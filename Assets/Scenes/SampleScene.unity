@@ -742,6 +742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2123518438}
+  distance: 10
+  sensitivity: 5
 --- !u!1 &1931542992
 GameObject:
   m_ObjectHideFlags: 0
