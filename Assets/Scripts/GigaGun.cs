@@ -7,7 +7,6 @@ public class GigaGun : MonoBehaviour
 {
     private List<ConnectionPoint> freeConnectionPoints = new List<ConnectionPoint>();
 
-
     //TODO
     public void showConnectionPoint(){}
     //TODO
