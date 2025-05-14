@@ -51,7 +51,14 @@ public class CameraBehaviour : MonoBehaviour
         {
             if (assemblyMode)
             {
-                camScroll();
+                if (Input.mouseScrollDelta.y != 0.0f)
+                {
+                    if (currentDistance >= minScrollNFDistance && currentDistance <= maxScrollNFDistance)
+                    {
+                        currentDistance -= Input.mouseScrollDelta.y * scrollScale;
+                        currentDistance = Mathf.Clamp(currentDistance, minScrollNFDistance, maxScrollNFDistance);
+                    }
+                }
 
                 if (Input.GetMouseButtonDown(0)) 
                 {
@@ -66,7 +73,7 @@ public class CameraBehaviour : MonoBehaviour
                 }
                 else if (Input.GetMouseButton(0)) 
                 {
-                    camMovement(true);
+                    camMovement();
                     if(Cursor.visible) 
                     {
                         storedMousePos = Mouse.current.position.ReadValue();
@@ -79,8 +86,10 @@ public class CameraBehaviour : MonoBehaviour
                     Mouse.current.WarpCursorPosition(storedMousePos);
                     Cursor.visible = true;
                 }
+
+                transform.position = target.position - transform.forward * currentDistance; // move camera to position where it faces the target
             }
-            else camMovement(false);
+            else camMovement();
         }
         else
         {
@@ -101,17 +110,7 @@ public class CameraBehaviour : MonoBehaviour
 
     }
 
-    private void camScroll()
-    {
-        if (currentDistance >= minScrollNFDistance && currentDistance <= maxScrollNFDistance)
-        {
-            currentDistance -= Input.mouseScrollDelta.y * scrollScale;
-            currentDistance = Mathf.Clamp(currentDistance, minScrollNFDistance, maxScrollNFDistance);
-            transform.position = target.position - transform.forward * currentDistance; // Set initial position of the camera
-        }
-    }
-
-    private void camMovement(bool isOrbital)
+    private void camMovement()
     {
         rotation.y += Input.GetAxis("Mouse X") * sensitivity; // Update rotation based on mouse input
         rotation.x -= Input.GetAxis("Mouse Y") * sensitivity; // Update rotation based on mouse input
@@ -119,8 +118,6 @@ public class CameraBehaviour : MonoBehaviour
         rotation.x = Mathf.Clamp(rotation.x, -90, 90); // Clamp the x rotation to prevent flipping
 
         transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera   
-
-        if(isOrbital) transform.position = target.position - transform.forward * currentDistance;
     }
 
     public void switchTarget(Transform newTarget){ 
