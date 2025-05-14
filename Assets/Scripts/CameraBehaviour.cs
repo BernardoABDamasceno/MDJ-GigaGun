@@ -6,10 +6,14 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
 
-    [SerializeField] Transform target; // The target to follow
+     // The target to follow
     [SerializeField] float distance = 10.0f; // Distance from the target
     [SerializeField] float sensitivity = 5.0f; // Mouse sensitivity
+    [SerializeField] Transform gigaGun;
+    private Transform target = null; // TODO: LOGIC NEEDS TO BE ADDED
     private Vector2 rotation; // Rotation of the camera
+
+    private bool OrbitalCamera = false; 
     
 
     // Start is called before the first frame update
@@ -18,9 +22,9 @@ public class CameraBehaviour : MonoBehaviour
         //cursor settings
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
-        transform.position = target.position + new Vector3(distance, distance, distance); // Set initial position of the camera
-        transform.LookAt(target); // Make the camera look at the target
+
+        transform.position = gigaGun.position + new Vector3(distance, distance, distance); // Set initial position of the camera
+        transform.LookAt(gigaGun); // Make the camera look at the target
         rotation = new Vector2(transform.eulerAngles.x, transform.eulerAngles.y); // Initialize rotation
     }
 
@@ -34,6 +38,12 @@ public class CameraBehaviour : MonoBehaviour
 
         transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera
 
-        transform.position = target.position - transform.forward * distance;
+        //positions looking at target
+        if(OrbitalCamera) transform.position = gigaGun.position - transform.forward * distance;
+
+        if(Input.GetKeyDown(KeyCode.C)) OrbitalCamera = !OrbitalCamera;
     }
+
+    public void switchTarget(Transform newTarget){ target = newTarget; }
+
 }
