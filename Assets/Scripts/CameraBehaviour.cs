@@ -15,6 +15,10 @@ public class CameraBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //cursor settings
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         transform.position = target.position + new Vector3(distance, distance, distance); // Set initial position of the camera
         transform.LookAt(target); // Make the camera look at the target
         rotation = new Vector2(transform.eulerAngles.x, transform.eulerAngles.y); // Initialize rotation
