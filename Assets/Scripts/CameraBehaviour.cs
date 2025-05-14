@@ -22,7 +22,7 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 initialLerpPosition;
     private Vector2 storedMousePos;
     private float maxScrollNFDistance = 15.0f;
-    private float minScrollNFDistance = 5.0f;
+    private float minScrollNFDistance = 2.5f;
     private float currentDistance;
     
 
