@@ -39,9 +39,9 @@ public class CameraBehaviour : MonoBehaviour
     void Update()
     {
         // Check inputs
-        if(Input.GetKeyDown(KeyCode.A)) camAssemblyMode(); // Switch to assembly mode
-        if(Input.GetKeyDown(KeyCode.F)) camfpsMode(); // Switch to FPS mode
-        if(Input.GetKeyDown(KeyCode.B) && target != gigaGun) switchTarget(gigaGun);
+        if(Input.GetKeyDown(KeyCode.Y)) camAssemblyMode(); // Switch to assembly mode
+        if(Input.GetKeyDown(KeyCode.U)) camfpsMode(); // Switch to FPS mode
+        if(Input.GetKeyDown(KeyCode.I) && target != gigaGun) switchTarget(gigaGun);
 
 
         if (!switchingTarget)
