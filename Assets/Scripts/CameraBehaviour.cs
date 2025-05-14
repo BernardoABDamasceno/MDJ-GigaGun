@@ -7,11 +7,13 @@ public class CameraBehaviour : MonoBehaviour
     private Camera cam;
 
      // The target to follow
-    [SerializeField] float distance = 12.0f; // Distance from the target
+    [SerializeField] float nonFocusedDistance = 12.0f; // Distance from the target
+    [SerializeField] float focusedDistance = 3.0f;
     [SerializeField] float sensitivity = 5.0f; // Mouse sensitivity
+    [SerializeField] float scrollScale = 1.0f;
     [SerializeField] float lerpDuration = 1.0f; // Duration of the transition
     [SerializeField] Transform gigaGun;
-    
+
     private Transform target = null;
     private Vector2 rotation; // Rotation of the camera
     private bool assemblyMode = true;
@@ -19,6 +21,10 @@ public class CameraBehaviour : MonoBehaviour
     private float elapsedTime = 0f;
     private Vector3 initialLerpPosition;
     private Vector2 storedMousePos;
+    private float maxScrollNFDistance = 15.0f;
+    private float minScrollNFDistance = 5.0f;
+    private float currentDistance;
+    
 
     void Awake()
     {
@@ -28,10 +34,8 @@ public class CameraBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-
         target = gigaGun;
-
+        currentDistance = nonFocusedDistance;
         camfpsMode();
     }
 
@@ -39,15 +43,16 @@ public class CameraBehaviour : MonoBehaviour
     void Update()
     {
         // Check inputs
-        if(Input.GetKeyDown(KeyCode.Y)) camAssemblyMode(); // Switch to assembly mode
-        if(Input.GetKeyDown(KeyCode.U)) camfpsMode(); // Switch to FPS mode
-        if(Input.GetKeyDown(KeyCode.I) && target != gigaGun) switchTarget(gigaGun);
-
+        if (Input.GetKeyDown(KeyCode.Y)) camAssemblyMode(); // Switch to assembly mode
+        if (Input.GetKeyDown(KeyCode.U)) camfpsMode(); // Switch to FPS mode
+        if (Input.GetKeyDown(KeyCode.I) && target != gigaGun) { switchTarget(gigaGun); currentDistance = nonFocusedDistance; }
 
         if (!switchingTarget)
         {
             if (assemblyMode)
             {
+                camScroll();
+
                 if (Input.GetMouseButtonDown(0)) 
                 {
                     Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -83,7 +88,7 @@ public class CameraBehaviour : MonoBehaviour
             {
                 
                 // Smoothly transition to the new target
-                Vector3 lerpValue = Vector3.Lerp(initialLerpPosition, target.position - transform.forward * distance, easeOutQuart(elapsedTime / lerpDuration));
+                Vector3 lerpValue = Vector3.Lerp(initialLerpPosition, target.position - transform.forward * currentDistance, easeOutQuart(elapsedTime / lerpDuration));
                 transform.position = lerpValue;
                 elapsedTime += Time.deltaTime; // Increment elapsed time
             }
@@ -96,6 +101,16 @@ public class CameraBehaviour : MonoBehaviour
 
     }
 
+    private void camScroll()
+    {
+        if (currentDistance >= minScrollNFDistance && currentDistance <= maxScrollNFDistance)
+        {
+            currentDistance -= Input.mouseScrollDelta.y * scrollScale;
+            currentDistance = Mathf.Clamp(currentDistance, minScrollNFDistance, maxScrollNFDistance);
+            transform.position = target.position - transform.forward * currentDistance; // Set initial position of the camera
+        }
+    }
+
     private void camMovement(bool isOrbital)
     {
         rotation.y += Input.GetAxis("Mouse X") * sensitivity; // Update rotation based on mouse input
@@ -105,25 +120,29 @@ public class CameraBehaviour : MonoBehaviour
 
         transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera   
 
-        if(isOrbital) transform.position = target.position - transform.forward * distance;
+        if(isOrbital) transform.position = target.position - transform.forward * currentDistance;
     }
 
     public void switchTarget(Transform newTarget){ 
         target = newTarget; 
-        switchingTarget = true; 
+        switchingTarget = true;
         initialLerpPosition = transform.position; // Store the initial position of the camera
+        currentDistance = focusedDistance;
     }
 
     private void camfpsMode()
     {
         assemblyMode = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     
     private void camAssemblyMode() { 
         assemblyMode = true; 
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         // Set initial transformations for orbital camera
-        transform.position = target.position - transform.forward * distance; // Set initial position of the camera
+        transform.position = target.position - transform.forward * currentDistance; // Set initial position of the camera
         rotation = new Vector2(transform.eulerAngles.x, transform.eulerAngles.y); // Initialize rotation
     }
 
