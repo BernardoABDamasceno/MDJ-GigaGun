@@ -1,33 +1,46 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class ConnectionPoint
+public class ConnectionPoint: MonoBehaviour
 {
     private static int idCounter = 0;
     //this is unique
     private int id;
-    private Gun parent;
-    private Transform position;
+    private bool interactable = false;
 
-    public ConnectionPoint(Gun parent, Transform position)
+    // public ConnectionPoint(Gun parent, Transform position)
+    // {
+    //     this.parent = parent;
+    //     this.position = position;
+    //     id = idCounter;
+    //     idCounter++;
+    // }
+
+    void Awake()
     {
-        this.parent = parent;
-        this.position = position;
         id = idCounter;
         idCounter++;
     }
+
     public int getId()
     {
         return id;
     }
-    public Transform getPosition()
+    public bool isInteractable()
     {
-        return position;
+        return interactable;
     }
-    public Gun getParent()
+    public void SetInteractable(bool interactable)
     {
-        return parent;
+        this.interactable = interactable;
+        if (interactable) 
+        {
+            gameObject.GetComponentInChildren<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
+        }
     }
+
 }

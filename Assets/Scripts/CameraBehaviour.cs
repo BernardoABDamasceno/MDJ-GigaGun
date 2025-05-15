@@ -45,7 +45,12 @@ public class CameraBehaviour : MonoBehaviour
         // Check inputs
         if (Input.GetKeyDown(KeyCode.Y)) camAssemblyMode(); // Switch to assembly mode
         if (Input.GetKeyDown(KeyCode.U)) camfpsMode(); // Switch to FPS mode
-        if (Input.GetKeyDown(KeyCode.I) && target != gigaGun) { switchTarget(gigaGun); currentDistance = nonFocusedDistance; }
+        if (Input.GetKeyDown(KeyCode.I) && target != gigaGun)
+        { 
+            resetAssemblyMode();
+            gigaGun.gameObject.SendMessage("cancelInsertGun");
+        } // Reset to assembly mode
+        
 
         if (!switchingTarget)
         {
@@ -67,7 +72,13 @@ public class CameraBehaviour : MonoBehaviour
                     {
                         if (hit.collider.CompareTag("ConnectionPoint"))
                         {
-                            switchTarget(hit.transform);
+                            ConnectionPoint cp = hit.collider.GetComponentInParent<ConnectionPoint>();
+                            
+                            if (cp.isInteractable()) 
+                            {
+                                switchTarget(hit.transform);
+                                gigaGun.gameObject.SendMessage("insertGun", cp);
+                            }
                         }
                     }
                 }
@@ -132,12 +143,14 @@ public class CameraBehaviour : MonoBehaviour
         assemblyMode = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        gigaGun.gameObject.SendMessage("disableConnectionPoints");
     }
     
     private void camAssemblyMode() { 
         assemblyMode = true; 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        gigaGun.gameObject.SendMessage("enableConnectionPoints");
         // Set initial transformations for orbital camera
         transform.position = target.position - transform.forward * currentDistance; // Set initial position of the camera
         rotation = new Vector2(transform.eulerAngles.x, transform.eulerAngles.y); // Initialize rotation
@@ -146,5 +159,11 @@ public class CameraBehaviour : MonoBehaviour
     private float easeOutQuart(float t)
     {
         return 1 - Mathf.Pow(1 - t, 4);   
+    }
+
+    private void resetAssemblyMode()
+    {
+        switchTarget(gigaGun); 
+        currentDistance = nonFocusedDistance;
     }
 }
