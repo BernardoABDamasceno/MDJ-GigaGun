@@ -8,6 +8,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 8f; // Adjustable walking speed
+    
+
+    void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -22,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             // Move the player in world space
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+            
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,10 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField] float sensitivity = 5.0f; // Mouse sensitivity
     [SerializeField] float scrollScale = 1.0f;
     [SerializeField] float lerpDuration = 1.0f; // Duration of the transition
+    [SerializeField] float gigaGunXOffset = 1.25f;
+    [SerializeField] float gigaGunYOffset = 0.5f;
     [SerializeField] Transform gigaGun;
+    [SerializeField] Transform player;
 
     private Transform target = null;
     private Vector2 rotation; // Rotation of the camera
@@ -43,8 +47,8 @@ public class CameraBehaviour : MonoBehaviour
     void Update()
     {
         // Check inputs
-        if (Input.GetKeyDown(KeyCode.Y)) camAssemblyMode(); // Switch to assembly mode
-        if (Input.GetKeyDown(KeyCode.U)) camfpsMode(); // Switch to FPS mode
+        if (Input.GetKeyDown(KeyCode.Y) && !assemblyMode) camAssemblyMode(); // Switch to assembly mode
+        if (Input.GetKeyDown(KeyCode.U) && assemblyMode) camfpsMode(); // Switch to FPS mode
         if (Input.GetKeyDown(KeyCode.I) && target != gigaGun)
         { 
             resetAssemblyMode();
@@ -65,7 +69,7 @@ public class CameraBehaviour : MonoBehaviour
                     }
                 }
 
-                if (Input.GetMouseButtonDown(0)) 
+                if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
                     if (Physics.Raycast(ray, out RaycastHit hit))
@@ -73,8 +77,8 @@ public class CameraBehaviour : MonoBehaviour
                         if (hit.collider.CompareTag("ConnectionPoint"))
                         {
                             ConnectionPoint cp = hit.collider.GetComponentInParent<ConnectionPoint>();
-                            
-                            if (cp.isInteractable()) 
+
+                            if (cp.isInteractable())
                             {
                                 switchTarget(hit.transform);
                                 gigaGun.gameObject.SendMessage("insertGun", cp);
@@ -82,17 +86,17 @@ public class CameraBehaviour : MonoBehaviour
                         }
                     }
                 }
-                else if (Input.GetMouseButton(0)) 
+                else if (Input.GetMouseButton(0))
                 {
                     camMovement();
-                    if(Cursor.visible) 
+                    if (Cursor.visible)
                     {
                         storedMousePos = Mouse.current.position.ReadValue();
                         Cursor.visible = false;
                     }
 
                 }
-                else if (Input.GetMouseButtonUp(0)) 
+                else if (Input.GetMouseButtonUp(0))
                 {
                     Mouse.current.WarpCursorPosition(storedMousePos);
                     Cursor.visible = true;
@@ -100,7 +104,14 @@ public class CameraBehaviour : MonoBehaviour
 
                 transform.position = target.position - transform.forward * currentDistance; // move camera to position where it faces the target
             }
-            else camMovement();
+            else
+            {
+                transform.position = player.position;
+                camMovement();
+                gigaGun.position = transform.position - transform.up * gigaGunYOffset + transform.forward * gigaGunXOffset;
+                gigaGun.transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0);
+            }
+                
         }
         else
         {
@@ -131,8 +142,9 @@ public class CameraBehaviour : MonoBehaviour
         transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera   
     }
 
-    public void switchTarget(Transform newTarget){ 
-        target = newTarget; 
+    public void switchTarget(Transform newTarget)
+    {
+        target = newTarget;
         switchingTarget = true;
         initialLerpPosition = transform.position; // Store the initial position of the camera
         currentDistance = focusedDistance;
@@ -145,9 +157,10 @@ public class CameraBehaviour : MonoBehaviour
         Cursor.visible = false;
         gigaGun.gameObject.SendMessage("disableConnectionPoints");
     }
-    
-    private void camAssemblyMode() { 
-        assemblyMode = true; 
+
+    private void camAssemblyMode()
+    {
+        assemblyMode = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
