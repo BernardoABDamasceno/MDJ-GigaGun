@@ -15,6 +15,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
+        // stops behaviour if in assembly mode
+        if (CameraManager.isAssemblyMode)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         Vector3 direction = (player.position - transform.position).normalized;
         Vector3 playerpos = player.position;
         playerpos.y = 0;

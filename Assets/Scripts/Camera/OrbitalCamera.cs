@@ -60,7 +60,7 @@ public class OrbitalCamera : MonoBehaviour
 
                         if (cp.isInteractable())
                         {
-                            switchTarget(hit.transform);
+                            switchTarget(hit.transform, true);
                             gigaGun.gameObject.SendMessage("insertGun", cp);
                         }
                     }
@@ -107,12 +107,13 @@ public class OrbitalCamera : MonoBehaviour
         }
     }
 
-    public void switchTarget(Transform newTarget)
+    public void switchTarget(Transform newTarget, bool keepDistance)
     {
         target = newTarget;
         switchingTarget = true;
         initialLerpPosition = transform.position; // Store the initial position of the camera
-        currentDistance = focusedDistance;
+        // I added this because just switching beetwen nodes with it zooming in and out was anoying
+        if (!keepDistance) currentDistance = focusedDistance;
     }
 
     private float easeOutQuart(float t)
@@ -122,7 +123,7 @@ public class OrbitalCamera : MonoBehaviour
 
     private void resetAssemblyMode()
     {
-        switchTarget(gigaGun);
+        switchTarget(gigaGun, false);
         currentDistance = nonFocusedDistance;
     }
 

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static bool isAssemblyMode = false;
+
     [SerializeField] Camera fpsCam;
     [SerializeField] Camera orbitalCam;
     [SerializeField] GameObject gigaGun;
+    [SerializeField] GameObject player;
 
     private bool fpsMode = true;
 
@@ -37,6 +40,8 @@ public class CameraManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        isAssemblyMode = false;
+        player.SendMessage("unpaused");
         gigaGun.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
     }
@@ -45,6 +50,8 @@ public class CameraManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        isAssemblyMode = true;
+        player.SendMessage("paused");
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
         gigaGun.transform.parent = transform;
     }

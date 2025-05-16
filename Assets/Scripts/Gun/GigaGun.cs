@@ -7,7 +7,7 @@ public class GigaGun : MonoBehaviour
     private List<ConnectionPoint> freeConnectionPoints = new List<ConnectionPoint>();
     private List<GameObject> guns = new List<GameObject>();
 
-    private Camera cam;
+    [SerializeField] Camera cam;
     private GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
@@ -18,7 +18,8 @@ public class GigaGun : MonoBehaviour
 
     void Start()
     {
-        cam = GetComponentInParent<Camera>();
+        //this gets fps camera due to the prefab setup, which is wrong
+        // cam = GetComponentInParent<Camera>().GetComponentInParent<Camera>();
 
         guns.Add(Instantiate(initialGun, transform));
         //adicionar os pontos a lista de pontos livres
@@ -196,6 +197,6 @@ public class GigaGun : MonoBehaviour
         Destroy(insertingCP);
         insertingCP = null;
 
-        Camera.main.SendMessage("resetAssemblyMode");
+        cam.SendMessage("resetAssemblyMode");
     }
 }
