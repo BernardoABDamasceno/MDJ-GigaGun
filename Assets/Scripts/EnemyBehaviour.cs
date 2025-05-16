@@ -2,18 +2,34 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float speed = 2.0f;
+    [SerializeField] float speed = 200.0f;
     private Transform player;
+    private Vector3 movementdir;
+    private Rigidbody rb;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
         Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0;
-        transform.position += direction * speed * Time.deltaTime;
+        Vector3 playerpos = player.position;
+        playerpos.y = 0;
+        Vector3 enemypos = transform.position;
+        enemypos.y = 0;
+
+        if (Vector3.Distance(enemypos, playerpos) > 1.05f)
+        {
+            float fixedDeltaTime = Time.fixedDeltaTime;
+            movementdir = direction * speed * fixedDeltaTime;
+            rb.velocity = new Vector3(movementdir.x, rb.velocity.y, movementdir.z);
+        }
+    }
+    
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 }
