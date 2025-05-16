@@ -21,9 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 enemypos = transform.position;
         enemypos.y = 0;
 
-        print(player.gameObject.name);
-
-        if (Vector3.Distance(enemypos, playerpos) > 3.05f)
+        if (Vector3.Distance(enemypos, playerpos) > 1.05f)
         {
             float fixedDeltaTime = Time.fixedDeltaTime;
             movementdir = direction * speed * fixedDeltaTime;
