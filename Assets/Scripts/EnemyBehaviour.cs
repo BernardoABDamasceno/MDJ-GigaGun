@@ -12,7 +12,8 @@ public class EnemyBehaviour : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
+
+    void FixedUpdate()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         Vector3 playerpos = player.position;
@@ -20,14 +21,16 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 enemypos = transform.position;
         enemypos.y = 0;
 
-        if (Vector3.Distance(enemypos, playerpos) > 1.05f)
+        print(player.gameObject.name);
+
+        if (Vector3.Distance(enemypos, playerpos) > 3.05f)
         {
             float fixedDeltaTime = Time.fixedDeltaTime;
             movementdir = direction * speed * fixedDeltaTime;
             rb.velocity = new Vector3(movementdir.x, rb.velocity.y, movementdir.z);
         }
     }
-    
+
     public void Death()
     {
         Destroy(gameObject);

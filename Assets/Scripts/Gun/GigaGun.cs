@@ -1,17 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GigaGun : MonoBehaviour
 {
     private List<ConnectionPoint> freeConnectionPoints = new List<ConnectionPoint>();
     private List<GameObject> guns = new List<GameObject>();
-    
+
+    private Camera cam;
     private GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
@@ -22,6 +18,8 @@ public class GigaGun : MonoBehaviour
 
     void Start()
     {
+        cam = GetComponentInParent<Camera>();
+
         guns.Add(Instantiate(initialGun, transform));
         //adicionar os pontos a lista de pontos livres
         foreach (ConnectionPoint point in guns[0].GetComponentsInChildren<ConnectionPoint>())
@@ -35,7 +33,7 @@ public class GigaGun : MonoBehaviour
     void Update()
     {
         float deltaTime = Time.deltaTime;
-        
+
         if (insertingGun != null)
         {
             if (Input.GetKeyDown(KeyCode.H))
@@ -54,27 +52,52 @@ public class GigaGun : MonoBehaviour
             {
                 if (insertingCP.transform.localPosition.y != 0)
                 {
-                    insertingGun.transform.Rotate(Vector3.up, -insertingGunRotSpeed*deltaTime);
+                    insertingGun.transform.Rotate(Vector3.up, -insertingGunRotSpeed * deltaTime);
                 }
                 else if (insertingCP.transform.localPosition.x != 0)
                 {
-                    insertingGun.transform.Rotate(Vector3.right, -insertingGunRotSpeed*deltaTime);
+                    insertingGun.transform.Rotate(Vector3.right, -insertingGunRotSpeed * deltaTime);
                 }
             }
             if (Input.GetKey(KeyCode.D))
             {
                 if (insertingCP.transform.localPosition.y != 0)
                 {
-                    insertingGun.transform.Rotate(Vector3.up, insertingGunRotSpeed*deltaTime);
+                    insertingGun.transform.Rotate(Vector3.up, insertingGunRotSpeed * deltaTime);
                 }
                 else if (insertingCP.transform.localPosition.x != 0)
                 {
-                    insertingGun.transform.Rotate(Vector3.right, insertingGunRotSpeed*deltaTime);
-                }                
+                    insertingGun.transform.Rotate(Vector3.right, insertingGunRotSpeed * deltaTime);
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Fire1")) // Default Fire key is Left Mouse Button
+            {
+                Shoot();
             }
         }
     }
 
+    void Shoot()
+    {
+        foreach (GameObject gun in guns)
+        {
+            Ray ray = new Ray(gun.transform.position, gun.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
+                    if (enemy != null)
+                    {
+                        enemy.Death();
+                    }
+                }
+            }
+        }
+    }
 
     public void enableConnectionPoints()
     {

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rdr = GetComponent<MeshRenderer>();
-        cam = Camera.main;
+        cam = GetComponentInChildren<Camera>();
     }
 
     void Update()
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal"); // Typically A/D or Left/Right Arrow keys
         float verticalInput = Input.GetAxis("Vertical");   // Typically W/S or Up/Down Arrow keys
 
-        movementDir = cam.transform.forward * verticalInput + cam.transform.right * horizontalInput;
+        movementDir = (cam.transform.forward * verticalInput + cam.transform.right * horizontalInput).normalized;
         if (Input.GetKeyDown(KeyCode.Space)) checkJump = true;
     }
 
