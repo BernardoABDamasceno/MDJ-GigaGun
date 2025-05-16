@@ -18,6 +18,7 @@ public class GigaGun : MonoBehaviour
     private List<ConnectionPoint> insertingGunCP = new List<ConnectionPoint>();
 
     [SerializeField] GameObject initialGun;
+    [SerializeField] float insertingGunRotSpeed = 1.0f;
 
     void Start()
     {
@@ -29,11 +30,12 @@ public class GigaGun : MonoBehaviour
             point.SetInteractable(true);
             point.gameObject.SetActive(false);
         }
-
     }
 
     void Update()
     {
+        float deltaTime = Time.deltaTime;
+        
         if (insertingGun != null)
         {
             if (Input.GetKeyDown(KeyCode.H))
@@ -47,6 +49,28 @@ public class GigaGun : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 confirmInsertGun();
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (insertingCP.transform.localPosition.y != 0)
+                {
+                    insertingGun.transform.Rotate(Vector3.up, -insertingGunRotSpeed*deltaTime);
+                }
+                else if (insertingCP.transform.localPosition.x != 0)
+                {
+                    insertingGun.transform.Rotate(Vector3.right, -insertingGunRotSpeed*deltaTime);
+                }
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (insertingCP.transform.localPosition.y != 0)
+                {
+                    insertingGun.transform.Rotate(Vector3.up, insertingGunRotSpeed*deltaTime);
+                }
+                else if (insertingCP.transform.localPosition.x != 0)
+                {
+                    insertingGun.transform.Rotate(Vector3.right, insertingGunRotSpeed*deltaTime);
+                }                
             }
         }
     }

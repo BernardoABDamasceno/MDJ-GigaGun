@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
+  insertingGunRotSpeed: 20
 --- !u!4 &2109256579
 Transform:
   m_ObjectHideFlags: 0
