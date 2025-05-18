@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c0b8ec372ddfa4498381b692352fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
   insertingGunRotSpeed: 1
 --- !u!1 &3331920714484375200
@@ -178,6 +179,7 @@ MonoBehaviour:
   fpsCam: {fileID: 4957798187787738221}
   orbitalCam: {fileID: 5074112208721519099}
   gigaGun: {fileID: 945707792014261627}
+  player: {fileID: 0}
 --- !u!1 &5483434924127165696
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +523,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6085038046522146658}
     m_Modifications:
+    - target: {fileID: 114532005046354199, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1300931854363233773, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
       propertyPath: m_Name
       value: Player
