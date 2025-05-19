@@ -209,6 +209,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 182845153}
     - target: {fileID: 1953718767457122483, guid: b2e30355bfd935b4db84b4aa39a33697, type: 3}
+      propertyPath: fireRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953718767457122483, guid: b2e30355bfd935b4db84b4aa39a33697, type: 3}
       propertyPath: insertingGunRotSpeed
       value: 25
       objectReference: {fileID: 0}

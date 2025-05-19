@@ -16,6 +16,9 @@ public class GigaGun : MonoBehaviour
 
     [SerializeField] GameObject initialGun;
     [SerializeField] float insertingGunRotSpeed = 1.0f;
+    [SerializeField] float fireRate = 0.5f;
+
+    private bool fireRateCooldown = false;
 
     void Start()
     {
@@ -84,18 +87,23 @@ public class GigaGun : MonoBehaviour
 
     void Shoot()
     {
+        int i = 0;
         foreach (GameObject gun in guns)
         {
-            fpsCam.SendMessage("addRecoil", 1.0f);
-            Ray ray = new Ray(gun.transform.position, gun.transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.CompareTag("Enemy"))
+            if (!fireRateCooldown) {
+                fpsCam.SendMessage("addRecoil", 1.0f);
+                Ray ray = new Ray(gun.transform.position, gun.transform.forward);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
-                    if (enemy != null)
+                    if (hit.collider.CompareTag("Enemy"))
                     {
-                        enemy.Death();
+                        EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
+                        if (enemy != null)
+                        {
+                            enemy.Death();
+                            fireRateCooldown = true;
+                            Invoke("resetFireRateCooldown", fireRate);
+                        }
                     }
                 }
             }
@@ -201,6 +209,11 @@ public class GigaGun : MonoBehaviour
         insertingCP = null;
 
         orbitalCam.SendMessage("resetAssemblyMode");
+    }
+
+    private void resetFireRateCooldown()
+    {
+        fireRateCooldown = false;
     }
     
 }
