@@ -130,7 +130,7 @@ public class GigaGun : MonoBehaviour
             initialGun,
             insertingCP.transform.position,
             insertingCP.transform.rotation,
-            insertingCP.GetComponentInParent<Gun>().transform
+            transform
         );
 
         foreach (ConnectionPoint point in insertingGun.GetComponentsInChildren<ConnectionPoint>())
