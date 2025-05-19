@@ -46,8 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitalCam: {fileID: 5074112208721519099}
   fpsCam: {fileID: 4957798187787738221}
+  player: {fileID: 0}
+  recoil: 15
+  kickback: 5
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
   insertingGunRotSpeed: 1
+  fireRate: 0.5
 --- !u!1 &3331920714484375200
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,37 +135,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3952811579430113276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8837259311666382221}
-  m_Layer: 0
-  m_Name: Orientation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8837259311666382221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3952811579430113276}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6085038046522146658}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4262591144961680677
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +167,6 @@ Transform:
   m_Children:
   - {fileID: 6956962950905983659}
   - {fileID: 2763746816832787559}
-  - {fileID: 8837259311666382221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4041764788998617503
@@ -212,7 +184,7 @@ MonoBehaviour:
   fpsCam: {fileID: 4957798187787738221}
   orbitalCam: {fileID: 5074112208721519099}
   gigaGun: {fileID: 945707792014261627}
-  player: {fileID: 0}
+  player: {fileID: 1206703595068704564}
 --- !u!1 &5483434924127165696
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,10 +577,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8151208401341147209, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
-      propertyPath: orientation
-      value: 
-      objectReference: {fileID: 8837259311666382221}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -617,6 +585,11 @@ PrefabInstance:
       addedObject: {fileID: 3645463901341260040}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
+--- !u!1 &1206703595068704564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1300931854363233773, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
+  m_PrefabInstance: {fileID: 194433408884951769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6956962950905983659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7079338475975325810, guid: 799da9cd924a52b42b9ecb7f0877cc95, type: 3}
