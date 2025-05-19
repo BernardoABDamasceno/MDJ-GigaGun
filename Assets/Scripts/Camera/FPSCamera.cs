@@ -20,6 +20,7 @@ public class FPSCamera : MonoBehaviour
         player.eulerAngles = new Vector3(0, rotation.y, 0); // Apply rotation to the orientation
     }
 
-    public void SetSensitivity(float sensitivity) { this.sensitivity = sensitivity; }    
+    public void SetSensitivity(float sensitivity) { this.sensitivity = sensitivity; }
+    public void addRecoil(Vector2 recoil) { rotation += recoil; } // Add recoil to the camera rotation
 
 }
