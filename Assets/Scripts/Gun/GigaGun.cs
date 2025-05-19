@@ -7,7 +7,8 @@ public class GigaGun : MonoBehaviour
     private List<ConnectionPoint> freeConnectionPoints = new List<ConnectionPoint>();
     private List<GameObject> guns = new List<GameObject>();
 
-    [SerializeField] Camera cam;
+    [SerializeField] Camera orbitalCam;
+    [SerializeField] Camera fpsCam;
     private GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
@@ -19,7 +20,7 @@ public class GigaGun : MonoBehaviour
     void Start()
     {
         //this gets fps camera due to the prefab setup, which is wrong
-        // cam = GetComponentInParent<Camera>().GetComponentInParent<Camera>();
+        // orbitalCam = GetComponentInParent<Camera>().GetComponentInParent<Camera>();
 
         guns.Add(Instantiate(initialGun, transform));
         //adicionar os pontos a lista de pontos livres
@@ -85,6 +86,7 @@ public class GigaGun : MonoBehaviour
     {
         foreach (GameObject gun in guns)
         {
+            fpsCam.SendMessage("addRecoil", 1.0f);
             Ray ray = new Ray(gun.transform.position, gun.transform.forward);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
@@ -112,22 +114,22 @@ public class GigaGun : MonoBehaviour
 
     public void insertGun(ConnectionPoint connectionPoint)
     {
-        if(insertingGun != null)
+        if (insertingGun != null)
         {
             cancelInsertGun();
         }
 
         // instaciar a nova arma
-            //referencia da nova arma
-            // referencia do ponto
-            // referencia da arma a qual o ponto pertence para fazer a arma nova ser filha
+        //referencia da nova arma
+        // referencia do ponto
+        // referencia da arma a qual o ponto pertence para fazer a arma nova ser filha
         //adiciona-la a lista de armas
 
-        insertingCP = connectionPoint.gameObject;        
+        insertingCP = connectionPoint.gameObject;
         insertingGun = Instantiate(
-            initialGun, 
-            insertingCP.transform.position, 
-            insertingCP.transform.rotation, 
+            initialGun,
+            insertingCP.transform.position,
+            insertingCP.transform.rotation,
             insertingCP.GetComponentInParent<Gun>().transform
         );
 
@@ -136,16 +138,17 @@ public class GigaGun : MonoBehaviour
             bool found = false;
             foreach (ConnectionPoint point2 in freeConnectionPoints)
             {
-                if(point.transform.position == point2.transform.position)
+                if (point.transform.position == point2.transform.position)
                 {
                     found = true;
                     break;
                 }
             }
-            if (!found) {
+            if (!found)
+            {
                 foreach (GameObject gun in guns)
                 {
-                    if(point.transform.position == gun.transform.position)
+                    if (point.transform.position == gun.transform.position)
                     {
                         found = true;
                         break;
@@ -153,8 +156,8 @@ public class GigaGun : MonoBehaviour
                 }
             }
             point.SetInteractable(false);
-            
-            if(found) point.gameObject.SetActive(false);
+
+            if (found) point.gameObject.SetActive(false);
             else point.gameObject.SetActive(insertingCPActive);
 
             insertingGunCP.Add(point);
@@ -163,7 +166,7 @@ public class GigaGun : MonoBehaviour
         //disable o ponto
         insertingCP.SetActive(false);
     }
-//these names are terrible
+    //these names are terrible
     public void cancelInsertGun()
     {
         //destroy a arma que estava sendo instanciada
@@ -182,7 +185,7 @@ public class GigaGun : MonoBehaviour
             {
                 Destroy(point);
             }
-            else 
+            else
             {
                 point.SetInteractable(true);
                 freeConnectionPoints.Add(point);
@@ -192,11 +195,12 @@ public class GigaGun : MonoBehaviour
 
         guns.Add(insertingGun);
         insertingGun = null;
-        
+
         freeConnectionPoints.Remove(insertingCP.GetComponent<ConnectionPoint>());
         Destroy(insertingCP);
         insertingCP = null;
 
-        cam.SendMessage("resetAssemblyMode");
+        orbitalCam.SendMessage("resetAssemblyMode");
     }
+    
 }

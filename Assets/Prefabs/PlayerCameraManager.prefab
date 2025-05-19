@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c0b8ec372ddfa4498381b692352fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  orbitalCam: {fileID: 5074112208721519099}
+  fpsCam: {fileID: 4957798187787738221}
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
   insertingGunRotSpeed: 1
 --- !u!1 &3331920714484375200
