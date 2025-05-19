@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
         //there is a bug here, you slow down as you look up or down, since forward tends to zero when looking up or downs
         // possible fix, just have a son empty object that only follows camera on the xz plane perhaps?
-        movementDir = (cam.transform.forward * verticalInput + cam.transform.right * horizontalInput).normalized;
+        movementDir = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
         if (Input.GetKeyDown(KeyCode.Space)) checkJump = true;
     }
 
