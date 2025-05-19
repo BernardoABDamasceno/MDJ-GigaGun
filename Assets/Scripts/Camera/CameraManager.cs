@@ -42,7 +42,8 @@ public class CameraManager : MonoBehaviour
         Cursor.visible = false;
         isAssemblyMode = false;
         player.SendMessage("unpaused");
-        gigaGun.SendMessage("cancelInsertGun");
+        if(GigaGun.insertingGun != null)
+            GigaGun.insertingGun.SendMessage("cancelInsertGun");
         gigaGun.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
     }

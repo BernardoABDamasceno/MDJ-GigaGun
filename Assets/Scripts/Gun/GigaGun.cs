@@ -12,7 +12,7 @@ public class GigaGun : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] float recoil = 15.0f;
     [SerializeField] float kickback = 5.0f;
-    private GameObject insertingGun = null;
+    public static GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
     private List<ConnectionPoint> insertingGunCP = new List<ConnectionPoint>();
@@ -90,27 +90,26 @@ public class GigaGun : MonoBehaviour
 
     void Shoot()
     {
+        if (fireRateCooldown) return;
         foreach (GameObject gun in guns)
         {
-            if (!fireRateCooldown) {
-                fpsCam.SendMessage("addRecoil", new Vector2(-1, -Mathf.Sin(gun.transform.localRotation.eulerAngles.y * Mathf.Deg2Rad)) * recoil);
-                player.SendMessage("applyPushback", -gun.transform.forward * kickback);
-                Ray ray = new Ray(gun.transform.position, gun.transform.forward);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+            fpsCam.SendMessage("addRecoil", new Vector2(-1, -Mathf.Sin(gun.transform.localRotation.eulerAngles.y * Mathf.Deg2Rad)) * recoil);
+            player.SendMessage("applyPushback", -gun.transform.forward * kickback);
+            Ray ray = new Ray(gun.transform.position, gun.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Enemy"))
                 {
-                    if (hit.collider.CompareTag("Enemy"))
+                    EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
+                    if (enemy != null)
                     {
-                        EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
-                        if (enemy != null)
-                        {
-                            enemy.Death();
-                        }
+                        enemy.Death();
                     }
                 }
-                fireRateCooldown = true;
-                Invoke("resetFireRateCooldown", fireRate);
             }
         }
+        fireRateCooldown = true;
+        Invoke("resetFireRateCooldown", fireRate);
     }
 
     public void enableConnectionPoints()
@@ -218,5 +217,4 @@ public class GigaGun : MonoBehaviour
     {
         fireRateCooldown = false;
     }
-    
 }
