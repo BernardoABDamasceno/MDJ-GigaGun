@@ -72,4 +72,8 @@ public class Player : MonoBehaviour
         rb.useGravity = true;
         rb.velocity = storedVelocity;
     }
+    public void applyPushback(Vector3 pushback)
+    {
+        rb.AddForce(pushback, ForceMode.Impulse);
+    }
 }

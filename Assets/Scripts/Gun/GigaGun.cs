@@ -9,7 +9,9 @@ public class GigaGun : MonoBehaviour
 
     [SerializeField] Camera orbitalCam;
     [SerializeField] Camera fpsCam;
+    [SerializeField] GameObject player;
     [SerializeField] float recoil = 15.0f;
+    [SerializeField] float kickback = 5.0f;
     private GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
@@ -92,6 +94,7 @@ public class GigaGun : MonoBehaviour
         {
             if (!fireRateCooldown) {
                 fpsCam.SendMessage("addRecoil", new Vector2(-1, -Mathf.Sin(gun.transform.localRotation.eulerAngles.y * Mathf.Deg2Rad)) * recoil);
+                player.SendMessage("applyPushback", -gun.transform.forward * kickback);
                 Ray ray = new Ray(gun.transform.position, gun.transform.forward);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
