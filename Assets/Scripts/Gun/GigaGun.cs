@@ -10,17 +10,18 @@ public class GigaGun : MonoBehaviour
     [SerializeField] Camera orbitalCam;
     [SerializeField] Camera fpsCam;
     [SerializeField] GameObject player;
-    [SerializeField] float recoil = 15.0f;
-    [SerializeField] float kickback = 5.0f;
     public static GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;
     private List<ConnectionPoint> insertingGunCP = new List<ConnectionPoint>();
 
     [SerializeField] GameObject initialGun;
-    [SerializeField] float insertingGunRotSpeed = 1.0f;
-    [SerializeField] float fireRate = 0.5f;
 
+    [Header("Gun Stats")]
+    [SerializeField] float recoil = 15.0f;
+    [SerializeField] float kickback = 5.0f;
+    [SerializeField] float fireRate = 0.5f;
+    [SerializeField] float insertingGunRotSpeed = 1.0f;
     private bool fireRateCooldown = false;
 
     void Start()
