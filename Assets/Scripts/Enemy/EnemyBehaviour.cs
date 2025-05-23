@@ -6,11 +6,13 @@ public class EnemyBehaviour : MonoBehaviour
     private Transform player;
     private Vector3 movementdir;
     private Rigidbody rb;
+    private ParticleSystem ps;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     void FixedUpdate()
@@ -38,6 +40,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Death()
     {
-        Destroy(gameObject);
+        ps.Play();
+        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+        Destroy(gameObject, ps.main.startLifetime.constant);
     }
 }
