@@ -6,21 +6,23 @@ public class FPSCamera : MonoBehaviour
 {
     [SerializeField] float sensitivity = 5.0f;
     [SerializeField] Transform player;
+    [SerializeField] Transform holder;
     private Vector2 rotation; // Rotation of the camera
+
+    float xRotation;
+    float yRotation;
 
     // Update is called once per frame
     void Update()
     {
-        rotation.y += Input.GetAxis("Mouse X") * sensitivity; // Update rotation based on mouse input
-        rotation.x -= Input.GetAxis("Mouse Y") * sensitivity; // Update rotation based on mouse input
+        yRotation += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime; // Update rotation based on mouse input
+        xRotation -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime; // Update rotation based on mouse input
 
-        rotation.x = Mathf.Clamp(rotation.x, -90, 90); // Clamp the x rotation to prevent flipping
+        xRotation = Mathf.Clamp(xRotation, -90, 90); // Clamp the x rotation to prevent flipping
 
-        transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera
-        player.eulerAngles = new Vector3(0, rotation.y, 0); // Apply rotation to the orientation
+        holder.transform.localEulerAngles = new Vector3(xRotation, yRotation, 0); // Apply rotation to the camera
+        player.localEulerAngles = new Vector3(0, yRotation, 0); // Apply rotation to the orientation
     }
 
     public void SetSensitivity(float sensitivity) { this.sensitivity = sensitivity; }
-    public void addRecoil(Vector2 recoil) { rotation += recoil; } // Add recoil to the camera rotation
-
 }

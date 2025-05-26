@@ -35,6 +35,13 @@ public class CameraManager : MonoBehaviour
             orbitalCam.gameObject.SetActive(!fpsMode);
         }
     }
+    void FixedUpdate()
+    {
+        if (!isAssemblyMode)
+        {
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z);
+        }       
+    }
 
     private void changeToFPS()
     {
@@ -42,7 +49,7 @@ public class CameraManager : MonoBehaviour
         Cursor.visible = false;
         isAssemblyMode = false;
         player.SendMessage("unpaused");
-        if(GigaGun.insertingGun != null)
+        if (GigaGun.insertingGun != null)
             GigaGun.insertingGun.SendMessage("cancelInsertGun");
         gigaGun.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
