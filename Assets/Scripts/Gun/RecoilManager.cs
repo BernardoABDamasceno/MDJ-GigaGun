@@ -6,11 +6,6 @@ public class RecoilManager : MonoBehaviour
     private Vector3 currentRotation = Vector3.zero;
     private Vector3 targetRotation = Vector3.zero;
 
-    // Recoil
-    [SerializeField] private float recoilX;
-    [SerializeField] private float recoilY;
-    [SerializeField] private float recoilZ;
-
     // Settings
     [SerializeField] private float snapiness;
     [SerializeField] private float returnSpeed;
@@ -22,8 +17,8 @@ public class RecoilManager : MonoBehaviour
         transform.localRotation = Quaternion.Euler(currentRotation);
     }
 
-    public void fireRecoil()
+    public void fireRecoil(Vector3 recoil)
     {
-        targetRotation += new Vector3(-recoilX, Random.Range(-recoilY,recoilY), Random.Range(-recoilZ,recoilZ));
+        targetRotation += new Vector3(-recoil.x, Random.Range(-recoil.y,recoil.y), Random.Range(-recoil.z,recoil.z));
     }
 }

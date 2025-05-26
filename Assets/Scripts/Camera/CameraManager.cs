@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -50,7 +48,7 @@ public class CameraManager : MonoBehaviour
         isAssemblyMode = false;
         player.SendMessage("unpaused");
         if (GigaGun.insertingGun != null)
-            GigaGun.insertingGun.SendMessage("cancelInsertGun");
+            gigaGun.SendMessage("cancelInsertGun");
         gigaGun.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
     }

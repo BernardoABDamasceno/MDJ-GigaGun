@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3327975769673953775}
-  - component: {fileID: 3297821447562178188}
+  - component: {fileID: -4834948180200579909}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -121,7 +121,7 @@ Transform:
   - {fileID: 1036503477133086398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3297821447562178188
+--- !u!114 &-4834948180200579909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,6 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf01e0232e504904aa6b112d24295229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kickback: 100
+  fireRate: 0.5
+  recoilX: 2
+  recoilY: 2
+  recoilZ: 0.35
+  snapiness: 6
   gunModel: {fileID: 0}
 --- !u!1 &8647085898705235644
 GameObject:

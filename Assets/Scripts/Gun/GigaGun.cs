@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GigaGun : MonoBehaviour
 {
     private List<ConnectionPoint> freeConnectionPoints = new List<ConnectionPoint>();
     private List<GameObject> guns = new List<GameObject>();
 
+    [Header("Required Components")]
     [SerializeField] Camera orbitalCam;
     [SerializeField] Camera fpsCam;
     [SerializeField] GameObject player;
@@ -16,14 +16,13 @@ public class GigaGun : MonoBehaviour
     private bool insertingCPActive = true;
     private List<ConnectionPoint> insertingGunCP = new List<ConnectionPoint>();
 
+    [Header("Initial Gun Settings")]
     [SerializeField] GameObject initialGun;
 
-    [Header("Gun Stats")]
-    [SerializeField] float recoil = 15.0f;
-    [SerializeField] float kickback = 5.0f;
-    [SerializeField] float fireRate = 0.5f;
+    [Header("Gun Rotation Settings")]
     [SerializeField] float insertingGunRotSpeed = 1.0f;
-    private bool fireRateCooldown = false;
+    [SerializeField] float cooldownRotTime = 0.25f;
+    private bool cooldownRot = false;
 
     void Start()
     {
@@ -60,24 +59,38 @@ public class GigaGun : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.A))
             {
-                if (insertingCP.transform.localPosition.y != 0)
+                if (!cooldownRot)
                 {
-                    insertingGun.transform.Rotate(Vector3.up, -insertingGunRotSpeed * deltaTime);
-                }
-                else if (insertingCP.transform.localPosition.x != 0)
-                {
-                    insertingGun.transform.Rotate(Vector3.right, -insertingGunRotSpeed * deltaTime);
+                    if (insertingCP.transform.localPosition.y != 0)
+                    {
+                        insertingGun.transform.Rotate(Vector3.up, -insertingGunRotSpeed);
+                        cooldownRot = true;
+                        Invoke("finishCooldown", cooldownRotTime);
+                    }
+                    else if (insertingCP.transform.localPosition.x != 0)
+                    {
+                        insertingGun.transform.Rotate(Vector3.right, -insertingGunRotSpeed);
+                        cooldownRot = true;
+                        Invoke("finishCooldown", cooldownRotTime);
+                    }
                 }
             }
             if (Input.GetKey(KeyCode.D))
             {
-                if (insertingCP.transform.localPosition.y != 0)
+                if (!cooldownRot)
                 {
-                    insertingGun.transform.Rotate(Vector3.up, insertingGunRotSpeed * deltaTime);
-                }
-                else if (insertingCP.transform.localPosition.x != 0)
-                {
-                    insertingGun.transform.Rotate(Vector3.right, insertingGunRotSpeed * deltaTime);
+                    if (insertingCP.transform.localPosition.y != 0)
+                    {
+                        insertingGun.transform.Rotate(Vector3.up, insertingGunRotSpeed);
+                        cooldownRot = true;
+                        Invoke("finishCooldown", cooldownRotTime);
+                    }
+                    else if (insertingCP.transform.localPosition.x != 0)
+                    {
+                        insertingGun.transform.Rotate(Vector3.right, insertingGunRotSpeed);
+                        cooldownRot = true;
+                        Invoke("finishCooldown", cooldownRotTime);
+                    }
                 }
             }
         }
@@ -92,27 +105,7 @@ public class GigaGun : MonoBehaviour
 
     void Shoot()
     {
-        if (fireRateCooldown) return;
-        foreach (GameObject gun in guns)
-        {
-            //fpsCam.SendMessage("addRecoil", new Vector2(-1, -Mathf.Sin(gun.transform.localRotation.eulerAngles.y * Mathf.Deg2Rad)) * recoil);
-            player.SendMessage("applyPushback", -gun.transform.forward * kickback);
-            recoilManager.SendMessage("fireRecoil");
-            Ray ray = new Ray(gun.transform.position, gun.transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
-                    if (enemy != null)
-                    {
-                        enemy.Death();
-                    }
-                }
-            }
-        }
-        fireRateCooldown = true;
-        Invoke("resetFireRateCooldown", fireRate);
+        foreach (GameObject gun in guns) gun.SendMessage("shoot");
     }
 
     public void enableConnectionPoints()
@@ -215,9 +208,9 @@ public class GigaGun : MonoBehaviour
 
         orbitalCam.SendMessage("resetAssemblyMode");
     }
-
-    private void resetFireRateCooldown()
+    
+    private void finishCooldown()
     {
-        fireRateCooldown = false;
+        cooldownRot = false;
     }
 }

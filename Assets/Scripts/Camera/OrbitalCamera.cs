@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class OrbitalCamera : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("Target Object")]
     [SerializeField] Transform gigaGun;
-    [SerializeField] float nonFocusedDistance = 12.0f; // Distance from the target
-    [SerializeField] float focusedDistance = 3.0f;
+
+    [Header("Camera Settings")]
+    [SerializeField] float defaultCameraDistance = 3.0f;
     [SerializeField] float scrollScale = 1.0f;
     [SerializeField] float lerpDuration = 1.0f; // Duration of the transition
     [SerializeField] float sensitivity = 5.0f;
@@ -20,13 +20,13 @@ public class OrbitalCamera : MonoBehaviour
     private Vector3 initialLerpPosition;
     private Vector2 storedMousePos;
     private float maxScrollNFDistance = 15.0f;
-    private float minScrollNFDistance = 2.5f;
+    private float minScrollNFDistance = 1.0f;
     private float currentDistance;
 
     void Start()
     {
         target = gigaGun;
-        currentDistance = nonFocusedDistance;
+        currentDistance = defaultCameraDistance;
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class OrbitalCamera : MonoBehaviour
 
                         if (cp.isInteractable())
                         {
-                            switchTarget(hit.transform, true);
+                            //switchTarget(hit.transform);
                             gigaGun.gameObject.SendMessage("insertGun", cp);
                         }
                     }
@@ -107,13 +107,12 @@ public class OrbitalCamera : MonoBehaviour
         }
     }
 
-    public void switchTarget(Transform newTarget, bool keepDistance)
+    public void switchTarget(Transform newTarget)
     {
         target = newTarget;
         switchingTarget = true;
         initialLerpPosition = transform.position; // Store the initial position of the camera
         // I added this because just switching beetwen nodes with it zooming in and out was anoying
-        if (!keepDistance) currentDistance = focusedDistance;
     }
 
     private float easeOutQuart(float t)
@@ -123,8 +122,7 @@ public class OrbitalCamera : MonoBehaviour
 
     private void resetAssemblyMode()
     {
-        switchTarget(gigaGun, false);
-        currentDistance = nonFocusedDistance;
+        //switchTarget(gigaGun);
     }
 
     public void SetSensitivity(float sensitivity) { this.sensitivity = sensitivity; }    
