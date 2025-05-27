@@ -337,6 +337,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: gundrag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: airTimer
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: acceleration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: jumpStrength
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: terminalVelocity
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 348877507911971629, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: gravityAcceleration
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 728251455984832436, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: kickback
       value: 500
@@ -391,6 +427,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3616497863072030988, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4506843876260413165, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6144280892881005925, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}

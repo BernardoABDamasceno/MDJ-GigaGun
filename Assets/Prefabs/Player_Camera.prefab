@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9a6bca0447a3d46a5e5aef4b29eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilX: 5
-  recoilY: 2
-  recoilZ: 0.35
   snapiness: 6
   returnSpeed: 2
 --- !u!1 &1905106923468719774
@@ -75,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1905106923468719774}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.65999985}
+  m_LocalPosition: {x: 0, y: -0.024, z: 0.65999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152,7 +149,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &348877507911971629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42307f3c5a486c049be3cdb1a81f5718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 300
+  acceleration: 100
+  maxSpeed: 100
   jumpStregth: 300
 --- !u!1 &6144280892881005925
 GameObject:
@@ -216,10 +214,8 @@ MonoBehaviour:
   player: {fileID: 3062537084504495173}
   recoilManager: {fileID: 817445817953242446}
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
-  recoil: 15
-  kickback: 5
-  fireRate: 0.5
   insertingGunRotSpeed: 1
+  cooldownRotTime: 0.25
 --- !u!1 &6153839988681990553
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,8 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gigaGun: {fileID: 2823766346458427025}
-  nonFocusedDistance: 12
-  focusedDistance: 3
+  defaultCameraDistance: 3
   scrollScale: 1
   lerpDuration: 1
   sensitivity: 5

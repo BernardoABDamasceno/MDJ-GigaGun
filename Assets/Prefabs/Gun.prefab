@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf01e0232e504904aa6b112d24295229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickback: 100
+  kickback: 1.5
   fireRate: 0.5
   recoilX: 2
   recoilY: 2

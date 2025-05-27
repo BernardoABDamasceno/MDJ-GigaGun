@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -42,6 +43,8 @@ public class Gun : MonoBehaviour
         if (fireRateCooldown) return;
 
         Ray ray = new Ray(transform.position, transform.forward);
+        Debug.DrawLine(transform.position, transform.position + transform.forward.normalized * 10f, Color.red, 1f);
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             if (hit.collider.CompareTag("Enemy"))
@@ -54,7 +57,7 @@ public class Gun : MonoBehaviour
             }
         }
 
-        player.SendMessage("applyPushback", -transform.forward * kickback);
+        player.SendMessage("applyPushback", -transform.forward.normalized * kickback);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
 
         fireRateCooldown = true;
@@ -65,4 +68,5 @@ public class Gun : MonoBehaviour
     public float getKickback() { return kickback; }
 
     private void finishFireRateCooldown() { fireRateCooldown = false; }
+
 }
