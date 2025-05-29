@@ -1,16 +1,15 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 300.0f;
+    [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float jumpdrag = 1f;
-    [SerializeField] float gundrag = 1f;
-    [SerializeField] float gravityAcceleration = 9.8f;
-    [SerializeField] float terminalVelocity = 20.0f;
-    [SerializeField] float jumpStrength = 10.0f;
-    [SerializeField] float airTimer = 0.25f;
-    [SerializeField] float jumpColdownTime = 2.0f;
+    [SerializeField] float gundrag = 2f;
+    [SerializeField] float gravityAcceleration = 1.25f;
+    [SerializeField] float terminalVelocity = 25.0f;
+    [SerializeField] float jumpStrength = 18.0f;
+    [SerializeField] float airTimer = 0.025f;
+    [SerializeField] float jumpColdownTime = 0.475f;
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
     private Vector3 jumpVector = Vector3.zero;
@@ -38,8 +37,9 @@ public class Player : MonoBehaviour
         if (CameraManager.isAssemblyMode) return;
 
         // Get input for horizontal and vertical movement
-        horizontalInput = Input.GetAxis("Horizontal"); // Typically A/D or Left/Right Arrow keys
-        verticalInput = Input.GetAxis("Vertical");   // Typically W/S or Up/Down Arrow keys
+        // This needs to be raw or the player will keep moving after the key is released because of input smoothing
+        horizontalInput = Input.GetAxisRaw("Horizontal"); // Typically A/D or Left/Right Arrow keys
+        verticalInput = Input.GetAxisRaw("Vertical");   // Typically W/S or Up/Down Arrow keys
 
         if (Input.GetKey(KeyCode.Space)) checkJump = true;
     }
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
             Invoke("airTimeOver", airTimer);
         }
         gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
-        pushback = Vector3.MoveTowards(pushback, Vector3.zero, gundrag);
+        pushback = Vector3.MoveTowards( pushback, Vector3.zero, gundrag);
         jumpVector = Vector3.MoveTowards(jumpVector, Vector3.zero, jumpdrag);
 
     }

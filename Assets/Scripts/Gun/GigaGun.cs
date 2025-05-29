@@ -20,7 +20,7 @@ public class GigaGun : MonoBehaviour
     [SerializeField] GameObject initialGun;
 
     [Header("Gun Rotation Settings")]
-    [SerializeField] float insertingGunRotSpeed = 1.0f;
+    [SerializeField] float insertingGunRotSpeed = 15.0f;
     [SerializeField] float cooldownRotTime = 0.25f;
     private bool cooldownRot = false;
 

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class FPSCamera : MonoBehaviour
 {
-    [SerializeField] float sensitivity = 5.0f;
+    [SerializeField] float sensitivity = 400.0f;
     [SerializeField] Transform player;
     [SerializeField] Transform holder;
-    private Vector2 rotation; // Rotation of the camera
-
+    
     float xRotation;
     float yRotation;
 

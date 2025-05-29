@@ -7,8 +7,8 @@ public class RecoilManager : MonoBehaviour
     private Vector3 targetRotation = Vector3.zero;
 
     // Settings
-    [SerializeField] private float snapiness;
-    [SerializeField] private float returnSpeed;
+    [SerializeField] private float snapiness = 6.0f;
+    [SerializeField] private float returnSpeed = 2.0f;
 
     void Update()
     {

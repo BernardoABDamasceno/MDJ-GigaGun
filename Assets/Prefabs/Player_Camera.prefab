@@ -162,9 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42307f3c5a486c049be3cdb1a81f5718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 100
-  maxSpeed: 100
-  jumpStregth: 300
+  moveSpeed: 10
+  jumpdrag: 1
+  gundrag: 2
+  gravityAcceleration: 1.25
+  terminalVelocity: 25
+  jumpStrength: 18
+  airTimer: 0.025
+  jumpColdownTime: 0.475
 --- !u!1 &6144280892881005925
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +219,7 @@ MonoBehaviour:
   player: {fileID: 3062537084504495173}
   recoilManager: {fileID: 817445817953242446}
   initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
-  insertingGunRotSpeed: 1
+  insertingGunRotSpeed: 15
   cooldownRotTime: 0.25
 --- !u!1 &6153839988681990553
 GameObject:
