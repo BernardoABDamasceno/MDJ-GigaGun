@@ -111,6 +111,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4059faabc007b6a4eb2c3e9572bea0d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f436021f63dfe7042956b91fb685a097, type: 2}
     - target: {fileID: 919132149155446097, guid: 4059faabc007b6a4eb2c3e9572bea0d9, type: 3}
       propertyPath: m_Name
       value: dune
