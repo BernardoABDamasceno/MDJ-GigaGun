@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Vector3 movementdir;
     private Rigidbody rb;
     private ParticleSystem ps;
+    private bool isDead = false;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         // stops behaviour if in assembly mode
-        if (CameraManager.isAssemblyMode)
+        if (CameraManager.isAssemblyMode || isDead)
         {
             rb.velocity = Vector3.zero;
             return;
@@ -43,6 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
         ps.Play();
         gameObject.GetComponent<Renderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
+        isDead = true;
         Destroy(gameObject, ps.main.startLifetime.constant);
     }
 }

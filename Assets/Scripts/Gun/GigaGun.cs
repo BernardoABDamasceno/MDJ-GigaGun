@@ -41,7 +41,6 @@ public class GigaGun : MonoBehaviour
 
     void Update()
     {
-        float deltaTime = Time.deltaTime;
 
         if (insertingGun != null)
         {

@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float jumpdrag = 1f;
-    [SerializeField] float gundrag = 2f;
+    [SerializeField] float gundragHorizontal = 2f;
+    [SerializeField] float gundragVertical = 10f;
     [SerializeField] float gravityAcceleration = 1.25f;
-    [SerializeField] float terminalVelocity = 25.0f;
+    [SerializeField] float terminalVelocity = 50.0f;
     [SerializeField] float jumpStrength = 18.0f;
     [SerializeField] float airTimer = 0.025f;
     [SerializeField] float jumpColdownTime = 0.475f;
@@ -17,12 +19,17 @@ public class Player : MonoBehaviour
     private Vector3 gravity = Vector3.zero;
     private bool checkJump = false;
     private bool isGrounded = false;
+    private bool isOnSlope = false;
     private bool airtime = true;
     private bool jumpCooldown = false;
     private Vector3 storedVelocity = Vector3.zero;
 
     float horizontalInput;
     float verticalInput;
+
+    
+    // find angle between player and ground
+    private RaycastHit hit = new RaycastHit();
 
     // Start is called before the first frame update
     void Start()
@@ -63,27 +70,72 @@ public class Player : MonoBehaviour
             checkJump = false;
         }
 
-        movementDir = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
-        movementDir = movementDir * moveSpeed;
+        // get mov dir
+        movementDir = transform.forward * verticalInput + transform.right * horizontalInput;
 
-        if (isGrounded)
+        movementDir.y = 0.0f; // flat ground
+        
+        movementDir = movementDir.normalized * moveSpeed;
+
+        if (isGrounded && !isOnSlope)
         {
-            rb.velocity = new Vector3(movementDir.x, 0, movementDir.z) + pushback + jumpVector / 1.5f;
+            print("Grounded");
+            rb.velocity = movementDir + pushback + jumpVector / 1.5f;
         }
-        else if (rb.velocity.y > 0.5f || rb.velocity.y < -0.5f || !airtime)
+        else if (isOnSlope) // effectively not grounded, but on a slope
+        // i want to fucking mcshoot myself, this shit is so fucking stupid and it doesnt even work wtf
         {
+            Vector3 groundNormal = hit.normal;
+            Vector3 slopeDirection = Vector3.Cross(Vector3.Cross(Vector3.up, groundNormal), groundNormal).normalized;
+            float dotDirectionSlope = Vector3.Dot(movementDir.normalized, slopeDirection);
+
+            //downhill
+            if (dotDirectionSlope > 0.1f)
+            {
+                print("On Slope Downhill");
+                // float slopeAngle = Vector3.Angle(transform.up, hit.normal);
+                // movementDir.y = gravity.y;
+                // movementDir = movementDir.normalized * moveSpeed;
+                // movementDir.y = -Mathf.Abs(movementDir.y);
+                // rb.velocity = movementDir + pushback + jumpVector / 1.5f;
+                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+            }
+            //uphill
+            else if (dotDirectionSlope < -0.1f)
+            {
+                print("On Slope Uphill");
+                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+            }
+            else if (dotDirectionSlope == 0.0f)
+            {
+                print("On Slope falling");
+                isOnSlope = false;
+                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+            }
+            else
+            {
+                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+            }
+        }
+        //
+        else if (rb.velocity.y > 0.5f || rb.velocity.y < -0.5f || !airtime) // this check might be a bit goofy
+        {
+            print("In Air");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f)
                                     + pushback + jumpVector - gravity;
         }
         else
         {
+            print("jump air time");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
             Invoke("airTimeOver", airTimer);
         }
         gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
-        pushback = Vector3.MoveTowards( pushback, Vector3.zero, gundrag);
+        float pushY = pushback.y;
+        pushback = Vector3.MoveTowards(new Vector3(pushback.x, 0, pushback.z), Vector3.zero, gundragHorizontal);
+        pushback += Vector3.MoveTowards(new Vector3(0, pushY, 0), Vector3.zero, gundragVertical);
         jumpVector = Vector3.MoveTowards(jumpVector, Vector3.zero, jumpdrag);
 
     }
@@ -126,6 +178,15 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == 6) // 6 is the ground layer
         {
+            if (Physics.SphereCast(transform.position, 0.95f, Vector3.down, out hit, 0.25f))
+            {
+                isOnSlope = true;
+            }
+            else
+            {
+                isOnSlope = false;
+            }
+
             isGrounded = true;
             gravity = Vector3.zero;
             jumpVector = Vector3.zero;
@@ -135,6 +196,16 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == 6) // 6 is the ground layer
         {
+
+            if (Physics.SphereCast(transform.position, 0.95f, Vector3.down, out hit, 0.25f) && !jumpCooldown)
+            {
+                isOnSlope = true;
+            }
+            else
+            {
+                isOnSlope = false;
+            }
+
             isGrounded = false;
             gravity = Vector3.zero;
         }
@@ -148,5 +219,12 @@ public class Player : MonoBehaviour
     void jumpCooldownOver()
     {
         jumpCooldown = false;
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position - new Vector3(0f, 0.8f, 0f), 0.95f);
     }
 }

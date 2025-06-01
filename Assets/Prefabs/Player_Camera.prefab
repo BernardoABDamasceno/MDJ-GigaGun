@@ -164,9 +164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpdrag: 1
-  gundrag: 2
+  gundragHorizontal: 2
+  gundragVertical: 10
   gravityAcceleration: 1.25
-  terminalVelocity: 25
+  terminalVelocity: 50
   jumpStrength: 18
   airTimer: 0.025
   jumpColdownTime: 0.475

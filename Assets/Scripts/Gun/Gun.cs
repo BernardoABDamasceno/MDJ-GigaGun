@@ -13,7 +13,8 @@ public class Gun : MonoBehaviour
 
     // Gun properties
     [Header("Gun Stats")]
-    [SerializeField] private float kickback = 5.0f;
+    [SerializeField] private float kickbackXZ = 1.5f;
+    [SerializeField] private float kickbackY = 5.0f;
     [SerializeField] private float fireRate = 0.5f;
     // Recoil
     [SerializeField] private float recoilX;
@@ -56,16 +57,20 @@ public class Gun : MonoBehaviour
                 }
             }
         }
+        Vector3 forwardNormalized = -transform.forward.normalized;
+        Vector3 kickbackOutput = new Vector3(
+                                forwardNormalized.x * kickbackXZ,
+                                forwardNormalized.y * kickbackY,
+                                forwardNormalized.z * kickbackXZ
+                                );
 
-        player.SendMessage("applyPushback", -transform.forward.normalized * kickback);
+        player.SendMessage("applyPushback", kickbackOutput);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);
     }
     public int getId() { return id; }
-    public Vector3 getRecoil() { return new Vector3(recoilX, recoilY, recoilZ); }
-    public float getKickback() { return kickback; }
 
     private void finishFireRateCooldown() { fireRateCooldown = false; }
 
