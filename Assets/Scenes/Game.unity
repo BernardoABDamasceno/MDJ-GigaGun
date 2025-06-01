@@ -1715,6 +1715,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 589efb82e39695d4c8c9d3069a07fb5c, type: 3}
   m_PrefabInstance: {fileID: 335029636}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &362384624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8663129407435074920, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+  m_PrefabInstance: {fileID: 1356229854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &362384629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362384624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc3ee179ff74374f86122ff7db2dcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowResTexture: {fileID: 8400000, guid: f9021fae5f1670d4fae12e1b8198cc61, type: 2}
+  crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
+  curvature: 10
+  vignetteWidth: 15
+  lineSpeed: 15
 --- !u!1001 &380962111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3379,6 +3401,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5044012500366497891, guid: e7155cbe12fca734e8cebbf88d057640, type: 3}
   m_PrefabInstance: {fileID: 956338605}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &958405212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8412077671594922191, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+  m_PrefabInstance: {fileID: 1356229854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &958405217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958405212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc3ee179ff74374f86122ff7db2dcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowResTexture: {fileID: 8400000, guid: f9021fae5f1670d4fae12e1b8198cc61, type: 2}
+  crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
+  curvature: 10
+  vignetteWidth: 15
+  lineSpeed: 15
 --- !u!1001 &973535106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4270,9 +4314,21 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 2600
       objectReference: {fileID: 0}
+    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6804360169471427512, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: far clip plane
       value: 2600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804360169471427512, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804360169471427512, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Name
@@ -4281,7 +4337,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8412077671594922191, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 958405217}
+    - targetCorrespondingSourceObject: {fileID: 8663129407435074920, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 362384629}
   m_SourcePrefab: {fileID: 100100000, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
 --- !u!1001 &1358004499
 PrefabInstance:
