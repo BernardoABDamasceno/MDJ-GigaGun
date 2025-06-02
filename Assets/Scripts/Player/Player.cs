@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpStrength = 18.0f;
     [SerializeField] float airTimer = 0.025f;
     [SerializeField] float jumpColdownTime = 0.475f;
+    [SerializeField] float slopeExtraSpeed = 0.0f;
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
     private Vector3 jumpVector = Vector3.zero;
@@ -59,12 +60,13 @@ public class Player : MonoBehaviour
 
         if (checkJump)
         {
-            if (isGrounded && !jumpCooldown)
+            if ((isGrounded && !jumpCooldown) || (isOnSlope && !jumpCooldown))
             {
                 //rb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
                 jumpVector = Vector3.up * jumpStrength;
                 airtime = true;
                 jumpCooldown = true;
+                gravity = Vector3.zero;
                 Invoke("jumpCooldownOver", jumpColdownTime);
             }
             checkJump = false;
@@ -85,6 +87,10 @@ public class Player : MonoBehaviour
         else if (isOnSlope) // effectively not grounded, but on a slope
         // i want to fucking mcshoot myself, this shit is so fucking stupid and it doesnt even work wtf
         {
+            if (!Physics.SphereCast(transform.position, 0.95f, Vector3.down, out hit, 0.25f))
+            {
+                isOnSlope = false;
+            }
             Vector3 groundNormal = hit.normal;
             Vector3 slopeDirection = Vector3.Cross(Vector3.Cross(Vector3.up, groundNormal), groundNormal).normalized;
             float dotDirectionSlope = Vector3.Dot(movementDir.normalized, slopeDirection);
@@ -93,25 +99,31 @@ public class Player : MonoBehaviour
             if (dotDirectionSlope > 0.1f)
             {
                 print("On Slope Downhill");
-                // float slopeAngle = Vector3.Angle(transform.up, hit.normal);
-                // movementDir.y = gravity.y;
-                // movementDir = movementDir.normalized * moveSpeed;
-                // movementDir.y = -Mathf.Abs(movementDir.y);
-                // rb.velocity = movementDir + pushback + jumpVector / 1.5f;
-                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+                if (movementDir.magnitude <= 0.1) // if player isnt clicking anything
+                {
+                    rb.velocity = pushback + jumpVector / 1.5f;
+                }
+                else
+                {
+                    //this aint quite right yet but it works
+                    movementDir.y = -gravity.y;
+                    movementDir = movementDir.normalized * (moveSpeed + slopeExtraSpeed);
+                    rb.velocity = movementDir + pushback + jumpVector / 1.5f;
+                }
             }
             //uphill
             else if (dotDirectionSlope < -0.1f)
             {
                 print("On Slope Uphill");
-                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+                rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
             else if (dotDirectionSlope == 0.0f)
             {
                 print("On Slope falling");
                 isOnSlope = false;
-                rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
+                rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
+            // in case of fucky wucky
             else
             {
                 rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
@@ -185,10 +197,10 @@ public class Player : MonoBehaviour
             else
             {
                 isOnSlope = false;
+                gravity = Vector3.zero;
             }
 
             isGrounded = true;
-            gravity = Vector3.zero;
             jumpVector = Vector3.zero;
         }
     }
@@ -204,10 +216,10 @@ public class Player : MonoBehaviour
             else
             {
                 isOnSlope = false;
+                gravity = Vector3.zero;
             }
 
             isGrounded = false;
-            gravity = Vector3.zero;
         }
     }
     void airTimeOver()
