@@ -67,7 +67,7 @@ public class CameraManager : MonoBehaviour
         player.SendMessage("unpaused");
         if (GigaGun.insertingGun != null)
             gigaGun.SendMessage("cancelInsertGun");
-        gigaGun.SendMessage("disableConnectionPoints");
+        gigaGun.gameObject.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
         fpsCam.gameObject.SetActive(true);
         orbitalCam.gameObject.SetActive(false);

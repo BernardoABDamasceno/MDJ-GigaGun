@@ -1131,6 +1131,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1531210455421117532, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: slopeExtraSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531210455421117532, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: terminalVelocity
       value: 50
       objectReference: {fileID: 0}

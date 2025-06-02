@@ -1736,7 +1736,7 @@ MonoBehaviour:
   crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
   curvature: 10
   vignetteWidth: 15
-  lineSpeed: 15
+  lineSpeed: 50
 --- !u!1001 &380962111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2310,6 +2310,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4507979513362731478, guid: 5f0aec804248c89498569024413389ec, type: 3}
   m_PrefabInstance: {fileID: 524230081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &538933078 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7970982422220127068, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+  m_PrefabInstance: {fileID: 1356229854}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &573616539
 PrefabInstance:
@@ -3422,7 +3427,7 @@ MonoBehaviour:
   crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
   curvature: 10
   vignetteWidth: 15
-  lineSpeed: 15
+  lineSpeed: 50
 --- !u!1001 &973535106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4310,6 +4315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3136087509016330361, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: optionsCam
+      value: 
+      objectReference: {fileID: 538933078}
     - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: far clip plane
       value: 2600

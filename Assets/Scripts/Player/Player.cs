@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpStrength = 18.0f;
     [SerializeField] float airTimer = 0.025f;
     [SerializeField] float jumpColdownTime = 0.475f;
-    [SerializeField] float slopeExtraSpeed = 0.0f;
+    [SerializeField] float slopeExtraSpeed = 7.0f;
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
     private Vector3 jumpVector = Vector3.zero;
