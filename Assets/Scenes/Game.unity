@@ -4390,9 +4390,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8663129407435074920, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       insertIndex: -1
       addedObject: {fileID: 362384629}
-    - targetCorrespondingSourceObject: {fileID: 5275255944791636779, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1961879909}
   m_SourcePrefab: {fileID: 100100000, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
 --- !u!1001 &1358004499
 PrefabInstance:
@@ -5875,28 +5872,6 @@ Transform:
   - {fileID: 104846065}
   m_Father: {fileID: 1404219797}
   m_LocalEulerAnglesHint: {x: 0, y: 108.649, z: 0}
---- !u!1 &1961879907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5275255944791636779, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-  m_PrefabInstance: {fileID: 1356229854}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1961879909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961879907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffc3ee179ff74374f86122ff7db2dcb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowResTexture: {fileID: 8400000, guid: f9021fae5f1670d4fae12e1b8198cc61, type: 2}
-  crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
-  curvature: 10
-  vignetteWidth: 15
-  lineSpeed: 50
 --- !u!1001 &2009181070
 PrefabInstance:
   m_ObjectHideFlags: 0
