@@ -18,6 +18,7 @@ public class GigaGun : MonoBehaviour
 
     [Header("Initial Gun Settings")]
     [SerializeField] GameObject initialGun;
+    private GameObject pickedGun;
 
     [Header("Gun Rotation Settings")]
     [SerializeField] float insertingGunRotSpeed = 15.0f;
@@ -117,6 +118,11 @@ public class GigaGun : MonoBehaviour
         foreach (ConnectionPoint item in freeConnectionPoints) item.gameObject.SetActive(false);
     }
 
+    public void setPickedGun(GameObject newgun)
+    {
+        pickedGun = newgun;
+    }
+
     public void insertGun(ConnectionPoint connectionPoint)
     {
         if (insertingGun != null)
@@ -132,7 +138,7 @@ public class GigaGun : MonoBehaviour
 
         insertingCP = connectionPoint.gameObject;
         insertingGun = Instantiate(
-            initialGun,
+            pickedGun,
             insertingCP.transform.position,
             insertingCP.transform.rotation,
             transform

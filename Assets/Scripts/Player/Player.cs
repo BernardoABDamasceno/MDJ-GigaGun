@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded && !isOnSlope)
         {
-            print("Grounded");
+            //print("Grounded");
             rb.velocity = movementDir + pushback + jumpVector / 1.5f;
         }
         else if (isOnSlope) // effectively not grounded, but on a slope

@@ -794,6 +794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd418ef3c8c8f64b8bea84f2757e6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
   fpsCam: {fileID: 6804360169471427512}
   orbitalCam: {fileID: 4912309375538569166}
   gigaGun: {fileID: 4948430276237621780}

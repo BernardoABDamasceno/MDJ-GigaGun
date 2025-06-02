@@ -6,10 +6,12 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] Camera fpsCam;
     [SerializeField] Camera orbitalCam;
+    [SerializeField] Camera optionsCam;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
     private bool fpsMode = true;
+    private bool weaponchoice = false;
 
     void Start()
     {
@@ -18,6 +20,7 @@ public class CameraManager : MonoBehaviour
 
         fpsCam.gameObject.SetActive(fpsMode);
         orbitalCam.gameObject.SetActive(!fpsMode);
+        optionsCam.gameObject.SetActive(false);
     }
 
     void Update()
@@ -27,10 +30,25 @@ public class CameraManager : MonoBehaviour
             fpsMode = !fpsMode;
 
             if (fpsMode) changeToFPS();
-            else changeToOrbital();
-
-            fpsCam.gameObject.SetActive(fpsMode);
-            orbitalCam.gameObject.SetActive(!fpsMode);
+            else weaponPick();
+        }
+        if (weaponchoice)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                print("1");
+                SetGun("Prefabs/Guns/Gun");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                print("2");
+                SetGun("Prefabs/Guns/SMG");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                print("3");
+                SetGun("Prefabs/Guns/Shotgun");
+            }
         }
     }
     void FixedUpdate()
@@ -38,7 +56,7 @@ public class CameraManager : MonoBehaviour
         if (!isAssemblyMode)
         {
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z);
-        }       
+        }
     }
 
     private void changeToFPS()
@@ -51,15 +69,36 @@ public class CameraManager : MonoBehaviour
             gigaGun.SendMessage("cancelInsertGun");
         gigaGun.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
+        fpsCam.gameObject.SetActive(true);
+        orbitalCam.gameObject.SetActive(false);
+        optionsCam.gameObject.SetActive(false);
     }
 
-    private void changeToOrbital()
+    public void changeToOrbital()
+    {
+        gigaGun.transform.parent = transform;
+        gigaGun.gameObject.SendMessage("enableConnectionPoints");
+        optionsCam.gameObject.SetActive(false);
+        orbitalCam.gameObject.SetActive(true);
+    }
+
+    private void weaponPick()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        isAssemblyMode = true;
         player.SendMessage("paused");
-        gigaGun.gameObject.SendMessage("enableConnectionPoints");
+        isAssemblyMode = true;
+        fpsCam.gameObject.SetActive(false);
+        optionsCam.gameObject.SetActive(true);
+        weaponchoice = true;
+    }   
+    void SetGun(string gunPrefabPath)
+    {
+        GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
+        print("Setting gun: " + newgun.layer);
         gigaGun.transform.parent = transform;
+        gigaGun.SendMessage("setPickedGun", newgun);
+        weaponchoice = false;
+        changeToOrbital();
     }
 }
