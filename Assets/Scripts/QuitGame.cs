@@ -4,8 +4,8 @@ public class QuitGame : MonoBehaviour
 {
     void Update()
     {
-        // Check if the Escape key was pressed down in this frame
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Check if the Backspace key was pressed down in this frame
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DoQuitGame();
         }
