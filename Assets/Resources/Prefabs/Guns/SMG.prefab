@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616341751035403379}
-  - component: {fileID: 6111254907708300538}
+  - component: {fileID: 8361934442523095877}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -373,7 +373,7 @@ Transform:
   - {fileID: 3258225806977462540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6111254907708300538
+--- !u!114 &8361934442523095877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8227123897541279027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf01e0232e504904aa6b112d24295229, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a7c979b2e68f2e4baf5deca09955ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kickbackXZ: 0.75
@@ -392,7 +392,7 @@ MonoBehaviour:
   recoilY: 0.2
   recoilZ: 0.2
   snapiness: 6
-  gunModel: {fileID: 0}
+  SMGModel: {fileID: 0}
 --- !u!1 &8402653070622794444
 GameObject:
   m_ObjectHideFlags: 0

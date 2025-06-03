@@ -17,6 +17,7 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private float kickbackXZ = 4.5f;
     [SerializeField] private float kickbackY = 10.0f;
     [SerializeField] private float fireRate = 2.0f;
+    [SerializeField] private float damage = 5.0f;
     // Recoil
     [SerializeField] private float recoilX;
     [SerializeField] private float recoilY;
@@ -73,7 +74,7 @@ public class Shotgun : MonoBehaviour
                     EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
                     if (enemy != null)
                     {
-                        enemy.Death();
+                        enemy.Hit(damage);
                     }
                 }
             }

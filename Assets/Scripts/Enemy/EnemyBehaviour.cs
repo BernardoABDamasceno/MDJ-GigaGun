@@ -9,6 +9,8 @@ public class EnemyBehaviour : MonoBehaviour
     private ParticleSystem ps;
     private bool isDead = false;
 
+    [SerializeField] private float health = 15.0f;
+
     private float ogSpeed;
 
     public float detectionRadius = 125f; // How far the enemy notices the player
@@ -129,6 +131,14 @@ public class EnemyBehaviour : MonoBehaviour
         else
         {
             currentWanderTarget = transform.position;
+        }
+    }
+    public void Hit(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Death();
         }
     }
 

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class SMG : MonoBehaviour
 {
     // Identifiers
     private static int idCounter = 0;
@@ -11,12 +11,12 @@ public class Gun : MonoBehaviour
     private GameObject player;
     private GameObject recoilManager;
 
-    // Gun properties
-    [Header("Gun Stats")]
+    // SMG properties
+    [Header("SMG Stats")]
     [SerializeField] private float kickbackXZ = 1.5f;
     [SerializeField] private float kickbackY = 5.0f;
     [SerializeField] private float fireRate = 0.5f;
-    [SerializeField] private float damage = 5.0f;
+    [SerializeField] private float damage = 2.0f;
     // Recoil
     [SerializeField] private float recoilX;
     [SerializeField] private float recoilY;
@@ -25,9 +25,9 @@ public class Gun : MonoBehaviour
 
     private bool fireRateCooldown = false;
 
-    // Gun Model
-    [Header("Gun Model")]
-    [SerializeField] private GameObject gunModel;
+    // SMG Model
+    [Header("SMG Model")]
+    [SerializeField] private GameObject SMGModel;
 
     void Awake()
     {
