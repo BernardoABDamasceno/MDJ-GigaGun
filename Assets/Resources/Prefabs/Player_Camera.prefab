@@ -350,6 +350,7 @@ MonoBehaviour:
   airTimer: 0.025
   jumpColdownTime: 0.475
   slopeExtraSpeed: 7
+  cameraManager: {fileID: 3136087509016330361}
 --- !u!1 &4939975077261342440
 GameObject:
   m_ObjectHideFlags: 0

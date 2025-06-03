@@ -27,10 +27,7 @@ public class CameraManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            fpsMode = !fpsMode;
-
-            if (fpsMode) changeToFPS();
-            else weaponPick();
+            levelUp();
         }
         if (weaponchoice)
         {
@@ -74,7 +71,7 @@ public class CameraManager : MonoBehaviour
         optionsCam.gameObject.SetActive(false);
     }
 
-    public void changeToOrbital()
+    private void changeToOrbital()
     {
         gigaGun.transform.parent = transform;
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
@@ -91,8 +88,8 @@ public class CameraManager : MonoBehaviour
         fpsCam.gameObject.SetActive(false);
         optionsCam.gameObject.SetActive(true);
         weaponchoice = true;
-    }   
-    void SetGun(string gunPrefabPath)
+    }
+    private void SetGun(string gunPrefabPath)
     {
         GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
         print("Setting gun: " + newgun.layer);
@@ -100,5 +97,12 @@ public class CameraManager : MonoBehaviour
         gigaGun.SendMessage("setPickedGun", newgun);
         weaponchoice = false;
         changeToOrbital();
+    }
+    
+    public void levelUp()
+    {
+        fpsMode = !fpsMode;
+        if (fpsMode) changeToFPS();
+        else weaponPick();
     }
 }

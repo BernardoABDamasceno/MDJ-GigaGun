@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float airTimer = 0.025f;
     [SerializeField] float jumpColdownTime = 0.475f;
     [SerializeField] float slopeExtraSpeed = 7.0f;
+    [SerializeField] CameraManager cameraManager;
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
     private Vector3 jumpVector = Vector3.zero;
@@ -24,11 +25,12 @@ public class Player : MonoBehaviour
     private bool airtime = true;
     private bool jumpCooldown = false;
     private Vector3 storedVelocity = Vector3.zero;
+    private int currentXP = 0;
 
     float horizontalInput;
     float verticalInput;
 
-    
+
     // find angle between player and ground
     private RaycastHit hit = new RaycastHit();
 
@@ -76,7 +78,7 @@ public class Player : MonoBehaviour
         movementDir = transform.forward * verticalInput + transform.right * horizontalInput;
 
         movementDir.y = 0.0f; // flat ground
-        
+
         movementDir = movementDir.normalized * moveSpeed;
 
         if (isGrounded && !isOnSlope)
@@ -238,5 +240,15 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position - new Vector3(0f, 0.8f, 0f), 0.95f);
+    }
+
+    void gainXP(int xp)
+    {
+        currentXP += xp;
+        if (currentXP >= 50)
+        {
+            currentXP -= 50;
+            cameraManager.SendMessage("levelUp");
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class EnemyBehaviour : MonoBehaviour
 {
     private Transform player;
+    private GameObject playerObj;
     private NavMeshAgent agent;
     private ParticleSystem ps;
     private bool isDead = false;
@@ -35,7 +36,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+        player = playerObj.transform;
         ps = GetComponentInChildren<ParticleSystem>();
         agent = GetComponent<NavMeshAgent>();
         ogSpeed = agent.speed; 
@@ -135,6 +137,7 @@ public class EnemyBehaviour : MonoBehaviour
         ps.Play();
         gameObject.GetComponent<Renderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
+        playerObj.SendMessage("gainXP", 10);
         isDead = true;
         Destroy(gameObject, ps.main.startLifetime.constant);
     }
