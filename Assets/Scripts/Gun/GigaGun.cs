@@ -53,7 +53,7 @@ public class GigaGun : MonoBehaviour
                     point.gameObject.SetActive(!point.gameObject.activeSelf);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 confirmInsertGun();
             }
@@ -211,7 +211,9 @@ public class GigaGun : MonoBehaviour
         Destroy(insertingCP);
         insertingCP = null;
 
-        orbitalCam.SendMessage("resetAssemblyMode");
+        // NEEDS TO BE REVIEWD LATER THIS SHOULD NOT BE A CONCERN OF LEVEL UP  METHOD;
+        //orbitalCam.SendMessage("resetAssemblyMode");
+        GetComponentInParent<CameraManager>().SendMessage("levelUp");
     }
     
     private void finishCooldown()

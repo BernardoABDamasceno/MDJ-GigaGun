@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] Camera fpsCam;
     [SerializeField] Camera orbitalCam;
-    [SerializeField] Camera optionsCam;
+    [SerializeField] Canvas optionsCanvas;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
 
         fpsCam.gameObject.SetActive(fpsMode);
         orbitalCam.gameObject.SetActive(!fpsMode);
-        optionsCam.gameObject.SetActive(false);
+        optionsCanvas.gameObject.SetActive(weaponchoice);
     }
 
     void Update()
@@ -61,6 +61,7 @@ public class CameraManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isAssemblyMode = false;
+        weaponchoice = false;
         player.SendMessage("unpaused");
         if (GigaGun.insertingGun != null)
             gigaGun.SendMessage("cancelInsertGun");
@@ -68,14 +69,14 @@ public class CameraManager : MonoBehaviour
         gigaGun.transform.parent = fpsCam.transform;
         fpsCam.gameObject.SetActive(true);
         orbitalCam.gameObject.SetActive(false);
-        optionsCam.gameObject.SetActive(false);
+        optionsCanvas.gameObject.SetActive(false);
     }
 
     private void changeToOrbital()
     {
         gigaGun.transform.parent = transform;
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
-        optionsCam.gameObject.SetActive(false);
+        fpsCam.gameObject.SetActive(false);
         orbitalCam.gameObject.SetActive(true);
     }
 
@@ -85,8 +86,8 @@ public class CameraManager : MonoBehaviour
         Cursor.visible = true;
         player.SendMessage("paused");
         isAssemblyMode = true;
-        fpsCam.gameObject.SetActive(false);
-        optionsCam.gameObject.SetActive(true);
+        optionsCanvas.gameObject.SetActive(true);
+        changeToOrbital();
         weaponchoice = true;
     }
     private void SetGun(string gunPrefabPath)
@@ -95,8 +96,8 @@ public class CameraManager : MonoBehaviour
         print("Setting gun: " + newgun.layer);
         gigaGun.transform.parent = transform;
         gigaGun.SendMessage("setPickedGun", newgun);
+        optionsCanvas.gameObject.SetActive(false);
         weaponchoice = false;
-        changeToOrbital();
     }
     
     public void levelUp()
