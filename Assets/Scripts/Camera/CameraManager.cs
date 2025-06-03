@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Camera fpsCam;
     [SerializeField] Camera orbitalCam;
     [SerializeField] Canvas optionsCanvas;
+    [SerializeField] Canvas dmgCanvas;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
@@ -21,6 +22,7 @@ public class CameraManager : MonoBehaviour
         fpsCam.gameObject.SetActive(fpsMode);
         orbitalCam.gameObject.SetActive(!fpsMode);
         optionsCanvas.gameObject.SetActive(weaponchoice);
+        dmgCanvas.gameObject.SetActive(false);
     }
 
     void Update()
@@ -99,11 +101,21 @@ public class CameraManager : MonoBehaviour
         optionsCanvas.gameObject.SetActive(false);
         weaponchoice = false;
     }
-    
+
     public void levelUp()
     {
         fpsMode = !fpsMode;
         if (fpsMode) changeToFPS();
         else weaponPick();
+    }
+
+    public void flashRed()
+    {
+        dmgCanvas.gameObject.SetActive(true);
+        Invoke("flashReset", 0.1f);
+    }
+    private void flashReset()
+    {
+        dmgCanvas.gameObject.SetActive(false);
     }
 }

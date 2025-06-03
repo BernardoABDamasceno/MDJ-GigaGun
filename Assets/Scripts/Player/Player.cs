@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10.0f;
+    [SerializeField] float HP = 50.0f;
     [SerializeField] float jumpdrag = 1f;
     [SerializeField] float gundragHorizontal = 2f;
     [SerializeField] float gundragVertical = 10f;
@@ -249,6 +250,17 @@ public class Player : MonoBehaviour
         {
             currentXP -= 50;
             cameraManager.SendMessage("levelUp");
+        }
+    }
+
+    void getHit(float damage)
+    {
+        print("Player got hit for " + damage + " damage");
+        HP -= damage;
+        cameraManager.SendMessage("flashRed");
+        if (HP <= 0)
+        {
+            //Death to implement
         }
     }
 }

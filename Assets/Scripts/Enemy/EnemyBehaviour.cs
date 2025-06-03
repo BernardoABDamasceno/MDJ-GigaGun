@@ -42,7 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
         player = playerObj.transform;
         ps = GetComponentInChildren<ParticleSystem>();
         agent = GetComponent<NavMeshAgent>();
-        ogSpeed = agent.speed; 
+        ogSpeed = agent.speed;
 
         // Start in Wandering state
         currentState = EnemyState.Wandering;
@@ -50,7 +50,7 @@ public class EnemyBehaviour : MonoBehaviour
         // Assign a random delay for *this* enemy
         newWanderTargetDelay = Random.Range(minNewWanderTargetDelay, maxNewWanderTargetDelay);
         // Initialize timer with a random offset (so they don't all start choosing new targets at once)
-        wanderTimer = Random.Range(0f, newWanderTargetDelay); 
+        wanderTimer = Random.Range(0f, newWanderTargetDelay);
 
         SetNewWanderTarget();
     }
@@ -133,7 +133,7 @@ public class EnemyBehaviour : MonoBehaviour
             currentWanderTarget = transform.position;
         }
     }
-    public void Hit(float damage)
+    public void takeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
@@ -150,5 +150,14 @@ public class EnemyBehaviour : MonoBehaviour
         playerObj.SendMessage("gainXP", 10);
         isDead = true;
         Destroy(gameObject, ps.main.startLifetime.constant);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            print("Enemy collided with player");
+            collision.gameObject.SendMessage("getHit", 5.0f);
+        }
     }
 }

@@ -54,7 +54,7 @@ public class SMG : MonoBehaviour
                 EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
                 if (enemy != null)
                 {
-                    enemy.Hit(damage);
+                    enemy.takeDamage(damage);
                 }
             }
         }
