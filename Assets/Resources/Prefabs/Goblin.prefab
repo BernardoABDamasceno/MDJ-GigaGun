@@ -301,10 +301,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.86340356
+  m_Radius: 0.58773154
   m_Height: 3.7200737
   m_Direction: 1
-  m_Center: {x: -0.031421065, y: 1.9322963, z: -0.073048115}
+  m_Center: {x: -0.031421065, y: 1.9322963, z: 0.2026239}
 --- !u!114 &5854690278402461842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   detectionRadius: 5000
   wanderSpeed: 1.5
   chaseSpeed: 10
-  attackRange: 2
+  attackRange: 1.2
   attackCooldown: 1.5
   modelRotationOffset: {x: 0, y: 180, z: 0}
   currentState: 0
