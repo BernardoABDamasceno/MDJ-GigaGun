@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
 
     private GameObject player;
     private GameObject recoilManager;
+    private ParticleSystem ps;
 
     // Gun properties
     [Header("Gun Stats")]
@@ -25,9 +26,6 @@ public class Gun : MonoBehaviour
 
     private bool fireRateCooldown = false;
 
-    // Gun Model
-    [Header("Gun Model")]
-    [SerializeField] private GameObject gunModel;
 
     void Awake()
     {
@@ -38,6 +36,7 @@ public class Gun : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         recoilManager = GameObject.FindGameObjectWithTag("RecoilManager");
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     public void shoot()
@@ -67,6 +66,7 @@ public class Gun : MonoBehaviour
 
         player.SendMessage("applyPushback", kickbackOutput);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
+        ps.Play();
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);

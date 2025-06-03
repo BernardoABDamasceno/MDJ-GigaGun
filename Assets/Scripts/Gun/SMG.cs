@@ -10,6 +10,7 @@ public class SMG : MonoBehaviour
 
     private GameObject player;
     private GameObject recoilManager;
+    private ParticleSystem ps;
 
     // SMG properties
     [Header("SMG Stats")]
@@ -25,10 +26,6 @@ public class SMG : MonoBehaviour
 
     private bool fireRateCooldown = false;
 
-    // SMG Model
-    [Header("SMG Model")]
-    [SerializeField] private GameObject SMGModel;
-
     void Awake()
     {
         id = idCounter;
@@ -38,6 +35,7 @@ public class SMG : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         recoilManager = GameObject.FindGameObjectWithTag("RecoilManager");
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     public void shoot()
@@ -67,6 +65,7 @@ public class SMG : MonoBehaviour
 
         player.SendMessage("applyPushback", kickbackOutput);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
+        ps.Play();
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);

@@ -135,6 +135,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
     public void takeDamage(float damage)
     {
+        print("HIT");
         health -= damage;
         if (health <= 0)
         {

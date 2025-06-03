@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
             //downhill
             if (dotDirectionSlope > 0.1f)
             {
-                print("On Slope Downhill");
+                //print("On Slope Downhill");
                 if (movementDir.magnitude <= 0.1) // if player isnt clicking anything
                 {
                     rb.velocity = pushback + jumpVector / 1.5f;
@@ -117,12 +117,12 @@ public class Player : MonoBehaviour
             //uphill
             else if (dotDirectionSlope < -0.1f)
             {
-                print("On Slope Uphill");
+                //print("On Slope Uphill");
                 rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
             else if (dotDirectionSlope == 0.0f)
             {
-                print("On Slope falling");
+                //print("On Slope falling");
                 isOnSlope = false;
                 rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
@@ -135,14 +135,14 @@ public class Player : MonoBehaviour
         //
         else if (rb.velocity.y > 0.5f || rb.velocity.y < -0.5f || !airtime) // this check might be a bit goofy
         {
-            print("In Air");
+            //print("In Air");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f)
                                     + pushback + jumpVector - gravity;
         }
         else
         {
-            print("jump air time");
+            //print("jump air time");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
             Invoke("airTimeOver", airTimer);
