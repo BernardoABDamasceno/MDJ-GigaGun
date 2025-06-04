@@ -6,11 +6,12 @@ public class EnemyBehaviour : MonoBehaviour
     private Transform player;
     private GameObject playerObj;
     private NavMeshAgent agent;
-    private ParticleSystem ps;
     private bool isDead = false;
     private Animator animator;
 
     [SerializeField] private float health = 15.0f;
+    [SerializeField] private ParticleSystem bloodSplaterDeath;
+    [SerializeField] private ParticleSystem bloodSplatterHit;
 
     private float ogSpeed;
 
@@ -51,7 +52,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj.transform;
-        ps = GetComponentInChildren<ParticleSystem>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         ogSpeed = agent.speed;
@@ -257,11 +257,15 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Death();
         }
+        else
+        {
+            bloodSplatterHit.Play();
+        }
     }
 
     public void Death()
     {
-        ps.Play();
+        bloodSplaterDeath.Play();
         // It's often good to stop the NavMeshAgent completely when dying
         if (agent != null && agent.enabled)
         {
@@ -279,7 +283,7 @@ public class EnemyBehaviour : MonoBehaviour
         playerObj.SendMessage("gainXP", 10);
         isDead = true;
 
-        Destroy(gameObject, ps.main.startLifetime.constant); // Destroy after particle system finishes
+        Destroy(gameObject, bloodSplaterDeath.main.startLifetime.constant); // Destroy after particle system finishes
     }
 
     void OnCollisionEnter(Collision collision)

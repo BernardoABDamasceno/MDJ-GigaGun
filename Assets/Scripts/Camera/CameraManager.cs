@@ -123,3 +123,7 @@ public class CameraManager : MonoBehaviour
         dmgCanvas.gameObject.SetActive(false);
     }
 }
+
+
+// ADD SMALL GUN ANIMATIONS
+// 
