@@ -245,7 +245,7 @@ public class Player : MonoBehaviour
     void gainXP(int xp)
     {
         currentXP += xp;
-        if (currentXP >= 50)
+        if (currentXP >= 999999999999)
         {
             currentXP -= 50;
             cameraManager.SendMessage("levelUp");
