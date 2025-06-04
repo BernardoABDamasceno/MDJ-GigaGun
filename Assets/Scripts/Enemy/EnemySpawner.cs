@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float rateOfSpawns = 10.0f;
 
     [SerializeField] static int maxEnemies = 100;
-    private static int currentEnemies = 0;
+    public static int currentEnemies = 0;
 
 
     void Start()

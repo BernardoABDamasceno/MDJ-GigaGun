@@ -284,6 +284,7 @@ public class EnemyBehaviour : MonoBehaviour
         isDead = true;
 
         Destroy(gameObject, bloodSplaterDeath.main.startLifetime.constant); // Destroy after particle system finishes
+        EnemySpawner.currentEnemies--;
     }
 
     void OnCollisionEnter(Collision collision)
