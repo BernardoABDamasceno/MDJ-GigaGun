@@ -8,6 +8,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float startDelay = 0.0f;
     [SerializeField] float rateOfSpawns = 10.0f;
 
+    [SerializeField] static int maxEnemies = 100;
+    private static int currentEnemies = 0;
+
 
     void Start()
     {
@@ -16,7 +19,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void spawnEnemy()
     {
-        if (CameraManager.isAssemblyMode) return;
+        if (CameraManager.isAssemblyMode || currentEnemies >= maxEnemies) return;
+        currentEnemies++;
         Instantiate(enemyPrefab, transform.position, Quaternion.identity, this.transform);
     }
 }
