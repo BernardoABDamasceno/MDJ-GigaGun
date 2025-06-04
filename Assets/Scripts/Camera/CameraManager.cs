@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Camera orbitalCam;
     [SerializeField] Canvas optionsCanvas;
     [SerializeField] Canvas dmgCanvas;
+    [SerializeField] Canvas infoDump;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
@@ -21,7 +22,8 @@ public class CameraManager : MonoBehaviour
 
         fpsCam.gameObject.SetActive(fpsMode);
         orbitalCam.gameObject.SetActive(!fpsMode);
-        optionsCanvas.gameObject.SetActive(weaponchoice);
+        optionsCanvas.gameObject.SetActive(false);
+        infoDump.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
     }
 
@@ -72,6 +74,7 @@ public class CameraManager : MonoBehaviour
         fpsCam.gameObject.SetActive(true);
         orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
+        infoDump.gameObject.SetActive(false);
     }
 
     private void changeToOrbital()
@@ -99,6 +102,7 @@ public class CameraManager : MonoBehaviour
         gigaGun.transform.parent = transform;
         gigaGun.SendMessage("setPickedGun", newgun);
         optionsCanvas.gameObject.SetActive(false);
+        infoDump.gameObject.SetActive(true);
         weaponchoice = false;
     }
 
