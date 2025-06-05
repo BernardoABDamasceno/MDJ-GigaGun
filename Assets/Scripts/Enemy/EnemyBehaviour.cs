@@ -17,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float detectionRadius = 125f; // How far the enemy notices the player
     public float wanderSpeed = 3.5f; // Speed when wandering
-    public float chaseSpeed = 5f;    // Speed when chasing player
+    public float chaseSpeed = 5f;     // Speed when chasing player
 
     // Attack parameters
     public float attackRange = 2.0f; // Distance to trigger attack
@@ -79,12 +79,48 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
-        // If in assembly mode or dead, stop movement and animation
-        if (CameraManager.isAssemblyMode || isDead)
+        if (isDead)
         {
-            agent.speed = 0;
-            animator.SetBool("isWalking", false);
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.enabled = false;
+            }
+
+            if (animator.enabled && animator.speed == 0)
+            {
+                animator.speed = 1;
+            }
             return;
+        }
+
+        // ASSEMBLY MODE 
+        if (CameraManager.isAssemblyMode)
+        {
+            // Check if agent is enabled before manipulating it
+            if (agent != null && agent.enabled)
+            {
+                agent.speed = 0;
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+            }
+            
+            // stop all animations or force to Idle and freeze playback
+            if (animator.enabled)
+            {
+                animator.SetBool("isWalking", false);
+                animator.ResetTrigger("AttackTrigger");
+                animator.Play("Idle", 0, 0f); // Force to Idle
+                animator.speed = 0; // Freeze the animator's playback speed
+            }
+            return; // Exit Update early if in assembly mode
+        }
+
+        // If we just exited assembly mode and the animator was frozen, unfreeze it
+        if (!CameraManager.isAssemblyMode && !isDead && animator.speed == 0)
+        {
+            animator.speed = 1; // Resume normal animation playback
         }
 
         // State machine logic for movement
@@ -108,13 +144,17 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         // Update the animator based on the agent's velocity.
-        animator.SetBool("isWalking", agent.velocity.magnitude > 0.1f);
+        // This line only executes if not in assembly mode or dead, and animator is unfrozen
+        if (animator.speed != 0) // Only update walking if animator is playing normally
+        {
+            animator.SetBool("isWalking", agent.velocity.magnitude > 0.1f);
+        }
     }
 
     void WanderState()
     {
         agent.speed = wanderSpeed;
-        agent.isStopped = false; // Ensure agent is not stopped while wandering
+        agent.isStopped = false; // Ensures agent is not stopped while wandering
 
         // Check if player is within detection radius
         if (Vector3.Distance(transform.position, player.position) < detectionRadius)
@@ -176,7 +216,7 @@ public class EnemyBehaviour : MonoBehaviour
         // Makes sure the enemy is facing the player while attacking
         RotateTowardsTarget(player.position);
 
-        // Decrement cooldown timer
+        // cooldown timer
         currentAttackCooldownTimer -= Time.deltaTime;
 
         // When cooldown is over, transition back to chasing or wandering
@@ -224,7 +264,7 @@ public class EnemyBehaviour : MonoBehaviour
             // Calculates the target rotation based on the agent's velocity, ignoring Y-axis
             Vector3 horizontalVelocity = new Vector3(agent.velocity.x, 0, agent.velocity.z).normalized;
 
-            // Ensure there's a valid direction to look at (prevents Quaternion.LookRotation(Vector3.zero) errors)
+            // Ensure there's a valid direction to look at before applying rotation
             if (horizontalVelocity.magnitude > 0.01f)
             {
                 Quaternion baseRotation = Quaternion.LookRotation(horizontalVelocity);
@@ -266,22 +306,31 @@ public class EnemyBehaviour : MonoBehaviour
     public void Death()
     {
         bloodSplaterDeath.Play();
-        // It's often good to stop the NavMeshAgent completely when dying
+        
+        // Disable agent first, as other actions depend on it being active to function
         if (agent != null && agent.enabled)
         {
             agent.isStopped = true;
-            agent.velocity = Vector3.zero; // Clear any residual velocity
-            agent.enabled = false; // Disable the NavMeshAgent component
+            agent.velocity = Vector3.zero;
+            agent.enabled = false; 
         }
-        // Stop the enemy's movement and animations
-        animator.SetBool("isWalking", false);
-        animator.SetTrigger("DieTrigger"); // Trigger the death animation
+
+        // Set the death state
+        isDead = true;
+        
+        // Trigger the death animation
+        if (animator != null && animator.enabled)
+        {
+            animator.speed = 1;
+            animator.SetBool("isWalking", false); // Stop any walking
+            animator.ResetTrigger("AttackTrigger"); // Clear any attack triggers
+            animator.SetTrigger("DieTrigger"); // Trigger the death animation
+        }
 
         gameObject.GetComponent<Renderer>().enabled = false; // Hide the model
         gameObject.GetComponent<Collider>().enabled = false; // Disable collision
 
         playerObj.SendMessage("gainXP", 10);
-        isDead = true;
 
         Destroy(gameObject, bloodSplaterDeath.main.startLifetime.constant); // Destroy after particle system finishes
         EnemySpawner.currentEnemies--;
