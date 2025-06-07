@@ -111,7 +111,6 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 animator.SetBool("isWalking", false);
                 animator.ResetTrigger("AttackTrigger");
-                animator.Play("Idle", 0, 0f); // Force to Idle
                 animator.speed = 0; // Freeze the animator's playback speed
             }
             return; // Exit Update early if in assembly mode

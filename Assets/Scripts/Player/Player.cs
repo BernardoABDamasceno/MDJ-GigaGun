@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10.0f;
-    [SerializeField] float HP = 50.0f;
+    [SerializeField] float HP = 25.0f;
     [SerializeField] float jumpdrag = 1f;
     [SerializeField] float gundragHorizontal = 2f;
     [SerializeField] float gundragVertical = 10f;
@@ -39,6 +40,11 @@ public class Player : MonoBehaviour
     {
         // Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
+
+        // Ensure game is unpaused and cursor is set correctly at the start of the game scene
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked; // Lock cursor to the game window
+        Cursor.visible = false; // Hide the cursor
     }
 
     void Update()
@@ -59,6 +65,13 @@ public class Player : MonoBehaviour
     {
         // this is just to stop unnecessary physics calculations
         if (CameraManager.isAssemblyMode) return;
+
+        // Prevent movement if the game is paused
+        if (Time.timeScale == 0f)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
 
         if (checkJump)
         {
@@ -259,7 +272,18 @@ public class Player : MonoBehaviour
         cameraManager.SendMessage("flashRed");
         if (HP <= 0)
         {
-            //Death to implement
+            // Player death logic
+            Die();
         }
+    }
+
+    /// Handles the player's death sequence.
+    private void Die()
+    {
+        Debug.Log("Player has died!");
+
+       // Load the desired scene
+        SceneManager.LoadScene("GameOver");
+
     }
 }
