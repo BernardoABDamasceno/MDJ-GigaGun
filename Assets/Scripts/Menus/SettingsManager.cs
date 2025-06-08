@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -19,8 +21,27 @@ public class SettingsManager : MonoBehaviour
     private AudioSource audioSource;
 
     // Constants for volume ranges
-    private const float MAX_VOLUME_LINEAR_VALUE = 10.0f; // Represents +20dB
+    private const float MAX_VOLUME_LINEAR_VALUE = 2.0f;
     private const float MIN_VOLUME_LINEAR_VALUE = 0.0001f; // Represents -80dB (to avoid Log10(0))
+
+    [Header("Display Settings")]
+    [SerializeField] private Button fullscreenButton;
+    [SerializeField] private Button windowedButton;
+
+    [Tooltip("The preferred width for windowed mode.")]
+    [SerializeField] private int windowedWidth = 1280; // Default width for windowed mode
+    [Tooltip("The preferred height for windowed mode.")]
+    [SerializeField] private int windowedHeight = 720; // Default height for windowed mode
+
+    [Tooltip("The preferred width for fullscreen mode.")]
+    [SerializeField] private int fullscreenWidth = 1920; // Default width for fullscreen mode
+    [Tooltip("The preferred height for fullscreen mode.")]
+    [SerializeField] private int fullscreenHeight = 1080; // Default height for fullscreen mode
+
+    // CRT Filter Settings
+    [Header("CRT Filter")]
+    [SerializeField] private Button crtOnButton;
+    [SerializeField] private Button crtOffButton;
 
     void Awake()
     {
@@ -31,7 +52,6 @@ public class SettingsManager : MonoBehaviour
             audioSource.playOnAwake = false;
             audioSource.loop = false;
         }
-
         // Sets slider ranges programmatically for consistency
         masterVolumeSlider.minValue = MIN_VOLUME_LINEAR_VALUE;
         masterVolumeSlider.maxValue = MAX_VOLUME_LINEAR_VALUE;
@@ -39,29 +59,41 @@ public class SettingsManager : MonoBehaviour
         musicVolumeSlider.maxValue = MAX_VOLUME_LINEAR_VALUE;
         sfxVolumeSlider.minValue = MIN_VOLUME_LINEAR_VALUE;
         sfxVolumeSlider.maxValue = MAX_VOLUME_LINEAR_VALUE;
-
         // Adds listeners for slider value changes.
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
+
+        fullscreenButton.onClick.AddListener(SetFullscreen);
+        windowedButton.onClick.AddListener(SetWindowed);
+
+        // CRT Button Listener
+        crtOnButton.onClick.AddListener(CrtOn);
+        crtOffButton.onClick.AddListener(CrtOff);
     }
 
     void Start()
     {
-        // Ensure cursor is visible in settings menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Loads saved volume settings and apply them when the scene starts
         LoadVolumeSettings();
+        LoadDisplaySettings();
+
     }
 
     private void OnDestroy()
     {
-        // Removes listeners to prevent memory leaks when the GameObject is destroyed
         masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
+
+        fullscreenButton.onClick.RemoveListener(SetFullscreen);
+        windowedButton.onClick.RemoveListener(SetWindowed);
+
+        // CRT Button Listeners
+        crtOnButton.onClick.RemoveListener(CrtOn);
+        crtOffButton.onClick.RemoveListener(CrtOff);
     }
 
     private void PlayButtonClickSound()
@@ -80,16 +112,12 @@ public class SettingsManager : MonoBehaviour
     // --- Volume Control Methods ---
     public void SetMasterVolume(float volume)
     {
-        // Mathf.Log10(volume) * 20f;
-        // Here, 'volume' will now range from 0.0001 to 10.0,
-        // so Log10 will range from -4 to 1.
-        // Multiplying by 20 gives a dB range from -80 to +20.
         float dB = Mathf.Log10(volume) * 20f;
         
         if (mainAudioMixer != null)
         {
             mainAudioMixer.SetFloat("MasterVolume", dB);
-            PlayerPrefs.SetFloat("MasterVolume", volume); // Save the linear slider value
+            PlayerPrefs.SetFloat("MasterVolume", volume);
         }
     }
 
@@ -99,7 +127,7 @@ public class SettingsManager : MonoBehaviour
         if (mainAudioMixer != null)
         {
             mainAudioMixer.SetFloat("MusicVolume", dB);
-            PlayerPrefs.SetFloat("MusicVolume", volume); // Save the linear slider value
+            PlayerPrefs.SetFloat("MusicVolume", volume);
         }
     }
 
@@ -109,35 +137,93 @@ public class SettingsManager : MonoBehaviour
         if (mainAudioMixer != null)
         {
             mainAudioMixer.SetFloat("SFXVolume", dB);
-            PlayerPrefs.SetFloat("SFXVolume", volume); // Save the linear slider value
+            PlayerPrefs.SetFloat("SFXVolume", volume);
         }
     }
 
-    // Method to load and apply saved volume settings
     private void LoadVolumeSettings()
     {
-        // Master Volume
-        // GetFloat has a default value if the key is not found (e.g., first run)
-        float masterVol = PlayerPrefs.GetFloat("MasterVolume", 1.0f); // Default to 0dB (linear 1.0)
-        masterVolumeSlider.value = masterVol; // Set slider UI
-        SetMasterVolume(masterVol); // Apply to mixer
+        float masterVol = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+        masterVolumeSlider.value = masterVol;
+        SetMasterVolume(masterVol);
 
-        // Music Volume
         float musicVol = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
         musicVolumeSlider.value = musicVol;
         SetMusicVolume(musicVol);
 
-        // SFX Volume
         float sfxVol = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
         sfxVolumeSlider.value = sfxVol;
         SetSFXVolume(sfxVol);
     }
 
-    // --- Scene Navigation ---
+    // Display Control Methods
+    public void SetFullscreen()
+    {
+        PlayButtonClickSound();
+        Screen.SetResolution(fullscreenWidth, fullscreenHeight, FullScreenMode.FullScreenWindow);
+        Screen.fullScreen = true;
+
+        PlayerPrefs.SetInt("Fullscreen", 1);
+        PlayerPrefs.SetInt("FullscreenWidth", fullscreenWidth);
+        PlayerPrefs.SetInt("FullscreenHeight", fullscreenHeight);
+        Debug.Log($"Set to Fullscreen: {fullscreenWidth}x{fullscreenHeight}");
+    }
+
+    public void SetWindowed()
+    {
+        PlayButtonClickSound();
+        Screen.SetResolution(windowedWidth, windowedHeight, FullScreenMode.Windowed);
+        Screen.fullScreen = false;
+
+        PlayerPrefs.SetInt("Fullscreen", 0);
+        PlayerPrefs.SetInt("WindowedWidth", windowedWidth);
+        PlayerPrefs.SetInt("WindowedHeight", windowedHeight);
+        Debug.Log($"Set to Windowed: {windowedWidth}x{windowedHeight}");
+    }
+
+    private void LoadDisplaySettings()
+    {
+        windowedWidth = PlayerPrefs.GetInt("WindowedWidth", windowedWidth);
+        windowedHeight = PlayerPrefs.GetInt("WindowedHeight", windowedHeight);
+
+        fullscreenWidth = PlayerPrefs.GetInt("FullscreenWidth", fullscreenWidth);
+        fullscreenHeight = PlayerPrefs.GetInt("FullscreenHeight", fullscreenHeight);
+
+        int isFullscreen = PlayerPrefs.GetInt("Fullscreen", 1); // Default to fullscreen
+
+        if (isFullscreen == 1)
+        {
+            Screen.SetResolution(fullscreenWidth, fullscreenHeight, FullScreenMode.FullScreenWindow);
+            Screen.fullScreen = true;
+        }
+        else
+        {
+            Screen.SetResolution(windowedWidth, windowedHeight, FullScreenMode.Windowed);
+            Screen.fullScreen = false;
+        }
+        Debug.Log($"Loaded Display Setting: Fullscreen = {Screen.fullScreen}, Resolution = {Screen.width}x{Screen.height}");
+    }
+
+    // CRT Filter Control Methods
+    public void CrtOn()
+    {
+        PlayButtonClickSound();
+        PlayerPrefs.SetInt("CrtOn", 1); // Save CRT state (1 = on, 0 = off)
+        PlayerPrefs.Save(); // Ensures PlayerPrefs are written to disk immediately
+        Debug.Log("CRT Filter On preference saved.");
+    }
+
+    public void CrtOff()
+    {
+        PlayButtonClickSound();
+        PlayerPrefs.SetInt("CrtOn", 0); // Save CRT state (1 = on, 0 = off)
+        PlayerPrefs.Save(); // Ensures PlayerPrefs are written to disk immediately
+        Debug.Log("CRT Filter Off preference saved.");
+    }
     public void BackToMainMenu()
     {
-        PlayButtonClickSound(); // Play sound before transition
+        PlayButtonClickSound();
         Debug.Log("Going back to main menu from settings...");
-        SceneManager.LoadScene("MainMenu"); // Load your MainMenu scene
+        SceneManager.LoadScene("MainMenu");
     }
 }

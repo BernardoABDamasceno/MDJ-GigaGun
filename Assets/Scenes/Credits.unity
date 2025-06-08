@@ -2132,10 +2132,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1772455790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd707671e24f11449a6e5e063800878, type: 3}
+  m_Script: {fileID: 11500000, guid: bb3dd7b4fa36e8a46a43cf420de07174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathMenuPanel: {fileID: 0}
   restartButtonText: {fileID: 0}
   mainMenuButtonText: {fileID: 1758578408}
 --- !u!1 &1939387677

@@ -326,7 +326,7 @@ MonoBehaviour:
   health: 15
   bloodSplaterDeath: {fileID: 1260972684799560305}
   bloodSplatterHit: {fileID: 4231216390401649954}
-  detectionRadius: 125
+  detectionRadius: 250
   wanderSpeed: 1.5
   chaseSpeed: 10
   attackRange: 1.2

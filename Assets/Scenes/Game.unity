@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 1273627098}
   - component: {fileID: 1273627100}
   m_Layer: 0
-  m_Name: 'GameManager '
+  m_Name: CRTManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4920,8 +4920,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd707671e24f11449a6e5e063800878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartButtonText: {fileID: 0}
-  mainMenuButtonText: {fileID: 0}
+  crtFilterScripts:
+  - {fileID: 958405217}
+  - {fileID: 362384629}
 --- !u!4 &1273627099
 Transform:
   m_ObjectHideFlags: 0

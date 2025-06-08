@@ -454,7 +454,7 @@ public class EnemyBehaviour : MonoBehaviour
         playerObj.SendMessage("gainXP", 10); // Give XP
 
         // calculated destruction delay based on sound length
-        float destructionDelay = dyingSFX != null ? dyingSFX.length : 2f;
+        float destructionDelay = dyingSFX != null ? dyingSFX.length : 1f; // Default to 1 second if no sound is set
 
         Destroy(gameObject, destructionDelay);
 
