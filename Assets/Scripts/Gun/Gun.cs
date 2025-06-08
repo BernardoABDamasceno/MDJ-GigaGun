@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     private GameObject player;
     private GameObject recoilManager;
     private ParticleSystem ps;
+    private AudioSource audioSource; // NEW: Reference to the AudioSource
 
     // Gun properties
     [Header("Gun Stats")]
@@ -17,11 +18,16 @@ public class Gun : MonoBehaviour
     [SerializeField] private float kickbackY = 5.0f;
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float damage = 5.0f;
+
     // Recoil
     [SerializeField] private float recoilX;
     [SerializeField] private float recoilY;
     [SerializeField] private float recoilZ;
     [SerializeField] private float snapiness;
+
+    // Audio Clip
+    [Header("Audio")]
+    [SerializeField] private AudioClip fireSFX;
 
     private bool fireRateCooldown = false;
 
@@ -31,16 +37,32 @@ public class Gun : MonoBehaviour
         id = idCounter;
         idCounter++;
     }
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         recoilManager = GameObject.FindGameObjectWithTag("RecoilManager");
         ps = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            // If there's no AudioSource, add one.
+            // This is useful if you create gun prefabs without one initially.
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
     }
 
     public void shoot()
     {
         if (fireRateCooldown) return;
+
+        // Play the SFX
+        if (fireSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(fireSFX);
+        }
 
         Ray ray = new Ray(transform.position, transform.forward);
         Debug.DrawLine(transform.position, transform.position + transform.forward.normalized * 10f, Color.red, 1f);
@@ -58,14 +80,24 @@ public class Gun : MonoBehaviour
         }
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
-                                forwardNormalized.x * kickbackXZ,
-                                forwardNormalized.y * kickbackY,
-                                forwardNormalized.z * kickbackXZ
-                                );
+                                 forwardNormalized.x * kickbackXZ,
+                                 forwardNormalized.y * kickbackY,
+                                 forwardNormalized.z * kickbackXZ
+                                 );
 
         player.SendMessage("applyPushback", kickbackOutput);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
-        ps.Play();
+
+        // Ensures ParticleSystem is found and played
+        if (ps != null)
+        {
+            ps.Play();
+        }
+        else
+        {
+            Debug.LogWarning("ParticleSystem not found on " + gameObject.name + ". Make sure it's a child object or assigned.");
+        }
+
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);

@@ -11,6 +11,7 @@ public class Shotgun : MonoBehaviour
     private GameObject player;
     private GameObject recoilManager;
     private ParticleSystem ps;
+    private AudioSource audioSource;
 
     // Shotgun properties
     [Header("Shotgun Stats")]
@@ -18,11 +19,16 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private float kickbackY = 10.0f;
     [SerializeField] private float fireRate = 2.0f;
     [SerializeField] private float damage = 5.0f;
+
     // Recoil
     [SerializeField] private float recoilX;
     [SerializeField] private float recoilY;
     [SerializeField] private float recoilZ;
     [SerializeField] private float snapiness;
+
+    // Audio Clip
+    [Header("Audio")]
+    [SerializeField] private AudioClip fireSFX;
 
     private bool fireRateCooldown = false;
 
@@ -31,16 +37,33 @@ public class Shotgun : MonoBehaviour
         id = idCounter;
         idCounter++;
     }
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         recoilManager = GameObject.FindGameObjectWithTag("RecoilManager");
         ps = GetComponentInChildren<ParticleSystem>();
+
+        // AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false; // Don't play when the GameObject activates
+        audioSource.loop = false;       // Gun shots are typically one-shot sounds
     }
 
     public void shoot()
     {
         if (fireRateCooldown) return;
+
+        // Plays the assigned SFX
+        if (fireSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(fireSFX);
+        }
 
         List <Ray> rays = new List<Ray>
         {
@@ -53,6 +76,8 @@ public class Shotgun : MonoBehaviour
             new Ray(transform.position, transform.forward + transform.right * 0.05f - transform.up * 0.05f),
             new Ray(transform.position, transform.forward - transform.right * 0.05f - transform.up * 0.05f)
         };
+
+        // Debug lines for visualizing shotgun spread
         Debug.DrawLine(transform.position, transform.position + (transform.forward.normalized + transform.right * 0.1f) * 10f, Color.red, 1f);
         Debug.DrawLine(transform.position, transform.position + (transform.forward.normalized - transform.right * 0.1f) * 10f, Color.red, 1f);
         Debug.DrawLine(transform.position, transform.position + (transform.forward.normalized + transform.up * 0.1f) * 10f, Color.red, 1f);
@@ -76,23 +101,32 @@ public class Shotgun : MonoBehaviour
                 }
             }
         }
-        
+
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
-                                forwardNormalized.x * kickbackXZ,
-                                forwardNormalized.y * kickbackY,
-                                forwardNormalized.z * kickbackXZ
-                                );
+                                 forwardNormalized.x * kickbackXZ,
+                                 forwardNormalized.y * kickbackY,
+                                 forwardNormalized.z * kickbackXZ
+                                 );
 
         player.SendMessage("applyPushback", kickbackOutput);
         recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
-        ps.Play();
+
+        // Ensures ParticleSystem is found and played
+        if (ps != null)
+        {
+            ps.Play();
+        }
+        else
+        {
+            Debug.LogWarning("ParticleSystem not found on " + gameObject.name + ". Make sure it's a child object or assigned.");
+        }
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);
     }
+
     public int getId() { return id; }
 
     private void finishFireRateCooldown() { fireRateCooldown = false; }
-
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static PauseManager; // To check if the game is paused
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class EnemyBehaviour : MonoBehaviour
     private bool isDead = false;
     private Animator animator;
 
+    // audio variables for SFX
+    [SerializeField] private AudioClip approachingSFX;
+    [SerializeField] private AudioClip attackingSFX;
+    [SerializeField] private AudioClip dyingSFX;
+    private AudioSource loopingAudioSource;   // For approaching
+    private AudioSource oneShotAudioSource;   // For attacks and dying,
+
+
     [SerializeField] private float health = 15.0f;
     [SerializeField] private ParticleSystem bloodSplaterDeath;
     [SerializeField] private ParticleSystem bloodSplatterHit;
@@ -17,7 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float detectionRadius = 125f; // How far the enemy notices the player
     public float wanderSpeed = 3.5f; // Speed when wandering
-    public float chaseSpeed = 5f;     // Speed when chasing player
+    public float chaseSpeed = 5f;    // Speed when chasing player
 
     // Attack parameters
     public float attackRange = 2.0f; // Distance to trigger attack
@@ -56,9 +65,53 @@ public class EnemyBehaviour : MonoBehaviour
         animator = GetComponent<Animator>();
         ogSpeed = agent.speed;
 
-        // Start in Wandering state
-        currentState = EnemyState.Wandering;
+        // --- AudioSource Setup ---
+        AudioSource[] audioSources = GetComponents<AudioSource>();
 
+        if (audioSources.Length == 0)
+        {
+            loopingAudioSource = gameObject.AddComponent<AudioSource>();
+            oneShotAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        else if (audioSources.Length == 1)
+        {
+            // If only one exists, assign it as the looping source and add another for one-shots
+            loopingAudioSource = audioSources[0];
+            oneShotAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        else // if (audioSources.Length >= 2)
+        {
+            // If two or more exist, use the first two found
+            loopingAudioSource = audioSources[0];
+            oneShotAudioSource = audioSources[1];
+        }
+
+        // Configures the looping AudioSource
+        if (loopingAudioSource != null)
+        {
+            loopingAudioSource.clip = approachingSFX;
+            loopingAudioSource.loop = true; // This one will always loop its assigned clip
+            loopingAudioSource.playOnAwake = false;
+            loopingAudioSource.spatialBlend = 1f; // Full 3D sound
+            loopingAudioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            loopingAudioSource.minDistance = 1f; // Sound starts fading after 1 unit
+            loopingAudioSource.maxDistance = 10f; // Sound is inaudible after x units
+            loopingAudioSource.pitch = 1f; // Ensure normal playback speed
+        }
+        // Configures the one-shot AudioSource
+        if (oneShotAudioSource != null)
+        {
+            oneShotAudioSource.loop = false; // This one should never loop
+            oneShotAudioSource.playOnAwake = false; // Don't play immediately
+            oneShotAudioSource.spatialBlend = 1f; // Full 3D sound
+            oneShotAudioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            oneShotAudioSource.minDistance = 1f;
+            oneShotAudioSource.maxDistance = 25f;
+            oneShotAudioSource.pitch = 1f; // Ensures normal playback speed
+        }
+        // --- End AudioSource Setup ---
+
+        currentState = EnemyState.Wandering;
         // Assign a random delay for *this* enemy
         newWanderTargetDelay = Random.Range(minNewWanderTargetDelay, maxNewWanderTargetDelay);
         // Initialize timer with a random offset (so they don't all start choosing new targets at once)
@@ -92,34 +145,48 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 animator.speed = 1;
             }
+            // Stop approaching sound immediately on death
+            if (loopingAudioSource != null && loopingAudioSource.isPlaying)
+            {
+                loopingAudioSource.Stop();
+            }
             return;
         }
 
-        // ASSEMBLY MODE 
-        if (CameraManager.isAssemblyMode)
+        // ASSEMBLY MODE OR GAME PAUSED
+        if (CameraManager.isAssemblyMode || isGamePaused)
         {
-            // Check if agent is enabled before manipulating it
             if (agent != null && agent.enabled)
             {
                 agent.speed = 0;
                 agent.isStopped = true;
                 agent.velocity = Vector3.zero;
             }
-            
-            // stop all animations or force to Idle and freeze playback
+
             if (animator.enabled)
             {
                 animator.SetBool("isWalking", false);
                 animator.ResetTrigger("AttackTrigger");
                 animator.speed = 0; // Freeze the animator's playback speed
             }
-            return; // Exit Update early if in assembly mode
+            // Stop approaching sound when in assembly mode or paused
+            if (loopingAudioSource != null && loopingAudioSource.isPlaying)
+            {
+                loopingAudioSource.Stop();
+            }
+            return; // Exit Update early if in assembly mode or paused
         }
 
-        // If we just exited assembly mode and the animator was frozen, unfreeze it
-        if (!CameraManager.isAssemblyMode && !isDead && animator.speed == 0)
+        // If we just exited assembly mode/pause and the animator was frozen, unfreeze it
+        if (!CameraManager.isAssemblyMode && !isGamePaused && !isDead && animator.speed == 0)
         {
             animator.speed = 1; // Resume normal animation playback
+            if (agent != null && !agent.enabled) // Re-enable agent if it was disabled by assembly/pause mode
+            {
+                agent.enabled = true;
+                agent.isStopped = false; // Allow movement again
+                agent.speed = ogSpeed; // Restore original speed
+            }
         }
 
         // State machine logic for movement
@@ -139,14 +206,34 @@ public class EnemyBehaviour : MonoBehaviour
         // Rotates towards movement only when not in Attacking state
         if (currentState != EnemyState.Attacking)
         {
-             RotateTowardsMovement();
+            RotateTowardsMovement();
         }
 
-        // Update the animator based on the agent's velocity.
-        // This line only executes if not in assembly mode or dead, and animator is unfrozen
+        // Update the animator based on the agent's velocity and handle approaching SFX
         if (animator.speed != 0) // Only update walking if animator is playing normally
         {
-            animator.SetBool("isWalking", agent.velocity.magnitude > 0.1f);
+            bool isCurrentlyWalking = agent.velocity.magnitude > 0.1f;
+            animator.SetBool("isWalking", isCurrentlyWalking);
+
+            // Approaching SFX Play/Stop Logic on the dedicated looping AudioSource
+            if (loopingAudioSource != null && approachingSFX != null)
+            {
+                if (isCurrentlyWalking)
+                {
+                    if (!loopingAudioSource.isPlaying)
+                    {
+                        // The clip and loop property are already set in Start() for this source
+                        loopingAudioSource.Play();
+                    }
+                }
+                else // Not walking (velocity is low)
+                {
+                    if (loopingAudioSource.isPlaying)
+                    {
+                        loopingAudioSource.Stop();
+                    }
+                }
+            }
         }
     }
 
@@ -199,6 +286,12 @@ public class EnemyBehaviour : MonoBehaviour
             agent.isStopped = true; // Stop movement to play attack animation
             animator.SetBool("isWalking", false);
             animator.SetTrigger("AttackTrigger"); // Trigger the attack animation
+
+            // Play attacking SFX on the one-shot AudioSource
+            if (oneShotAudioSource != null && attackingSFX != null)
+            {
+                oneShotAudioSource.PlayOneShot(attackingSFX);
+            }
             return; // Immediately switch to attack state
         }
 
@@ -211,6 +304,12 @@ public class EnemyBehaviour : MonoBehaviour
         // Keeps the agent stopped during attack
         agent.isStopped = true;
         animator.SetBool("isWalking", false); // Ensures walking animation is off
+
+        // Stop approaching sound when in attack state, using the dedicated looping source
+        if (loopingAudioSource != null && loopingAudioSource.isPlaying)
+        {
+            loopingAudioSource.Stop();
+        }
 
         // Makes sure the enemy is facing the player while attacking
         RotateTowardsTarget(player.position);
@@ -304,34 +403,61 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Death()
     {
-        bloodSplaterDeath.Play();
-        
-        // Disable agent first, as other actions depend on it being active to function
+        Debug.Log("Enemy Death() method called! Time: " + Time.time); 
+
+        // Stop any looping audio when dying
+        if (loopingAudioSource != null && loopingAudioSource.isPlaying)
+        {
+            loopingAudioSource.Stop();
+            Debug.Log("Looping audio stopped on death.");
+        }
+
+        // Play dying SFX on the one-shot AudioSource
+        if (oneShotAudioSource != null && dyingSFX != null)
+        {
+            Debug.Log("Attempting to play dying SFX: " + dyingSFX.name);
+            oneShotAudioSource.PlayOneShot(dyingSFX); 
+            Debug.Log("Dying SFX PlayOneShot called.");
+        }
+        else
+        {
+            Debug.LogError("ERROR: Dying SFX cannot be played. oneShotAudioSource null: " + (oneShotAudioSource == null) + ", dyingSFX null: " + (dyingSFX == null));
+        }
+
+        bloodSplaterDeath.Play(); // The particle system still plays
+
+        // Immediately stop agent movement and disable its component
+        // This makes the enemy 'dead' from a gameplay perspective
         if (agent != null && agent.enabled)
         {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
-            agent.enabled = false; 
+            agent.enabled = false;
         }
 
-        // Set the death state
-        isDead = true;
-        
+        isDead = true; // Mark as dead to stop Update logic
+
         // Trigger the death animation
         if (animator != null && animator.enabled)
         {
-            animator.speed = 1;
-            animator.SetBool("isWalking", false); // Stop any walking
-            animator.ResetTrigger("AttackTrigger"); // Clear any attack triggers
+            animator.speed = 1; // Ensure animator is running normally
+            animator.SetBool("isWalking", false);
+            animator.ResetTrigger("AttackTrigger");
             animator.SetTrigger("DieTrigger"); // Trigger the death animation
         }
 
-        gameObject.GetComponent<Renderer>().enabled = false; // Hide the model
-        gameObject.GetComponent<Collider>().enabled = false; // Disable collision
+        // Hide the model and disable its collider immediately
+        // The enemy is effectively gone visually and interactively
+        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
 
-        playerObj.SendMessage("gainXP", 10);
+        playerObj.SendMessage("gainXP", 10); // Give XP
 
-        Destroy(gameObject, bloodSplaterDeath.main.startLifetime.constant); // Destroy after particle system finishes
+        // calculated destruction delay based on sound length
+        float destructionDelay = dyingSFX != null ? dyingSFX.length : 2f;
+
+        Destroy(gameObject, destructionDelay);
+
         EnemySpawner.currentEnemies--;
     }
 

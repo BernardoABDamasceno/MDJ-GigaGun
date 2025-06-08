@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
 
         if (mainMenuButtonText != null)
         {
-            mainMenuButtonText.gameObject.SetActive(false); 
+            mainMenuButtonText.gameObject.SetActive(false);
         }
         Time.timeScale = 1f;
         isGamePaused = false;

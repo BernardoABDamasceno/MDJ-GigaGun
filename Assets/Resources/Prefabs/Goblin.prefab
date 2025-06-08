@@ -320,10 +320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0cc53b38333074d90a74760180f7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  approachingSFX: {fileID: 8300000, guid: 32d6e58c2301ee94fac60a1eb9b5f537, type: 3}
+  attackingSFX: {fileID: 8300000, guid: b7da98e8c814183438a7990901c2342f, type: 3}
+  dyingSFX: {fileID: 8300000, guid: 7e0cf79d3aed4b44b942de93fae5ae6b, type: 3}
   health: 15
   bloodSplaterDeath: {fileID: 1260972684799560305}
   bloodSplatterHit: {fileID: 4231216390401649954}
-  detectionRadius: 5000
+  detectionRadius: 125
   wanderSpeed: 1.5
   chaseSpeed: 10
   attackRange: 1.2

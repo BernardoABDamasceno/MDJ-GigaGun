@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpColdownTime = 0.475f;
     [SerializeField] float slopeExtraSpeed = 7.0f;
     [SerializeField] CameraManager cameraManager;
+
+    [SerializeField] private AudioClip runningSFX; // Drag your running audio clip here in the Inspector
+    private AudioSource audioSource;
+
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
     private Vector3 jumpVector = Vector3.zero;
@@ -40,8 +44,9 @@ public class Player : MonoBehaviour
     {
         // Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
-        // Ensure game is unpaused and cursor is set correctly at the start of the game scene
+        // Ensures game is unpaused and cursor is set correctly at the start of the game scene
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor to the game window
         Cursor.visible = false; // Hide the cursor
@@ -54,8 +59,8 @@ public class Player : MonoBehaviour
 
         // Get input for horizontal and vertical movement
         // This needs to be raw or the player will keep moving after the key is released because of input smoothing
-        horizontalInput = Input.GetAxisRaw("Horizontal"); // Typically A/D or Left/Right Arrow keys
-        verticalInput = Input.GetAxisRaw("Vertical");   // Typically W/S or Up/Down Arrow keys
+        horizontalInput = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right Arrow keys
+        verticalInput = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow keys
 
         if (Input.GetKey(KeyCode.Space)) checkJump = true;
     }
@@ -70,6 +75,10 @@ public class Player : MonoBehaviour
         if (Time.timeScale == 0f)
         {
             rb.velocity = Vector3.zero;
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
             return;
         }
 
@@ -144,19 +153,18 @@ public class Player : MonoBehaviour
                 rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
             }
         }
-        //
         else if (rb.velocity.y > 0.5f || rb.velocity.y < -0.5f || !airtime) // this check might be a bit goofy
         {
             //print("In Air");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
-                                    0, rb.velocity.z * 0.93f + movementDir.z * 0.07f)
-                                    + pushback + jumpVector - gravity;
+                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f)
+                                     + pushback + jumpVector - gravity;
         }
         else
         {
             //print("jump air time");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
-                                    0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
+                                     0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
             Invoke("airTimeOver", airTimer);
         }
         gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
@@ -165,9 +173,28 @@ public class Player : MonoBehaviour
         pushback += Vector3.MoveTowards(new Vector3(0, pushY, 0), Vector3.zero, gundragVertical);
         jumpVector = Vector3.MoveTowards(jumpVector, Vector3.zero, jumpdrag);
 
+        bool isMovingHorizontally = (horizontalInput != 0 || verticalInput != 0);
+        bool isGroundedOrOnSlope = isGrounded || isOnSlope;
+
+        if (isMovingHorizontally && isGroundedOrOnSlope)
+        {
+            // If moving and grounded, and sound isn't already playing, play it
+            if (audioSource != null && !audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            // If not moving, or in air, or not grounded, stop the sound
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 
-    //  TODO: Refactor
+    // TODO: Refactor
     // for some reason, this does not actually restore the velocity
     // i had to go to bed so i will fix this later
     public void paused()
@@ -183,7 +210,8 @@ public class Player : MonoBehaviour
 
         rb.velocity = storedVelocity;
     }
-    //  TODO: Refactor
+    // TODO: Refactor
+
     public void applyPushback(Vector3 pushback)
     {
         if (pushback.x < 0.2f && pushback.x > -0.2f)
@@ -277,7 +305,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /// Handles the player's death sequence.
+    // Handles the player's death sequence
     private void Die()
     {
         Debug.Log("Player has died!");
