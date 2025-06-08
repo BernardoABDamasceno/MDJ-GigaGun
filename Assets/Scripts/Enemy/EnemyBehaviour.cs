@@ -94,9 +94,9 @@ public class EnemyBehaviour : MonoBehaviour
             loopingAudioSource.playOnAwake = false;
             loopingAudioSource.spatialBlend = 1f; // Full 3D sound
             loopingAudioSource.rolloffMode = AudioRolloffMode.Logarithmic;
-            loopingAudioSource.minDistance = 1f; // Sound starts fading after 1 unit
-            loopingAudioSource.maxDistance = 10f; // Sound is inaudible after x units
-            loopingAudioSource.pitch = 1f; // Ensure normal playback speed
+            loopingAudioSource.minDistance = 1.5f; // Sound starts fading after 1 unit
+            loopingAudioSource.maxDistance = 2.0f; // Sound is inaudible after x units
+            loopingAudioSource.pitch = 1f; // Ensures normal playback speed
         }
         // Configures the one-shot AudioSource
         if (oneShotAudioSource != null)
@@ -105,8 +105,8 @@ public class EnemyBehaviour : MonoBehaviour
             oneShotAudioSource.playOnAwake = false; // Don't play immediately
             oneShotAudioSource.spatialBlend = 1f; // Full 3D sound
             oneShotAudioSource.rolloffMode = AudioRolloffMode.Logarithmic;
-            oneShotAudioSource.minDistance = 1f;
-            oneShotAudioSource.maxDistance = 25f;
+            oneShotAudioSource.minDistance = 1.5f;
+            oneShotAudioSource.maxDistance = 2.0f;
             oneShotAudioSource.pitch = 1f; // Ensures normal playback speed
         }
         // --- End AudioSource Setup ---
