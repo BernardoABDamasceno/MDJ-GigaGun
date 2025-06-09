@@ -6,6 +6,14 @@ public abstract class Gun : MonoBehaviour
     private static int idCounter = 0;
     //this is unique
     private int id = 0;
+    public enum GunType
+    {
+        Revolver,
+        PlasmaGun,
+        Shotgun,
+        Flametrhrower,
+        RocketLauncher,
+    }
 
     [Header("References")]
     protected GameObject player;
@@ -86,5 +94,7 @@ public abstract class Gun : MonoBehaviour
     public int getId() { return id; }
 
     protected void finishFireRateCooldown() { fireRateCooldown = false; }
+
+    public abstract GunType getGunType(); 
 
 }

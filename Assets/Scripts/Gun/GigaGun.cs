@@ -128,7 +128,6 @@ public class GigaGun : MonoBehaviour
         {
             cancelInsertGun();
         }
-
         // instaciar a nova arma
         //referencia da nova arma
         // referencia do ponto

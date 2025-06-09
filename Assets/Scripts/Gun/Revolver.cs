@@ -6,4 +6,8 @@ public class Revolver : Gun
     {
         base.shoot();
     }
+    public override GunType getGunType()
+    {
+        return GunType.Revolver;
+    }
 }

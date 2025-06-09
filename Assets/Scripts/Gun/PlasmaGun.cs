@@ -43,4 +43,8 @@ public class PlasmaGun : Gun
             Destroy(orb);
         }
     }
+    public override GunType getGunType()
+    {
+        return GunType.Revolver;
+    }
 }

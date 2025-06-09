@@ -13,7 +13,7 @@ public class Shotgun : Gun
             audioSource.PlayOneShot(fireSFX);
         }
 
-        List <Ray> rays = new List<Ray>
+        List<Ray> rays = new List<Ray>
         {
             new Ray(transform.position, transform.forward + transform.right * 0.1f),
             new Ray(transform.position, transform.forward - transform.right * 0.1f),
@@ -70,5 +70,9 @@ public class Shotgun : Gun
         }
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);
+    }
+    public override GunType getGunType()
+    {
+        return GunType.Revolver;
     }
 }

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class ConnectionPoint: MonoBehaviour
+public class ConnectionPoint : MonoBehaviour
 {
     private static int idCounter = 0;
     //this is unique
@@ -21,14 +21,10 @@ public class ConnectionPoint: MonoBehaviour
         id = idCounter;
         idCounter++;
     }
+
     void Start()
     {
-        Physics.SphereCast(transform.position, 0.5f, Vector3.up, out RaycastHit hit, 0f);
-        print(hit.collider.tag);
-        if (hit.collider != null && (hit.collider.CompareTag("ConnectionPoint") || hit.collider.CompareTag("Gun")))
-        {
-            Destroy(gameObject);
-        }
+        confirmCollisions();
     }
 
     public int getId()
@@ -42,13 +38,25 @@ public class ConnectionPoint: MonoBehaviour
     public void SetInteractable(bool interactable)
     {
         this.interactable = interactable;
-        if (interactable) 
+        if (interactable)
         {
             gameObject.GetComponentInChildren<Renderer>().material.color = Color.green;
         }
         else
         {
             gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
+        }
+    }
+
+    public void confirmCollisions()
+    {
+        if (Physics.SphereCast(transform.position, 0.5f, Vector3.up, out RaycastHit hit, 0f))
+        {
+            if (hit.collider.CompareTag("ConnectionPoint") || hit.collider.CompareTag("Gun"))
+            {
+                print("DESTROY");
+                Destroy(gameObject);
+            }   
         }
     }
 
