@@ -37,17 +37,17 @@ public class CameraManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                print("1");
+                //print("1");
                 SetGun("Prefabs/Guns/Revolver");
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                print("2");
+                //print("2");
                 SetGun("Prefabs/Guns/PlasmaGun");
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                print("3");
+                //print("3");
                 SetGun("Prefabs/Guns/Shotgun");
             }
         }
@@ -98,7 +98,7 @@ public class CameraManager : MonoBehaviour
     private void SetGun(string gunPrefabPath)
     {
         GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
-        print("Setting gun: " + newgun.layer);
+        //print("Setting gun: " + newgun.layer);
         gigaGun.transform.parent = transform;
         gigaGun.SendMessage("setPickedGun", newgun);
         optionsCanvas.gameObject.SetActive(false);

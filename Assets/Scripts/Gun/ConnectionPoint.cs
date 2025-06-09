@@ -50,14 +50,24 @@ public class ConnectionPoint : MonoBehaviour
 
     public void confirmCollisions()
     {
-        if (Physics.SphereCast(transform.position, 0.5f, Vector3.up, out RaycastHit hit, 0f))
+        if (Physics.SphereCast(transform.position, 0.11f, Vector3.up, out RaycastHit hit, 0f))
         {
-            if (hit.collider.CompareTag("ConnectionPoint") || hit.collider.CompareTag("Gun"))
+            print(hit.collider.tag);
+            if (hit.collider.tag == "ConnectionPoint" || hit.collider.tag == "Gun")
             {
                 print("DESTROY");
                 Destroy(gameObject);
-            }   
+            }
         }
+        else
+        {
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 0.11f);
     }
 
 }

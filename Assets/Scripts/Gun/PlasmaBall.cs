@@ -27,7 +27,6 @@ public class PlasmaBall : MonoBehaviour
     {
         if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb")
         {
-            print(other.tag);
             if (other.tag == "Enemy")
             {
                 other.SendMessage("takeDamage", damage);

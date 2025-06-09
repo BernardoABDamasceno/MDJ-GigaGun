@@ -73,6 +73,6 @@ public class Shotgun : Gun
     }
     public override GunType getGunType()
     {
-        return GunType.Revolver;
+        return GunType.Shotgun;
     }
 }

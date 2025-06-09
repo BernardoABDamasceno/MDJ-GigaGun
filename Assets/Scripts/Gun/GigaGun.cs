@@ -190,11 +190,18 @@ public class GigaGun : MonoBehaviour
         foreach (ConnectionPoint point in insertingGunCP)
         {
             //THIS WILL NEED TO BE CHANGED, SINCE THE STATEMENT IS NOT GARANTEED LATER
-            if (point.gameObject.transform.position == insertingGun.gameObject.transform.position)
+            /* if (point.gameObject.transform.position == insertingGun.gameObject.transform.position)
             {
                 Destroy(point);
             }
             else
+            {
+                point.SetInteractable(true);
+                freeConnectionPoints.Add(point);
+            } */
+
+            point.confirmCollisions();
+            if (point != null)
             {
                 point.SetInteractable(true);
                 freeConnectionPoints.Add(point);

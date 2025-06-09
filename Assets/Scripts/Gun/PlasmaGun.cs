@@ -45,6 +45,6 @@ public class PlasmaGun : Gun
     }
     public override GunType getGunType()
     {
-        return GunType.Revolver;
+        return GunType.PlasmaGun;
     }
 }
