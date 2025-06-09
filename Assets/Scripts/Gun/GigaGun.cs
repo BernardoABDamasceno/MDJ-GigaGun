@@ -110,6 +110,7 @@ public class GigaGun : MonoBehaviour
     public void enableConnectionPoints()
     {
         foreach (ConnectionPoint item in freeConnectionPoints) item.gameObject.SetActive(true);
+        foreach (ConnectionPoint item in freeConnectionPoints) item.confirmCollisions();
     }
 
     public void disableConnectionPoints()
@@ -142,11 +143,15 @@ public class GigaGun : MonoBehaviour
             transform
         );
 
+
+        // who programmed this? me? why?
         foreach (ConnectionPoint point in insertingGun.GetComponentsInChildren<ConnectionPoint>())
         {
+            point.confirmCollisions();
             bool found = false;
             foreach (ConnectionPoint point2 in freeConnectionPoints)
             {
+                point2.confirmCollisions();
                 if (point.transform.position == point2.transform.position)
                 {
                     found = true;
@@ -166,6 +171,7 @@ public class GigaGun : MonoBehaviour
             }
             point.SetInteractable(false);
 
+            //this shit makes no sense wtf is this
             if (found) point.gameObject.SetActive(false);
             else point.gameObject.SetActive(insertingCPActive);
 
@@ -200,7 +206,6 @@ public class GigaGun : MonoBehaviour
                 freeConnectionPoints.Add(point);
             } */
 
-            point.confirmCollisions();
             if (point != null)
             {
                 point.SetInteractable(true);

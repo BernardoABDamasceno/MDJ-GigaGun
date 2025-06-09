@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6980720629326618391}
   - component: {fileID: 8385702645603795991}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConnectionPoint
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4155778132528386268}
   - component: {fileID: 2113827825438720638}
   - component: {fileID: 8086979484322934805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}

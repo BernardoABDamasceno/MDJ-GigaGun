@@ -25,7 +25,7 @@ public class PlasmaBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb")
+        if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb" && other.tag != "Cameraholder" && other.tag != "Gun" && other.tag != "ConnectionPoint")
         {
             if (other.tag == "Enemy")
             {

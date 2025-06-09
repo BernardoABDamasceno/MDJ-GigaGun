@@ -50,24 +50,13 @@ public class ConnectionPoint : MonoBehaviour
 
     public void confirmCollisions()
     {
-        if (Physics.SphereCast(transform.position, 0.11f, Vector3.up, out RaycastHit hit, 0f))
-        {
-            print(hit.collider.tag);
-            if (hit.collider.tag == "ConnectionPoint" || hit.collider.tag == "Gun")
-            {
-                print("DESTROY");
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
-        }
-    }
+        Collider[] collisions = Physics.OverlapSphere(transform.position, 0.055f, LayerMask.GetMask("Gun", "ConnectionPoint"), QueryTriggerInteraction.Collide);
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position, 0.11f);
+        print("Collisions found: " + collisions.Length);
+        if (collisions.Length >= 2)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 }

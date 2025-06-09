@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4597198233707349332}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: gun
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2787006864562140754}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.042712506, z: 1.0643303}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,7 +47,8 @@ GameObject:
   - component: {fileID: 4783606400651176579}
   - component: {fileID: 4624906142117186332}
   - component: {fileID: 4366610497456122174}
-  m_Layer: 0
+  - component: {fileID: 2905717798750786869}
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -63,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 3127039946442655984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.004712507, z: -0.45033032}
+  m_LocalPosition: {x: 0, y: 0.038, z: 0.614}
   m_LocalScale: {x: 0.1, y: 0.062468, z: 0.32711}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -119,6 +120,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2905717798750786869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127039946442655984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4821238828303873595
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +152,8 @@ GameObject:
   - component: {fileID: 2740069190617084945}
   - component: {fileID: 5695135768524519098}
   - component: {fileID: 4422799703553233636}
-  m_Layer: 0
+  - component: {fileID: 890885601478389498}
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -146,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 4821238828303873595}
   serializedVersion: 2
   m_LocalRotation: {x: -0.47759044, y: -0, z: -0, w: 0.87858266}
-  m_LocalPosition: {x: 0, y: -0.17871252, z: -1.4733304}
+  m_LocalPosition: {x: 0, y: -0.136, z: -0.40900004}
   m_LocalScale: {x: 0.1, y: 0.2, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -202,6 +225,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &890885601478389498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821238828303873595}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.0000001, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5337607234960111909
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +257,8 @@ GameObject:
   - component: {fileID: 6806583007777111681}
   - component: {fileID: 1576441172274193516}
   - component: {fileID: 2452304226402615493}
-  m_Layer: 0
+  - component: {fileID: 50939163992335134}
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -229,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 5337607234960111909}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6908321, y: -0, z: -0, w: 0.72301525}
-  m_LocalPosition: {x: 0, y: -0.22771251, z: -0.9503303}
+  m_LocalPosition: {x: 0, y: -0.185, z: 0.11400002}
   m_LocalScale: {x: 0.1, y: 0.2, z: 0.27497396}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,6 +330,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &50939163992335134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337607234960111909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.99999994, z: 1.0000001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6118668908923290782
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +362,8 @@ GameObject:
   - component: {fileID: 8516639606092929961}
   - component: {fileID: 6504531824145559449}
   - component: {fileID: 4022213557456497899}
-  m_Layer: 0
+  - component: {fileID: 2258683089730941500}
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -312,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 6118668908923290782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.042712506, z: -1.0643303}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,6 +435,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2258683089730941500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118668908923290782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8227123897541279027
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +467,7 @@ GameObject:
   - component: {fileID: 1616341751035403379}
   - component: {fileID: 2695714047360796081}
   - component: {fileID: 8120576366840047899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlasmaGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -533,7 +621,8 @@ GameObject:
   - component: {fileID: 6813139690747498207}
   - component: {fileID: 1536968850708332066}
   - component: {fileID: 9144070596256744119}
-  m_Layer: 0
+  - component: {fileID: 7493615485012517347}
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -549,7 +638,7 @@ Transform:
   m_GameObject: {fileID: 8402653070622794444}
   serializedVersion: 2
   m_LocalRotation: {x: -0.59027916, y: -0, z: -0, w: 0.8071992}
-  m_LocalPosition: {x: 0, y: -0.3897125, z: -0.9823303}
+  m_LocalPosition: {x: 0, y: -0.347, z: 0.08200002}
   m_LocalScale: {x: 0.1, y: 0.2, z: 0.27497396}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -605,6 +694,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7493615485012517347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402653070622794444}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2216401809467682006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -616,6 +726,10 @@ PrefabInstance:
     - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_Name
       value: ConnectionPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -657,6 +771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8114981110658568730, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -684,8 +802,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4863107067092380233, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863107067092380233, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
       propertyPath: m_TagString
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497378597027075303, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5497378597027075303, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
       propertyPath: m_TagString
@@ -694,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 8238066146995313161, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
       propertyPath: m_Name
       value: MuzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238066146995313161, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8238066146995313161, guid: 5cad8e9969b047f49a742fd6952d9977, type: 3}
       propertyPath: m_TagString
@@ -761,6 +891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConnectionPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
@@ -801,6 +935,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8114981110658568730, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -822,6 +960,10 @@ PrefabInstance:
     - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_Name
       value: ConnectionPoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,6 +1005,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8114981110658568730, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -884,6 +1030,10 @@ PrefabInstance:
     - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_Name
       value: ConnectionPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -924,6 +1074,10 @@ PrefabInstance:
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114981110658568730, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
