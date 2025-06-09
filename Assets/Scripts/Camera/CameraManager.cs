@@ -38,12 +38,12 @@ public class CameraManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 print("1");
-                SetGun("Prefabs/Guns/Gun");
+                SetGun("Prefabs/Guns/Revolver");
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 print("2");
-                SetGun("Prefabs/Guns/SMG");
+                SetGun("Prefabs/Guns/PlasmaGun");
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {

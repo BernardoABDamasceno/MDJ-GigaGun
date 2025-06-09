@@ -21,6 +21,15 @@ public class ConnectionPoint: MonoBehaviour
         id = idCounter;
         idCounter++;
     }
+    void Start()
+    {
+        Physics.SphereCast(transform.position, 0.5f, Vector3.up, out RaycastHit hit, 0f);
+        print(hit.collider.tag);
+        if (hit.collider != null && (hit.collider.CompareTag("ConnectionPoint") || hit.collider.CompareTag("Gun")))
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public int getId()
     {

@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
 
     void getHit(float damage)
     {
-        print("Player got hit for " + damage + " damage");
+        //print("Player got hit for " + damage + " damage");
         HP -= damage;
         cameraManager.SendMessage("flashRed");
         if (HP <= 0)
@@ -308,7 +308,7 @@ public class Player : MonoBehaviour
     // Handles the player's death sequence
     private void Die()
     {
-        Debug.Log("Player has died!");
+        //Debug.Log("Player has died!");
 
        // Load the desired scene
         SceneManager.LoadScene("GameOver");

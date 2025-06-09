@@ -389,7 +389,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-        print("HIT");
+        //print("HIT");
         health -= damage;
         if (health <= 0)
         {
@@ -403,25 +403,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log("Enemy Death() method called! Time: " + Time.time); 
+        //Debug.Log("Enemy Death() method called! Time: " + Time.time); 
 
         // Stop any looping audio when dying
         if (loopingAudioSource != null && loopingAudioSource.isPlaying)
         {
             loopingAudioSource.Stop();
-            Debug.Log("Looping audio stopped on death.");
+            //Debug.Log("Looping audio stopped on death.");
         }
 
         // Play dying SFX on the one-shot AudioSource
         if (oneShotAudioSource != null && dyingSFX != null)
         {
-            Debug.Log("Attempting to play dying SFX: " + dyingSFX.name);
+            //Debug.Log("Attempting to play dying SFX: " + dyingSFX.name);
             oneShotAudioSource.PlayOneShot(dyingSFX); 
-            Debug.Log("Dying SFX PlayOneShot called.");
+            //Debug.Log("Dying SFX PlayOneShot called.");
         }
         else
         {
-            Debug.LogError("ERROR: Dying SFX cannot be played. oneShotAudioSource null: " + (oneShotAudioSource == null) + ", dyingSFX null: " + (dyingSFX == null));
+            //Debug.LogError("ERROR: Dying SFX cannot be played. oneShotAudioSource null: " + (oneShotAudioSource == null) + ", dyingSFX null: " + (dyingSFX == null));
         }
 
         bloodSplaterDeath.Play(); // The particle system still plays

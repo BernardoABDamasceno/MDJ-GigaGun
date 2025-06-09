@@ -8,6 +8,10 @@ TagManager:
   - ConnectionPoint
   - RecoilManager
   - Panel
+  - Cameraholder
+  - Gun
+  - PlasmaOrb
+  - PlayerGroup
   layers:
   - Default
   - TransparentFX

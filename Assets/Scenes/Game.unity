@@ -5156,6 +5156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2014165811809818821, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: initialGun
+      value: 
+      objectReference: {fileID: 8227123897541279027, guid: d46d85407fc5ed14582f044b113636ce, type: 3}
     - target: {fileID: 2583065420253902461, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5231,6 +5235,14 @@ PrefabInstance:
     - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Name
       value: Player_Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_TagString
+      value: PlasmaOrb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923018295140574546, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_TagString
+      value: Cameraholder
       objectReference: {fileID: 0}
     - target: {fileID: 9187565912654399674, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_RaycastTarget

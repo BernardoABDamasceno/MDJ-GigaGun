@@ -1,35 +1,29 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour
 {
     // Identifiers
     private static int idCounter = 0;
     //this is unique
     private int id = 0;
 
-    private GameObject player;
-    private GameObject recoilManager;
-    private ParticleSystem ps;
-    private AudioSource audioSource; // NEW: Reference to the AudioSource
+    [Header("References")]
+    protected GameObject player;
+    protected ParticleSystem ps;
+    protected AudioSource audioSource; // NEW: Reference to the AudioSource
 
     // Gun properties
     [Header("Gun Stats")]
-    [SerializeField] private float kickbackXZ = 1.5f;
-    [SerializeField] private float kickbackY = 5.0f;
-    [SerializeField] private float fireRate = 0.5f;
-    [SerializeField] private float damage = 5.0f;
-
-    // Recoil
-    [SerializeField] private float recoilX;
-    [SerializeField] private float recoilY;
-    [SerializeField] private float recoilZ;
-    [SerializeField] private float snapiness;
+    [SerializeField] protected float kickbackXZ = 1.5f;
+    [SerializeField] protected float kickbackY = 5.0f;
+    [SerializeField] protected float fireRate = 0.5f;
+    [SerializeField] protected float damage = 5.0f;
 
     // Audio Clip
     [Header("Audio")]
-    [SerializeField] private AudioClip fireSFX;
+    [SerializeField] protected AudioClip fireSFX;
 
-    private bool fireRateCooldown = false;
+    protected bool fireRateCooldown = false;
 
 
     void Awake()
@@ -41,20 +35,17 @@ public class Gun : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        recoilManager = GameObject.FindGameObjectWithTag("RecoilManager");
         ps = GetComponentInChildren<ParticleSystem>();
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
+        if (audioSource != null)
         {
-            // If there's no AudioSource, add one.
-            // This is useful if you create gun prefabs without one initially.
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
         }
-        audioSource.playOnAwake = false;
-        audioSource.loop = false;
     }
 
-    public void shoot()
+    public virtual void shoot()
     {
         if (fireRateCooldown) return;
 
@@ -86,24 +77,14 @@ public class Gun : MonoBehaviour
                                  );
 
         player.SendMessage("applyPushback", kickbackOutput);
-        recoilManager.SendMessage("fireRecoil", new Vector3(recoilX, recoilY, recoilZ));
 
-        // Ensures ParticleSystem is found and played
-        if (ps != null)
-        {
-            ps.Play();
-        }
-        else
-        {
-            Debug.LogWarning("ParticleSystem not found on " + gameObject.name + ". Make sure it's a child object or assigned.");
-        }
-
+        ps.Play();
 
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);
     }
     public int getId() { return id; }
 
-    private void finishFireRateCooldown() { fireRateCooldown = false; }
+    protected void finishFireRateCooldown() { fireRateCooldown = false; }
 
 }

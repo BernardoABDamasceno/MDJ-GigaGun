@@ -10,7 +10,6 @@ public class GigaGun : MonoBehaviour
     [SerializeField] Camera orbitalCam;
     [SerializeField] Camera fpsCam;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject recoilManager;
     public static GameObject insertingGun = null;
     private GameObject insertingCP = null;
     private bool insertingCPActive = true;

@@ -52,6 +52,6 @@ public class GameSceneCrtHandler : MonoBehaviour
                 Debug.LogWarning("One of the assigned CRT scripts is null in the list.", this);
             }
         }
-        Debug.Log($"CRT Filter in Game Scene: {(enableCrt ? "On" : "Off")} for {crtFilterScripts.Count} scripts.");
+        //Debug.Log($"CRT Filter in Game Scene: {(enableCrt ? "On" : "Off")} for {crtFilterScripts.Count} scripts.");
     }
 }
