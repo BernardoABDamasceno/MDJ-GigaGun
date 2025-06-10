@@ -1,22 +1,28 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlasmaGun : Gun
+public class Flamethrower : Gun
 {
-    [Header("Plasma Gun Settings")]
-    [SerializeField] private GameObject plasmaOrbPrefab;
-    [SerializeField] private float plasmaOrbLifetime = 5.0f;
+    [Header("Flamethrower Settings")]
+    [SerializeField] private GameObject flames;
+    private bool flamesOn = false;
+
+    void Start()
+    {
+        flames.SetActive(flamesOn);
+    }
 
     public override void shoot()
     {
         if (fireRateCooldown) return;
+        // Plays the assigned SFX
         if (fireSFX != null && audioSource != null)
         {
             audioSource.PlayOneShot(fireSFX);
         }
-        //needs refactoring
-        GameObject orb = Instantiate(plasmaOrbPrefab, transform.position, transform.rotation);
-        StartCoroutine(destroyPlasmaOrb(orb, plasmaOrbLifetime));
+
+        flamesOn = !flamesOn;
+        flames.SetActive(flamesOn);
 
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
@@ -27,25 +33,21 @@ public class PlasmaGun : Gun
 
         player.SendMessage("applyPushback", kickbackOutput);
 
-        ps.Play();
-
+        // Ensures ParticleSystem is found and played
+        if (ps != null)
+        {
+            ps.Play();
+        }
+        else
+        {
+            Debug.LogWarning("ParticleSystem not found on " + gameObject.name + ". Make sure it's a child object or assigned.");
+        }
         fireRateCooldown = true;
         Invoke("finishFireRateCooldown", fireRate);
-
     }
 
-    private IEnumerator destroyPlasmaOrb(GameObject orb, float lifetime)
-    {
-        yield return new WaitForSeconds(lifetime);
-
-        // Destroy the plasma orb after the specified lifetime
-        if (orb != null)
-        {
-            Destroy(orb);
-        }
-    }
     public override GunType getGunType()
     {
-        return GunType.PlasmaGun;
+        return GunType.Flamethrower;
     }
 }

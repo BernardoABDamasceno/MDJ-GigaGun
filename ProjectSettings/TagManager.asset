@@ -12,6 +12,8 @@ TagManager:
   - Gun
   - PlasmaOrb
   - PlayerGroup
+  - Missile
+  - Flamethrower
   layers:
   - Default
   - TransparentFX

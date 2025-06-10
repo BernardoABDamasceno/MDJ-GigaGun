@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10.0f;
-    [SerializeField] float HP = 25.0f;
+    [SerializeField] float HP = 100.0f;
     [SerializeField] float jumpdrag = 1f;
     [SerializeField] float gundragHorizontal = 2f;
     [SerializeField] float gundragVertical = 10f;

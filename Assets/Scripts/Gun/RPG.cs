@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlasmaGun : Gun
+public class RPG : Gun
 {
-    [Header("Plasma Gun Settings")]
-    [SerializeField] private GameObject plasmaOrbPrefab;
-    [SerializeField] private float plasmaOrbLifetime = 5.0f;
+    [Header("RPG Settings")]
+    [SerializeField] private GameObject missilePrefab;
+    [SerializeField] private float missileLifetime = 10.0f;
 
     public override void shoot()
     {
@@ -14,9 +14,9 @@ public class PlasmaGun : Gun
         {
             audioSource.PlayOneShot(fireSFX);
         }
-        //needs refactoring
-        GameObject orb = Instantiate(plasmaOrbPrefab, transform.position, transform.rotation);
-        StartCoroutine(destroyPlasmaOrb(orb, plasmaOrbLifetime));
+        
+        GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
+        StartCoroutine(destroyMissile(missile, missileLifetime));
 
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
@@ -24,6 +24,7 @@ public class PlasmaGun : Gun
                                  forwardNormalized.y * kickbackY,
                                  forwardNormalized.z * kickbackXZ
                                  );
+
 
         player.SendMessage("applyPushback", kickbackOutput);
 
@@ -34,18 +35,17 @@ public class PlasmaGun : Gun
 
     }
 
-    private IEnumerator destroyPlasmaOrb(GameObject orb, float lifetime)
+    private IEnumerator destroyMissile(GameObject missile, float lifetime)
     {
         yield return new WaitForSeconds(lifetime);
 
-        // Destroy the plasma orb after the specified lifetime
-        if (orb != null)
+        if (missile != null)
         {
-            Destroy(orb);
+            Destroy(missile);
         }
     }
     public override GunType getGunType()
     {
-        return GunType.PlasmaGun;
+        return GunType.RPG;
     }
 }

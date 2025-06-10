@@ -11,8 +11,8 @@ public abstract class Gun : MonoBehaviour
         Revolver,
         PlasmaGun,
         Shotgun,
-        Flametrhrower,
-        RocketLauncher,
+        Flamethrower,
+        RPG,
     }
 
     [Header("References")]

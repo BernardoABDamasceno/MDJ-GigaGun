@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 8414114174840918231}
   - component: {fileID: 6912341404931529427}
   - component: {fileID: 2611730021565114533}
-  - component: {fileID: 5426086401544233709}
-  - component: {fileID: 2740392040553941633}
-  - component: {fileID: 3841441112015811399}
+  - component: {fileID: 3862124157989304263}
+  - component: {fileID: -7114132772586368923}
   m_Layer: 0
-  m_Name: PlasmaBall
-  m_TagString: PlasmaOrb
+  m_Name: Flamecone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.66, y: 0.66, z: 0.66}
+  m_LocalScale: {x: 1000, y: 150, z: 1000}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9171390392663240242}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3613567641014311022, guid: 83ed0488ba2146b459162b1cf589eac2, type: 3}
 --- !u!23 &2611730021565114533
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86,28 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5426086401544233709
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9171390392663240242}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2740392040553941633
+--- !u!114 &3862124157989304263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,13 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9171390392663240242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2c46f15a8af772449acee532a1f3bfb, type: 3}
+  m_Script: {fileID: 11500000, guid: fd2394f77310d3947b6d7fa95315d8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plasmaOrbSpeed: 1.5
-  damage: 5
-  extraDistance: 1
---- !u!54 &3841441112015811399
+  damage: 2
+  extraDistance: 11
+--- !u!54 &-7114132772586368923
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
