@@ -422,8 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickbackXZ: 1.5
   kickbackY: 5
-  fireRate: 0.01
-  damage: 0.000000002
+  fireRate: 0.5
+  damage: 0
   fireSFX: {fileID: 0}
   flames: {fileID: 2284175724329458571}
 --- !u!82 &1102201545713281752
@@ -807,6 +807,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3327975769673953775}
     m_Modifications:
+    - target: {fileID: 3862124157989304263, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
+      propertyPath: delay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862124157989304263, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalScale.x
       value: 400
@@ -866,6 +874,10 @@ PrefabInstance:
     - target: {fileID: 9171390392663240242, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_Name
       value: Flamecone
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171390392663240242, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

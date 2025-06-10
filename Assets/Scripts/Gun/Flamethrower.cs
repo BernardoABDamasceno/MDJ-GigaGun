@@ -5,45 +5,51 @@ public class Flamethrower : Gun
 {
     [Header("Flamethrower Settings")]
     [SerializeField] private GameObject flames;
-    private bool flamesOn = false;
+    bool isfiring = false;
 
     void Start()
     {
-        flames.SetActive(flamesOn);
+        flames.SetActive(false);
     }
 
-    public override void shoot()
+    public override void shoot() {}
+
+    public void Update()
     {
-        if (fireRateCooldown) return;
-        // Plays the assigned SFX
-        if (fireSFX != null && audioSource != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            audioSource.PlayOneShot(fireSFX);
+            print("Flamethrower is firing");
+            isfiring = true;
+            flames.SetActive(true);
         }
-
-        flamesOn = !flamesOn;
-        flames.SetActive(flamesOn);
-
-        Vector3 forwardNormalized = -transform.forward.normalized;
-        Vector3 kickbackOutput = new Vector3(
-                                 forwardNormalized.x * kickbackXZ,
-                                 forwardNormalized.y * kickbackY,
-                                 forwardNormalized.z * kickbackXZ
-                                 );
-
-        player.SendMessage("applyPushback", kickbackOutput);
-
-        // Ensures ParticleSystem is found and played
-        if (ps != null)
+        if (Input.GetMouseButtonUp(0))
         {
-            ps.Play();
+            print("Flamethrower stopped firing");
+            isfiring = false;
+            flames.SetActive(false);
         }
-        else
+    }
+
+    public void FixedUpdate()
+    {
+        if (isfiring)  
         {
-            Debug.LogWarning("ParticleSystem not found on " + gameObject.name + ". Make sure it's a child object or assigned.");
+            if (fireSFX != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(fireSFX);
+            }
+            
+            // Always play the fire particle system when isfiring is true
+
+            Vector3 forwardNormalized = -transform.forward.normalized;
+            Vector3 kickbackOutput = new Vector3(
+                                    forwardNormalized.x * kickbackXZ,
+                                    forwardNormalized.y * kickbackY,
+                                    forwardNormalized.z * kickbackXZ
+                                    );
+
+            //player.SendMessage("applyPushback", kickbackOutput);
         }
-        fireRateCooldown = true;
-        Invoke("finishFireRateCooldown", fireRate);
     }
 
     public override GunType getGunType()
