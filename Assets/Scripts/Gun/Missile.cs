@@ -37,7 +37,10 @@ public class Missile : MonoBehaviour
         if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb" && other.tag != "Missile")
         {
             print(other.tag);
-            if (other.tag == "Enemy")
+            if (other.CompareTag("Enemy"))
+            {
+                print("Hit enemy: " + other.name);
+            }
             {
                 other.SendMessage("takeDamage", hitDamage);
             }
@@ -46,7 +49,7 @@ public class Missile : MonoBehaviour
             {
                 print("Target: " + target.name + " Tag: " + target.tag);
                 Vector3 direction = (target.transform.position - this.transform.position).normalized;
-                if (target.tag == "Enemy")
+                if (target.CompareTag("Enemy"))
                 {
                     target.SendMessage("takeDamage", explosionDamage);
                     //target.SendMessage("enemyPushback", direction * explosionPushback);  Enemies need gravity + velocity to be pushed back  

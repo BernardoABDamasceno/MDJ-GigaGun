@@ -420,9 +420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce72b30c9acf45438b94301f338b18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickbackXZ: 1.5
-  kickbackY: 5
-  fireRate: 0.5
+  kickbackXZ: 0.5
+  kickbackY: 2
+  fireRate: 0.1
   damage: 0
   fireSFX: {fileID: 0}
   flames: {fileID: 2284175724329458571}
@@ -817,15 +817,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalScale.x
-      value: 400
+      value: 560
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalScale.y
-      value: 75
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalScale.z
-      value: 500
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.62
+      value: 7.62
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_LocalRotation.w
@@ -869,7 +869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414114174840918231, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9171390392663240242, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_Name

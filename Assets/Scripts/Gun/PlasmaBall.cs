@@ -27,7 +27,7 @@ public class PlasmaBall : MonoBehaviour
     {
         if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb" && other.tag != "Cameraholder" && other.tag != "Gun" && other.tag != "ConnectionPoint" && other.tag != "Missile")
         {
-            if (other.tag == "Enemy")
+            if (other.CompareTag("Enemy"))
             {
                 other.SendMessage("takeDamage", damage);
             }

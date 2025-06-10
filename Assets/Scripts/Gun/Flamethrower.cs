@@ -10,9 +10,19 @@ public class Flamethrower : Gun
     void Start()
     {
         flames.SetActive(false);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public override void shoot() {}
+    public override void shoot()
+    {
+        Vector3 forwardNormalized = -transform.forward.normalized;
+            Vector3 kickbackOutput = new Vector3(
+                                    forwardNormalized.x * kickbackXZ,
+                                    forwardNormalized.y * kickbackY,
+                                    forwardNormalized.z * kickbackXZ
+                                    );
+        player.SendMessage("applyPushback", kickbackOutput);
+    }
 
     public void Update()
     {
@@ -40,15 +50,6 @@ public class Flamethrower : Gun
             }
             
             // Always play the fire particle system when isfiring is true
-
-            Vector3 forwardNormalized = -transform.forward.normalized;
-            Vector3 kickbackOutput = new Vector3(
-                                    forwardNormalized.x * kickbackXZ,
-                                    forwardNormalized.y * kickbackY,
-                                    forwardNormalized.z * kickbackXZ
-                                    );
-
-            //player.SendMessage("applyPushback", kickbackOutput);
         }
     }
 
