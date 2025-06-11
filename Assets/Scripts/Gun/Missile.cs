@@ -32,6 +32,7 @@ public class Missile : MonoBehaviour
         
     }
 
+    // this might need a refactor
     void OnTriggerEnter(Collider other)
     {
         if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb" && other.tag != "Missile")

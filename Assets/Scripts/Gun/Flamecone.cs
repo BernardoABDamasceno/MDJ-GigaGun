@@ -13,6 +13,7 @@ public class Flamecone : MonoBehaviour
     private bool doublestop = false;
     private List<Collider> collidersInTrigger = new List<Collider>();
     
+    //this might need a refactor
     void OnTriggerEnter(Collider other)
     {
         print(other.tag);

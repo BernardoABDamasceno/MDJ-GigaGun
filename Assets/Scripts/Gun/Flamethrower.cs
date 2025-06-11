@@ -24,6 +24,7 @@ public class Flamethrower : Gun
         player.SendMessage("applyPushback", kickbackOutput);
     }
 
+    // this needs to be removed
     public void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -42,13 +43,13 @@ public class Flamethrower : Gun
 
     public void FixedUpdate()
     {
-        if (isfiring)  
+        if (isfiring)
         {
             if (fireSFX != null && audioSource != null)
             {
                 audioSource.PlayOneShot(fireSFX);
             }
-            
+
             // Always play the fire particle system when isfiring is true
         }
     }

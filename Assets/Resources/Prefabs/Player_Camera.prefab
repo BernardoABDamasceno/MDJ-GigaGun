@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2710977942310209440}
   - component: {fileID: 3414576609576839580}
   - component: {fileID: 1531210455421117532}
+  - component: {fileID: 125023253161727891}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -115,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42307f3c5a486c049be3cdb1a81f5718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  HP: 25
+  moveSpeed: 25
+  HP: 200
   jumpdrag: 1
   gundragHorizontal: 2
   gundragVertical: 10
@@ -127,7 +128,103 @@ MonoBehaviour:
   jumpColdownTime: 0.475
   slopeExtraSpeed: 7
   cameraManager: {fileID: 3136087509016330361}
-  runningSFX: {fileID: 0}
+  runningSFX: {fileID: 8300000, guid: 6da85f8247a4a5e439fd6ff32d195334, type: 3}
+--- !u!82 &125023253161727891
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4280905323022369588}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 6da85f8247a4a5e439fd6ff32d195334, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4939975077261342440
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +355,7 @@ MonoBehaviour:
   orbitalCam: {fileID: 4912309375538569166}
   fpsCam: {fileID: 6804360169471427512}
   player: {fileID: 4280905323022369588}
-  initialGun: {fileID: 8293294622055359598, guid: efebdc918aaa03642bf6de6192ea8b68, type: 3}
+  initialGun: {fileID: 8293294622055359598, guid: 13f7895dac0c0034193a0e0208cd23ab, type: 3}
   insertingGunRotSpeed: 15
   cooldownRotTime: 0.25
 --- !u!1 &5369374705177724106
@@ -275,7 +372,7 @@ GameObject:
   - component: {fileID: 9204314818226032834}
   m_Layer: 2
   m_Name: PlayerModel
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,6 +560,7 @@ GameObject:
   - component: {fileID: 6804360169471427512}
   - component: {fileID: 6879494663676899103}
   - component: {fileID: 2704540336256116934}
+  - component: {fileID: 2049343887692612914}
   m_Layer: 0
   m_Name: CameraFPS
   m_TagString: Untagged
@@ -519,7 +617,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2600
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -561,6 +659,23 @@ MonoBehaviour:
   sensitivity: 400
   player: {fileID: 6168728798836526620}
   holder: {fileID: 8766215608029370119}
+--- !u!114 &2049343887692612914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412077671594922191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc3ee179ff74374f86122ff7db2dcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowResTexture: {fileID: 8400000, guid: f9021fae5f1670d4fae12e1b8198cc61, type: 2}
+  crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
+  curvature: 10
+  vignetteWidth: 15
+  lineSpeed: 50
 --- !u!1 &8503799133296989534
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +701,7 @@ Transform:
   m_GameObject: {fileID: 8503799133296989534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.6172023, y: -0.11767268, z: -11.179049}
+  m_LocalPosition: {x: 0, y: 11.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -606,6 +721,7 @@ GameObject:
   - component: {fileID: 4912309375538569166}
   - component: {fileID: 8614503326545080837}
   - component: {fileID: 8782389786835237936}
+  - component: {fileID: 1191873992753634393}
   m_Layer: 0
   m_Name: CameraOrbital
   m_TagString: Untagged
@@ -660,7 +776,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2600
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -704,6 +820,23 @@ MonoBehaviour:
   scrollScale: 1
   lerpDuration: 1
   sensitivity: 5
+--- !u!114 &1191873992753634393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663129407435074920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc3ee179ff74374f86122ff7db2dcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowResTexture: {fileID: 8400000, guid: f9021fae5f1670d4fae12e1b8198cc61, type: 2}
+  crtShader: {fileID: 4800000, guid: 7356ee340a09b1b4999bb02961f24fed, type: 3}
+  curvature: 10
+  vignetteWidth: 15
+  lineSpeed: 50
 --- !u!1 &8923018295140574546
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +849,7 @@ GameObject:
   - component: {fileID: 3136087509016330361}
   m_Layer: 0
   m_Name: CameraHolder
-  m_TagString: Untagged
+  m_TagString: Cameraholder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded && !isOnSlope)
         {
-            //print("Grounded");
+            // print("Grounded");
             rb.velocity = movementDir + pushback + jumpVector / 1.5f;
         }
         else if (isOnSlope) // effectively not grounded, but on a slope
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
             //downhill
             if (dotDirectionSlope > 0.1f)
             {
-                //print("On Slope Downhill");
+                // print("On Slope Downhill");
                 if (movementDir.magnitude <= 0.1) // if player isnt clicking anything
                 {
                     rb.velocity = pushback + jumpVector / 1.5f;
@@ -138,31 +138,40 @@ public class Player : MonoBehaviour
             //uphill
             else if (dotDirectionSlope < -0.1f)
             {
-                //print("On Slope Uphill");
+                // print("On Slope Uphill");
                 rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
             else if (dotDirectionSlope == 0.0f)
             {
-                //print("On Slope falling");
+                // print("On Slope falling");
                 isOnSlope = false;
                 rb.velocity = movementDir + pushback + jumpVector / 1.5f;
             }
             // in case of fucky wucky
             else
             {
+                // print("fucky wucky ):");
                 rb.velocity = movementDir - gravity + pushback + jumpVector / 1.5f;
             }
         }
         else if (rb.velocity.y > 0.5f || rb.velocity.y < -0.5f || !airtime) // this check might be a bit goofy
         {
-            //print("In Air");
+            // print("In Air");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                      0, rb.velocity.z * 0.93f + movementDir.z * 0.07f)
                                      + pushback + jumpVector - gravity;
+
+            // this whole section needs refactoring, however, no time
+            // i believe the correct way to do this is to straight up not use the OnCollision methods and just check ourselves if its in ground or not
+            // so for now this will do as a bandaid fix
+            if (Physics.CheckSphere(transform.position + Vector3.down * 0.6f, 0.45f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+            {
+                isOnSlope = true;
+            }
         }
         else
         {
-            //print("jump air time");
+            // print("jump air time");
             rb.velocity = new Vector3(rb.velocity.x * 0.93f + movementDir.x * 0.07f,
                                      0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
             Invoke("airTimeOver", airTimer);
@@ -279,14 +288,15 @@ public class Player : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position - new Vector3(0f, 0.8f, 0f), 0.95f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.down * 0.6f, 0.45f);
     }
 
     void gainXP(int xp)
     {
         currentXP += xp;
-        if (currentXP >= 999999999999)
+        // sick of the warning
+        if (currentXP <= -1)
         {
             currentXP -= 50;
             cameraManager.SendMessage("levelUp");
