@@ -1677,7 +1677,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crtFilterScripts:
   - {fileID: 1510258314}
-  - {fileID: 1510258314}
 --- !u!4 &666551905
 Transform:
   m_ObjectHideFlags: 0
