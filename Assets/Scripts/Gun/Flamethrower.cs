@@ -1,10 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
 public class Flamethrower : Gun
 {
     [Header("Flamethrower Settings")]
     [SerializeField] private GameObject flames;
+    [SerializeField] private ParticleSystem flamesPs;
     bool isfiring = false;
 
     void Start()
@@ -31,12 +31,14 @@ public class Flamethrower : Gun
         {
             print("Flamethrower is firing");
             isfiring = true;
+            flamesPs.Play();
             flames.SetActive(true);
         }
         if (Input.GetMouseButtonUp(0))
         {
             print("Flamethrower stopped firing");
             isfiring = false;
+            flamesPs.Stop();
             flames.SetActive(false);
         }
     }
