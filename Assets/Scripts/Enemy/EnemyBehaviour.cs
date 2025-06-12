@@ -394,6 +394,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void takeDamage(float damage)
     {
+        if (isDead) return; // If already dead, ignore damage
+        
         //print("HIT");
         health -= damage;
         if (health <= 0)
