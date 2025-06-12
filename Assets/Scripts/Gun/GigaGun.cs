@@ -95,7 +95,7 @@ public class GigaGun : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Fire1") && !CameraManager.isAssemblyMode) // Default Fire key is Left Mouse Button
+            if (Input.GetButton("Fire1") && !CameraManager.isAssemblyMode && !PauseManager.isGamePaused) // Default Fire key is Left Mouse Button
             {
                 Shoot();
             }

@@ -13,6 +13,8 @@ public class Shotgun : Gun
             audioSource.PlayOneShot(fireSFX);
         }
 
+
+        //mby randomize this the rays later
         List<Ray> rays = new List<Ray>
         {
             new Ray(transform.position, transform.forward + transform.right * 0.1f),

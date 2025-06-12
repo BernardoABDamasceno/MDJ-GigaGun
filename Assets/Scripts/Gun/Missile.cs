@@ -52,7 +52,7 @@ public class Missile : MonoBehaviour
         Collider[] entitiesInRange = Physics.OverlapSphere(
             transform.position,
             explosionRadius,
-            LayerMask.GetMask("Enemies", "Ignore Raycast"),
+            LayerMask.GetMask("Enemy", "Ignore Raycast"),
             QueryTriggerInteraction.Collide
         );
 

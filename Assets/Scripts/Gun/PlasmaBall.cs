@@ -35,7 +35,8 @@ public class PlasmaBall : MonoBehaviour
             other.CompareTag("Cameraholder") ||
             other.CompareTag("Gun") ||
             other.CompareTag("ConnectionPoint") ||
-            other.CompareTag("Missile"))
+            other.CompareTag("Missile") ||
+            other.CompareTag("Flamethrower"))
         { return; }
 
         if (other.CompareTag("Enemy"))

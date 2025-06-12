@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1102201545713281752}
   m_Layer: 0
   m_Name: Flamethrower
-  m_TagString: Flamethrower
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -885,6 +885,10 @@ PrefabInstance:
     - target: {fileID: 9171390392663240242, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171390392663240242, guid: d1b8d711f6eeaea49ae89b26ab933950, type: 3}
+      propertyPath: m_TagString
+      value: Flamethrower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
