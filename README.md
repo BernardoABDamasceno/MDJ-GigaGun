@@ -16,3 +16,4 @@ MDJ Game Project
  - flamethrower stops death animation 
  - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
  - some objects make the player start stutter walking
+ - parameterizar tudo como deve de ser
