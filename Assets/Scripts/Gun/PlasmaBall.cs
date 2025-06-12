@@ -25,14 +25,21 @@ public class PlasmaBall : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "PlayerGroup" && other.tag != "PlasmaOrb" && other.tag != "Cameraholder" && other.tag != "Gun" && other.tag != "ConnectionPoint" && other.tag != "Missile")
+        //things that SHOULDNT make the projectile destroy itself
+        if (other.CompareTag("PlayerGroup") ||
+            other.CompareTag("PlasmaOrb") ||
+            other.CompareTag("Cameraholder") ||
+            other.CompareTag("Gun") ||
+            other.CompareTag("ConnectionPoint") ||
+            other.CompareTag("Missile"))
+        { return; }
+
+        if (other.CompareTag("Enemy"))
         {
-            if (other.CompareTag("Enemy"))
-            {
-                other.SendMessage("takeDamage", damage);
-            }
-            Destroy(gameObject);
+            other.SendMessage("takeDamage", damage);
         }
+        
+        Destroy(gameObject);
     }
 
 }
