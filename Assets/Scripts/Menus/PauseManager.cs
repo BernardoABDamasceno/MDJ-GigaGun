@@ -68,8 +68,17 @@ public class PauseManager : MonoBehaviour
         isGamePaused = false;
 
         // Re-lock and hide the cursor for gameplay
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (!CameraManager.isAssemblyMode)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        
     }
 
     // Loads the main menu scene.

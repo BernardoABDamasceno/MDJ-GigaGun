@@ -40,6 +40,8 @@ public class OrbitalCamera : MonoBehaviour
 
         if (!switchingTarget)
         {
+            if (PauseManager.isGamePaused) return;
+
             if (Input.mouseScrollDelta.y != 0.0f)
             {
                 if (currentDistance >= minScrollNFDistance && currentDistance <= maxScrollNFDistance)

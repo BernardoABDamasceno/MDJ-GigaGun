@@ -9,5 +9,7 @@ MDJ Game Project
  - look up arcade or bullet hell games also for reference for guns and power ups
 
 ## Known Bugs:
- - pause menu in assembly mode lets player drag camera
- - when in assembly mode if return to menu through pause menu when starting game again player is stuck until going back to assembly mode 
+ - when paused if firing a gun:
+   - Plasma orbs still spawn
+   - pushback is accumulated, when unpaused player flies away
+ - animations for shooting are being run in each individual update functions

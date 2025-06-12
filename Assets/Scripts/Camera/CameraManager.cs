@@ -13,20 +13,21 @@ public class CameraManager : MonoBehaviour
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
-    private bool fpsMode = true;
     private bool weaponchoice = false;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        fpsCam.gameObject.SetActive(fpsMode);
-        orbitalCam.gameObject.SetActive(!fpsMode);
+        isAssemblyMode = false;
+        weaponchoice = false;
+        gigaGun.transform.parent = fpsCam.transform;
+        fpsCam.gameObject.SetActive(true);
+        orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
-        pauseCanvas.gameObject.SetActive(false);
+        pauseCanvas.worldCamera = fpsCam;
     }
 
     void Update()
@@ -112,8 +113,8 @@ public class CameraManager : MonoBehaviour
 
     public void levelUp()
     {
-        fpsMode = !fpsMode;
-        if (fpsMode) changeToFPS();
+        isAssemblyMode = !isAssemblyMode;
+        if (!isAssemblyMode) changeToFPS();
         else weaponPick();
     }
 
