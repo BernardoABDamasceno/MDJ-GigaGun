@@ -1,27 +1,23 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class PauseManager : MonoBehaviour
 {
     public static bool isGamePaused = false;
 
-    [SerializeField] private GameObject pauseTextUI;
-    [SerializeField] private TMPro.TextMeshProUGUI mainMenuButtonText;
+    [SerializeField] Canvas pauseCanvas;
 
 
     void Start()
     {
         // Ensures the "Game Paused" text is hidden at the start
-        if (pauseTextUI != null)
+        if (pauseCanvas != null)
         {
-            pauseTextUI.SetActive(false);
+            pauseCanvas.gameObject.SetActive(false);
         }
 
-        if (mainMenuButtonText != null)
-        {
-            mainMenuButtonText.gameObject.SetActive(false);
-        }
         Time.timeScale = 1f;
         isGamePaused = false;
 
@@ -48,14 +44,9 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (pauseTextUI != null)
+        if (pauseCanvas != null)
         {
-            pauseTextUI.SetActive(true);
-        }
-
-        if (mainMenuButtonText != null)
-        {
-            mainMenuButtonText.gameObject.SetActive(true);
+            pauseCanvas.gameObject.SetActive(true);
         }
 
         Time.timeScale = 0f; // Stop time
@@ -68,16 +59,10 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (pauseTextUI != null)
+        if (pauseCanvas != null)
         {
-            pauseTextUI.SetActive(false);
+            pauseCanvas.gameObject.SetActive(false);
         }
-
-        if (mainMenuButtonText != null)
-        {
-            mainMenuButtonText.gameObject.SetActive(false);
-        }
-
 
         Time.timeScale = 1f;
         isGamePaused = false;

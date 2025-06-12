@@ -1083,9 +1083,9 @@ Canvas:
   m_GameObject: {fileID: 116382257}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 958405219}
-  m_PlaneDistance: 200
+  m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -3596,8 +3596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db21f8c99e10164a979c796844ad7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseTextUI: {fileID: 2091933440}
-  mainMenuButtonText: {fileID: 1989261824}
+  pauseCanvas: {fileID: 0}
 --- !u!4 &817544549
 Transform:
   m_ObjectHideFlags: 0
@@ -5130,6 +5129,10 @@ PrefabInstance:
       propertyPath: dmgCanvas
       value: 
       objectReference: {fileID: 642838763}
+    - target: {fileID: 3136087509016330361, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 116382260}
     - target: {fileID: 3136087509016330361, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: optionsCanvas
       value: 
