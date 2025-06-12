@@ -5,59 +5,59 @@ public class Flamethrower : Gun
     [Header("Flamethrower Settings")]
     [SerializeField] private GameObject flames;
     [SerializeField] private ParticleSystem flamesPs;
-    bool isfiring = false;
+    [SerializeField] private float firingTimeOutTime = 1.0f;
+    private bool isfiring = false;
 
     void Start()
     {
-        flames.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
+        flames.SetActive(false);
     }
 
     public override void shoot()
     {
-        Vector3 forwardNormalized = -transform.forward.normalized;
-            Vector3 kickbackOutput = new Vector3(
-                                    forwardNormalized.x * kickbackXZ,
-                                    forwardNormalized.y * kickbackY,
-                                    forwardNormalized.z * kickbackXZ
-                                    );
-        player.SendMessage("applyPushback", kickbackOutput);
-    }
-
-    // this needs to be removed
-    public void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        if (!isfiring)
         {
-            print("Flamethrower is firing");
             isfiring = true;
-            flamesPs.Play();
             flames.SetActive(true);
+            flamesPs.Play();
+            //if after a second this function isn't called again, is not firing anymore
+            Invoke("firingTimeOut", firingTimeOutTime);
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            print("Flamethrower stopped firing");
-            isfiring = false;
-            flamesPs.Stop();
-            flames.SetActive(false);
+            //if it is still firing just reset timer
+            CancelInvoke();
+            Invoke("firingTimeOut", firingTimeOutTime);
         }
     }
-
-    public void FixedUpdate()
-    {
+    private void FixedUpdate() {
         if (isfiring)
         {
             if (fireSFX != null && audioSource != null)
             {
                 audioSource.PlayOneShot(fireSFX);
             }
-
-            // Always play the fire particle system when isfiring is true
+                //applied continously   -   not sure if we should even have this
+            Vector3 forwardNormalized = -transform.forward.normalized;
+            Vector3 kickbackOutput = new Vector3(
+                                    forwardNormalized.x * kickbackXZ,
+                                    forwardNormalized.y * kickbackY,
+                                    forwardNormalized.z * kickbackXZ
+                                    );
+            player.SendMessage("applyPushback", kickbackOutput);
         }
     }
 
     public override GunType getGunType()
     {
         return GunType.Flamethrower;
+    }
+
+    private void firingTimeOut()
+    {
+        isfiring = false;
+        flamesPs.Stop();
+        flames.SetActive(false);
     }
 }

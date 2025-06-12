@@ -13,3 +13,4 @@ MDJ Game Project
    - Plasma orbs still spawn
    - pushback is accumulated, when unpaused player flies away
  - animations for shooting are being run in each individual update functions
+ - got a bug with the flame thrower once where it took like half a second to change directions when walking, haven't been able to replicate it

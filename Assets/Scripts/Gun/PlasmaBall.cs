@@ -7,6 +7,8 @@ public class PlasmaBall : MonoBehaviour
     [SerializeField] private float plasmaOrbSpeed = 0.5f;
     [SerializeField] private float damage = 5.0f;
     [SerializeField] private float extraDistance = 1.0f;
+    [SerializeField] private float plasmaOrbLifetime = 5.0f;
+
     private Vector3 playerForward;
     void Start()
     {
@@ -14,13 +16,15 @@ public class PlasmaBall : MonoBehaviour
         playerForward = parentTransform.forward;
         transform.position += playerForward * extraDistance;
         rb = GetComponent<Rigidbody>();
+
+        Invoke("ExistentialTimeOut", plasmaOrbLifetime);
     }
 
     void FixedUpdate()
     {
         Vector3 position = transform.position + (playerForward * plasmaOrbSpeed);
         rb.MovePosition(position);
-        
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,7 +42,12 @@ public class PlasmaBall : MonoBehaviour
         {
             other.SendMessage("takeDamage", damage);
         }
-        
+
+        Destroy(gameObject);
+    }
+
+    private void ExistentialTimeOut()
+    {
         Destroy(gameObject);
     }
 

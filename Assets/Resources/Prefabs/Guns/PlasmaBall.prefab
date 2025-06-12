@@ -122,6 +122,7 @@ MonoBehaviour:
   plasmaOrbSpeed: 1.5
   damage: 5
   extraDistance: 1
+  plasmaOrbLifetime: 5
 --- !u!54 &3841441112015811399
 Rigidbody:
   m_ObjectHideFlags: 0

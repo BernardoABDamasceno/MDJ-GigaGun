@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEditor.Callbacks;
 
 public class Flamecone : MonoBehaviour
 {
@@ -10,59 +11,49 @@ public class Flamecone : MonoBehaviour
     [SerializeField] private float damage = 2.0f;
     [SerializeField] private float delay = 0.2f;
     private bool tick = true;
-    private bool doublestop = false;
     private List<Collider> collidersInTrigger = new List<Collider>();
-    
-    //this might need a refactor
+
     void OnTriggerEnter(Collider other)
     {
-        print(other.tag);
         if (other.CompareTag("Enemy"))
         {
             if (!collidersInTrigger.Contains(other))
             {
                 collidersInTrigger.Add(other);
             }
-            other.SendMessage("takeDamage", damage);
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Enemy") && !doublestop && tick && collidersInTrigger.Contains(other))
-        {
-            StartCoroutine(Delay(delay));
-        }
-    }
-
-
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") && collidersInTrigger.Contains(other))
+        //if its exiting it implies that it entered so a list check for is unnecessery right?
+        if (other.CompareTag("Enemy"))
         {
             collidersInTrigger.Remove(other);
         }
     }
-    IEnumerator Delay(float delayTime)
+
+    private void Update()
     {
-        if (doublestop)
-            yield break;
-
-        tick = false;
-        doublestop = true;
-
-        collidersInTrigger.RemoveAll(col => col == null);
-
-        foreach (Collider col in collidersInTrigger)
+        if (tick)
         {
-            if (col.CompareTag("Enemy"))
+            //if enemy died onTriggerExit does not trigger, so manual removal is required
+            for (int i = 0; i < collidersInTrigger.Count;)
             {
-                col.SendMessage("takeDamage", damage);
-                print("DMG");
+                if (collidersInTrigger[i] == null) collidersInTrigger.RemoveAt(i);
+                else i++;
             }
+            //after sanitation is safe to do damage
+            foreach (Collider enemy in collidersInTrigger)
+            {
+                enemy.SendMessage("takeDamage", damage);
+            }
+            tick = false;
+            Invoke("tickCooldown", delay);
         }
-        yield return new WaitForSeconds(delayTime);
+    }
+
+    private void tickCooldown()
+    {
         tick = true;
-        doublestop = false;
-        print("Delay ended");
     }
 }

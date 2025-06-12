@@ -428,6 +428,7 @@ MonoBehaviour:
   fireSFX: {fileID: 0}
   flames: {fileID: 2284175724329458571}
   flamesPs: {fileID: 5242246689183441752}
+  firingTimeOutTime: 0.1
 --- !u!82 &1102201545713281752
 AudioSource:
   m_ObjectHideFlags: 0
