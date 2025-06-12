@@ -13,18 +13,20 @@ public class Shotgun : Gun
             audioSource.PlayOneShot(fireSFX);
         }
 
+        int randomNumber = UnityEngine.Random.Range(1, 5);
+
 
         //mby randomize this the rays later
-        List<Ray> rays = new List<Ray>
+        List<Ray> rays = new()
         {
-            new Ray(transform.position, transform.forward + transform.right * 0.1f),
-            new Ray(transform.position, transform.forward - transform.right * 0.1f),
-            new Ray(transform.position, transform.forward + transform.up * 0.1f),
-            new Ray(transform.position, transform.forward - transform.up * 0.1f),
-            new Ray(transform.position, transform.forward + transform.right * 0.05f + transform.up * 0.05f),
-            new Ray(transform.position, transform.forward - transform.right * 0.05f + transform.up * 0.05f),
-            new Ray(transform.position, transform.forward + transform.right * 0.05f - transform.up * 0.05f),
-            new Ray(transform.position, transform.forward - transform.right * 0.05f - transform.up * 0.05f)
+            new Ray(transform.position, transform.forward + transform.right * 0.025f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward - transform.right * 0.025f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward + transform.up * 0.025f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward - transform.up * 0.025f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward + transform.right * 0.0125f *UnityEngine.Random.Range(2, 5) + transform.up * 0.0125f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward - transform.right * 0.0125f *UnityEngine.Random.Range(2, 5) + transform.up * 0.0125f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward + transform.right * 0.0125f *UnityEngine.Random.Range(2, 5) - transform.up * 0.0125f *UnityEngine.Random.Range(2, 5)),
+            new Ray(transform.position, transform.forward - transform.right * 0.0125f *UnityEngine.Random.Range(2, 5) - transform.up * 0.0125f *UnityEngine.Random.Range(2, 5))
         };
 
         // Debug lines for visualizing shotgun spread
@@ -43,11 +45,16 @@ public class Shotgun : Gun
             {
                 if (hit.collider.CompareTag("Enemy"))
                 {
+                    print("gets here");
                     EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
                     if (enemy != null)
                     {
                         enemy.takeDamage(damage);
                     }
+                }
+                else
+                {
+                    print("Hit something else: " + hit.collider.name);
                 }
             }
         }
