@@ -10,7 +10,6 @@ MDJ Game Project
 
 ## Known Bugs:
  - got a bug with the flame thrower once where it took like half a second to change directions when walking, haven't been able to replicate it
- - shotgun doesnt hit
  - flamethrower particles too narrow and short
  - explosion particles too small
  - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
