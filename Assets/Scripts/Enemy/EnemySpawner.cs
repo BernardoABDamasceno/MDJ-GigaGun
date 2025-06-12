@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject hulkPrefab;
     [SerializeField] float startDelay = 0.0f;
     [SerializeField] float rateOfSpawns = 10.0f;
 
@@ -21,6 +22,13 @@ public class EnemySpawner : MonoBehaviour
     {
         if (CameraManager.isAssemblyMode || currentEnemies >= maxEnemies) return;
         currentEnemies++;
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity, this.transform);
+        if (Random.Range(0, 100) <= 15)
+        {
+            Instantiate(hulkPrefab, transform.position, Quaternion.identity, transform);
+        }
+        else
+        {
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity, transform);
+        }
     }
 }

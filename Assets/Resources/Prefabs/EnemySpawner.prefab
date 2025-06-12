@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c883ce2a43f31d4681f8d159c0004bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 7871006488725435901, guid: 7bb47f5c1dfd9ca4aa4f7976ef988327, type: 3}
+  hulkPrefab: {fileID: 360752378583137147, guid: 143eb79815b6b174e97605a0583d96bc, type: 3}
   startDelay: 0
   rateOfSpawns: 10

@@ -17,10 +17,13 @@ public class EnemyBehaviour : MonoBehaviour
     private AudioSource loopingAudioSource;   // For approaching
     private AudioSource oneShotAudioSource;   // For attacks and dying,
 
-
+    [SerializeField] bool isHulk = false;
     [SerializeField] private float health = 15.0f;
     [SerializeField] private ParticleSystem bloodSplaterDeath;
     [SerializeField] private ParticleSystem bloodSplatterHit;
+    [SerializeField] GameObject granadePrefab;
+    [SerializeField] float throwAngle = 5.0f;
+    [SerializeField] float throwForce = 10.0f;
 
     private float ogSpeed;
 
@@ -128,6 +131,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             agent.updateRotation = false;
         }
+
+        InvokeRepeating("throwGranade", 0, 10);
     }
 
     void Update()
@@ -401,6 +406,47 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    private void throwGranade()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // BIGGEST PILE OF SHIT I'VE PROBABLY DONE SO FAR BUT FUCK IT
+        if (distanceToPlayer <= 50.0f && currentAttackCooldownTimer <= 0f)
+        {
+            if (Random.Range(0, 100) <= 50)
+            {
+                if (isHulk)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        GameObject granade = Instantiate(granadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
+                        granade.GetComponent<Rigidbody>().AddForce(
+                            (player.position - transform.position + Vector3.up * throwAngle + transform.right * 2.0f * (2 - i)) * throwForce,
+                            ForceMode.Impulse
+                        );
+                    }
+                }
+                else
+                {
+                    GameObject granade = Instantiate(granadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
+                    granade.GetComponent<Rigidbody>().AddForce((player.position - transform.position + Vector3.up * throwAngle) * throwForce, ForceMode.Impulse);
+                }
+                currentState = EnemyState.Attacking;
+                currentAttackCooldownTimer = attackCooldown; // Reset cooldown
+                agent.isStopped = true; // Stop movement to play attack animation
+                animator.SetBool("isWalking", false);
+                animator.SetTrigger("AttackTrigger"); // Trigger the attack animation
+
+                // Play attacking SFX on the one-shot AudioSource
+                if (oneShotAudioSource != null && attackingSFX != null)
+                {
+                    oneShotAudioSource.PlayOneShot(attackingSFX);
+                }
+                return; // Immediately switch to attack state
+            }
+        }
+    }
+
     public void Death()
     {
         //Debug.Log("Enemy Death() method called! Time: " + Time.time); 
@@ -416,7 +462,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (oneShotAudioSource != null && dyingSFX != null)
         {
             //Debug.Log("Attempting to play dying SFX: " + dyingSFX.name);
-            oneShotAudioSource.PlayOneShot(dyingSFX); 
+            oneShotAudioSource.PlayOneShot(dyingSFX);
             //Debug.Log("Dying SFX PlayOneShot called.");
         }
         else
