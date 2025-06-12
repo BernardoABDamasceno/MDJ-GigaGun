@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 155458792994904358}
   - component: {fileID: 1029852727238384381}
   - component: {fileID: 702044387543488203}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -122,10 +122,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0cc53b38333074d90a74760180f7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  approachingSFX: {fileID: 0}
+  attackingSFX: {fileID: 0}
+  dyingSFX: {fileID: 0}
   health: 15
+  bloodSplaterDeath: {fileID: 0}
+  bloodSplatterHit: {fileID: 0}
   detectionRadius: 5000
   wanderSpeed: 5
   chaseSpeed: 10
+  attackRange: 2
+  attackCooldown: 1.5
+  modelRotationOffset: {x: 0, y: 180, z: 0}
   currentState: 0
   wanderMovementRange: 5
   minNewWanderTargetDelay: 1.5

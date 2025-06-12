@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3414576609576839580}
   - component: {fileID: 1531210455421117532}
   - component: {fileID: 125023253161727891}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -888,5 +888,6 @@ MonoBehaviour:
   optionsCanvas: {fileID: 0}
   dmgCanvas: {fileID: 0}
   infoDump: {fileID: 0}
+  pauseCanvas: {fileID: 0}
   gigaGun: {fileID: 4948430276237621780}
   player: {fileID: 4280905323022369588}
