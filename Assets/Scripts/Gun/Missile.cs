@@ -15,6 +15,11 @@ public class Missile : MonoBehaviour
     [SerializeField] private float explosionPushbackXZ = 10.0f; // Horizontal pushback
     [SerializeField] private float explosionPushbackY = 30.0f; // Vertical pushback
     private Vector3 playerForward;
+    private bool isExploded = false;
+
+    [SerializeField] private ParticleSystem explosionPs;
+    [SerializeField] private ParticleSystem trusterPs;
+
     void Start()
     {
         parentTransform = GameObject.FindGameObjectWithTag("Cameraholder").transform;
@@ -27,6 +32,8 @@ public class Missile : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isExploded) return;
+
         Vector3 position = transform.position + (playerForward * missileSpeed);
         rb.MovePosition(position);
         
@@ -67,7 +74,11 @@ public class Missile : MonoBehaviour
                     player.SendMessage("applyPushback", explosionOutput);
                 }
             }
-            Destroy(gameObject);
+            trusterPs.Stop();
+            isExploded = true;
+            explosionPs.Play();
+            gameObject.GetComponent<Renderer>().enabled = false;
+            Destroy(gameObject, explosionPs.main.startLifetime.constant);
         }
     }
 
