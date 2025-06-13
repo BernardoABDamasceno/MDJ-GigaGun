@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class GigaGun : MonoBehaviour
 {
@@ -128,16 +130,54 @@ public class GigaGun : MonoBehaviour
         {
             cancelInsertGun();
         }
+
+        Vector3 newposition = Vector3.zero;
+        Vector3 pointdirection = Vector3.zero;
+
         // instaciar a nova arma
-        //referencia da nova arma
+        // referencia da nova arma
         // referencia do ponto
         // referencia da arma a qual o ponto pertence para fazer a arma nova ser filha
-        //adiciona-la a lista de armas
+        // adiciona-la a lista de armas
 
         insertingCP = connectionPoint.gameObject;
+        if (pickedGun.name.Contains("RPG"))
+        {
+            if (connectionPoint.name.Contains("1"))
+            {
+                pointdirection = new Vector3(1, 0, 0);
+            }
+            else if (connectionPoint.name.Contains("2"))
+            {
+                pointdirection = new Vector3(0, 1, 0);
+            }
+            else if (connectionPoint.name.Contains("3"))
+            {
+                pointdirection = new Vector3(-1, 0, 0);
+            }
+            else if (connectionPoint.name.Contains("4"))
+            {
+                pointdirection = new Vector3(0, -1, 0);
+            }
+        
+            newposition = insertingCP.transform.position + pointdirection * 0.1f; // RPG needs a bit of space to avoid clipping
+        }
+        else if (pickedGun.name.Contains("Flamethrower"))
+        {
+            if (connectionPoint.name.Contains("2"))
+            {
+                pointdirection = new Vector3(0, 1, 0);
+            }
+
+            newposition = insertingCP.transform.position + pointdirection * 0.075f; // Flamethrower needs a bit of downwards space to avoid clipping
+        }
+        else
+        {
+            newposition = insertingCP.transform.position;
+        }
         insertingGun = Instantiate(
             pickedGun,
-            insertingCP.transform.position,
+            newposition,
             insertingCP.transform.rotation,
             transform
         );
@@ -253,7 +293,7 @@ public class GigaGun : MonoBehaviour
         //orbitalCam.SendMessage("resetAssemblyMode");
         //GetComponentInParent<CameraManager>().SendMessage("levelUp");
     }
-    
+
     private void finishCooldown()
     {
         cooldownRot = false;
