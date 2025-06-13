@@ -753,8 +753,8 @@ Camera:
   m_GameObject: {fileID: 8663129407435074920}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -776,7 +776,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 2600
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -891,3 +891,4 @@ MonoBehaviour:
   pauseCanvas: {fileID: 0}
   gigaGun: {fileID: 4948430276237621780}
   player: {fileID: 4280905323022369588}
+  assemblyLocation: {x: -500, y: -500, z: -500}

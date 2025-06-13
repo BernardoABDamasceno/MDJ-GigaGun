@@ -14,6 +14,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
+    [SerializeField] private Vector3 assemblyLocation = new Vector3(-500, -500, -500);
+    private Vector3 gigagunFPSposition = Vector3.zero;
+
     private bool weaponchoice = false;
 
     void Start()
@@ -29,6 +32,9 @@ public class CameraManager : MonoBehaviour
         infoDump.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
+        
+        orbitalCam.transform.position = assemblyLocation;
+
     }
 
     void Update()
@@ -85,11 +91,15 @@ public class CameraManager : MonoBehaviour
         Cursor.visible = false;
         isAssemblyMode = false;
         weaponchoice = false;
+
+
         player.SendMessage("unpaused");
         if (GigaGun.insertingGun != null)
             gigaGun.SendMessage("cancelInsertGun");
         gigaGun.gameObject.SendMessage("disableConnectionPoints");
         gigaGun.transform.parent = fpsCam.transform;
+        gigaGun.transform.position = gigagunFPSposition;
+
         fpsCam.gameObject.SetActive(true);
         orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
@@ -110,9 +120,13 @@ public class CameraManager : MonoBehaviour
         infoDump.gameObject.SetActive(true);
 
         //default pick
-        SetGun("Prefabs/Guns/Revolver");
+        SetGun("Prefabs/Guns/Revolver");    
 
+        
+        gigagunFPSposition = gigaGun.transform.position;
         gigaGun.transform.parent = transform;
+        gigaGun.transform.position = assemblyLocation;
+
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
         fpsCam.gameObject.SetActive(false);
         orbitalCam.gameObject.SetActive(true);
