@@ -41,7 +41,6 @@ public class GigaGun : MonoBehaviour
 
     void Update()
     {
-
         if (insertingGun != null)
         {
             if (Input.GetKeyDown(KeyCode.H))
@@ -215,6 +214,31 @@ public class GigaGun : MonoBehaviour
         insertingGunCP.Clear();
 
         guns.Add(insertingGun);
+        // Logging player actions for data collection
+        switch (insertingGun.name.Split('(')[0]) // Get the gun type from the name
+        // This assumes the gun name is formatted like "Revolver(Clone)" or "Shotgun(Clone)"
+        {
+            case "Revolver":
+                JsonFileWriter.sampleData.revolvers++;
+                break;
+            case "Shotgun":
+                JsonFileWriter.sampleData.shotguns++;
+                break;
+            case "PlasmaGun":
+                JsonFileWriter.sampleData.plasmaRifles++;
+                break;
+            case "Flamethrower":
+                JsonFileWriter.sampleData.flamethrowers++;
+                break;
+            case "RPG":
+                JsonFileWriter.sampleData.rpgs++;
+                break;
+            default:
+                Debug.LogWarning("Unknown gun type: " + insertingGun.name);
+                break;
+        }
+        FindObjectOfType<JsonFileWriter>().WriteToJson();
+        // End of logging
         insertingGun = null;
 
         freeConnectionPoints.Remove(insertingCP.GetComponent<ConnectionPoint>());
@@ -224,6 +248,8 @@ public class GigaGun : MonoBehaviour
         // NEEDS TO BE REVIEWD LATER THIS SHOULD NOT BE A CONCERN OF LEVEL UP  METHOD;
         //orbitalCam.SendMessage("resetAssemblyMode");
         GetComponentInParent<CameraManager>().SendMessage("levelUp");
+
+        
     }
     
     private void finishCooldown()

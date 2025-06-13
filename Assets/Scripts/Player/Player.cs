@@ -63,6 +63,12 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow keys
 
         if (Input.GetKey(KeyCode.Space)) checkJump = true;
+
+        // Logging player actions for data collection
+        if (!PauseManager.isGamePaused || !CameraManager.isAssemblyMode)
+        {
+            if (!isGrounded && !isOnSlope) JsonFileWriter.sampleData.airTime += Time.deltaTime;
+        }
     }
 
     //  TODO: Refactor
@@ -254,6 +260,9 @@ public class Player : MonoBehaviour
 
             isGrounded = true;
             jumpVector = Vector3.zero;
+
+            // Logging player actions for data collection
+            FindObjectOfType<JsonFileWriter>().WriteToJson();
         }
     }
     void OnCollisionExit(Collision collision)

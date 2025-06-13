@@ -2691,6 +2691,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4507979513362731478, guid: 5f0aec804248c89498569024413389ec, type: 3}
   m_PrefabInstance: {fileID: 524230081}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &548849507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548849509}
+  - component: {fileID: 548849510}
+  m_Layer: 0
+  m_Name: LoggingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &548849509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548849507}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548849510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548849507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44eba378a660e74d809f1059e66d95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: playerdata.json
+  sampleData:
+    playerId: Player_b25c0a01-c8b3-41af-8e44-636de90b3ffa
+    timeSpentFPS: 0
+    timeSpentAssembly: 0
+    airTime: 0
+    revolvers: 0
+    shotguns: 0
+    plasmaRifles: 0
+    flamethrowers: 0
+    rpgs: 0
 --- !u!1001 &573616539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7923,3 +7978,4 @@ SceneRoots:
   - {fileID: 1578790737}
   - {fileID: 116382261}
   - {fileID: 817544549}
+  - {fileID: 548849509}

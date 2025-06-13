@@ -54,6 +54,13 @@ public class CameraManager : MonoBehaviour
                 SetGun("Prefabs/Guns/Shotgun");
             }
         }
+
+        // Logging player actions for data collection
+        if (!PauseManager.isGamePaused)
+        {
+            if (isAssemblyMode) JsonFileWriter.sampleData.timeSpentAssembly += Time.deltaTime;
+            else JsonFileWriter.sampleData.timeSpentFPS += Time.deltaTime;
+        }
     }
     void FixedUpdate()
     {
@@ -79,6 +86,9 @@ public class CameraManager : MonoBehaviour
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
+
+        // Logging player actions for data collection
+        FindObjectOfType<JsonFileWriter>().WriteToJson();
     }
 
     private void changeToOrbital()
@@ -88,6 +98,9 @@ public class CameraManager : MonoBehaviour
         fpsCam.gameObject.SetActive(false);
         orbitalCam.gameObject.SetActive(true);
         pauseCanvas.worldCamera = orbitalCam;
+
+        // Logging player actions for data collection
+        FindObjectOfType<JsonFileWriter>().WriteToJson();
     }
 
     private void weaponPick()
