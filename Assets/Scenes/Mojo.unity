@@ -6156,7 +6156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!223 &472439706
 Canvas:
   m_ObjectHideFlags: 0
@@ -12046,7 +12046,6 @@ GameObject:
   - component: {fileID: 937350762}
   - component: {fileID: 937350764}
   - component: {fileID: 937350763}
-  - component: {fileID: 937350765}
   - component: {fileID: 937350766}
   m_Layer: 5
   m_Name: ButtonPlasma
@@ -12138,19 +12137,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937350761}
   m_CullTransparentMesh: 1
---- !u!114 &937350765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937350761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6f3895b38f58a4983fc79704729513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponPath: Prefabs/Guns/PlasmaGun
 --- !u!114 &937350766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14549,6 +14535,7 @@ GameObject:
   - component: {fileID: 1171518589}
   - component: {fileID: 1171518591}
   - component: {fileID: 1171518590}
+  - component: {fileID: 1171518592}
   m_Layer: 5
   m_Name: ButtonShotgun
   m_TagString: Untagged
@@ -14639,6 +14626,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171518588}
   m_CullTransparentMesh: 1
+--- !u!114 &1171518592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171518588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!4 &1171932054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3736682293532762586, guid: 89cd941df3db1ab4899c93e7258ef249, type: 3}
@@ -16658,6 +16675,7 @@ GameObject:
   - component: {fileID: 1283772310}
   - component: {fileID: 1283772312}
   - component: {fileID: 1283772311}
+  - component: {fileID: 1283772313}
   m_Layer: 5
   m_Name: ButtonRPG
   m_TagString: Untagged
@@ -16748,6 +16766,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283772309}
   m_CullTransparentMesh: 1
+--- !u!114 &1283772313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283772309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!4 &1285445824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4687693301019717399, guid: fabbfcb7d0b1ec547828efe0f7a30cb1, type: 3}
@@ -19084,6 +19132,7 @@ GameObject:
   - component: {fileID: 1503565647}
   - component: {fileID: 1503565649}
   - component: {fileID: 1503565648}
+  - component: {fileID: 1503565650}
   m_Layer: 5
   m_Name: ButtonFlamethrower
   m_TagString: Untagged
@@ -19174,6 +19223,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503565646}
   m_CullTransparentMesh: 1
+--- !u!114 &1503565650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503565646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!4 &1506855013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1791819879914499464, guid: 1bc01da6b87b4164b8f10b08c5a006d9, type: 3}
@@ -22901,10 +22980,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1795100496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6f3895b38f58a4983fc79704729513, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPath: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &1800622948
 PrefabInstance:
   m_ObjectHideFlags: 0
