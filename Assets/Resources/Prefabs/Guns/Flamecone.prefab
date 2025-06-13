@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2611730021565114533}
   - component: {fileID: 3862124157989304263}
   - component: {fileID: -7114132772586368923}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flamecone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  extraDistance: 11
+  delay: 0.2
 --- !u!54 &-7114132772586368923
 Rigidbody:
   m_ObjectHideFlags: 0

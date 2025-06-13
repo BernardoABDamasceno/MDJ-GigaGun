@@ -146,11 +146,9 @@ public class GigaGun : MonoBehaviour
         // who programmed this? me? why?
         foreach (ConnectionPoint point in insertingGun.GetComponentsInChildren<ConnectionPoint>())
         {
-            point.confirmCollisions();
             bool found = false;
             foreach (ConnectionPoint point2 in freeConnectionPoints)
             {
-                point2.confirmCollisions();
                 if (point.transform.position == point2.transform.position)
                 {
                     found = true;
@@ -245,11 +243,15 @@ public class GigaGun : MonoBehaviour
         Destroy(insertingCP);
         insertingCP = null;
 
+        //check overlaps to stop too extreme shenanigans
+        foreach (ConnectionPoint point in freeConnectionPoints)
+        {
+            point.confirmCollisions();
+        }
+
         // NEEDS TO BE REVIEWD LATER THIS SHOULD NOT BE A CONCERN OF LEVEL UP  METHOD;
         //orbitalCam.SendMessage("resetAssemblyMode");
-        GetComponentInParent<CameraManager>().SendMessage("levelUp");
-
-        
+        //GetComponentInParent<CameraManager>().SendMessage("levelUp");
     }
     
     private void finishCooldown()

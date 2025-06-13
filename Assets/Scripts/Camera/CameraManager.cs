@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -53,6 +54,14 @@ public class CameraManager : MonoBehaviour
                 //print("3");
                 SetGun("Prefabs/Guns/Shotgun");
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                SetGun("Prefabs/Guns/RPG");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                SetGun("Prefabs/Guns/Flamethrower");
+            }
         }
 
         // Logging player actions for data collection
@@ -93,6 +102,16 @@ public class CameraManager : MonoBehaviour
 
     private void changeToOrbital()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        player.SendMessage("paused");
+        isAssemblyMode = true;
+        weaponchoice = true;
+        infoDump.gameObject.SetActive(true);
+
+        //default pick
+        SetGun("Prefabs/Guns/Revolver");
+
         gigaGun.transform.parent = transform;
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
         fpsCam.gameObject.SetActive(false);
@@ -113,22 +132,22 @@ public class CameraManager : MonoBehaviour
         changeToOrbital();
         weaponchoice = true;
     }
-    private void SetGun(string gunPrefabPath)
+    public void SetGun(string gunPrefabPath)
     {
         GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
         //print("Setting gun: " + newgun.layer);
         gigaGun.transform.parent = transform;
         gigaGun.SendMessage("setPickedGun", newgun);
-        optionsCanvas.gameObject.SetActive(false);
-        infoDump.gameObject.SetActive(true);
-        weaponchoice = false;
+        //optionsCanvas.gameObject.SetActive(false);
+        //this is always on for sandbox
+        //weaponchoice = false;
     }
 
     public void levelUp()
     {
         isAssemblyMode = !isAssemblyMode;
         if (!isAssemblyMode) changeToFPS();
-        else weaponPick();
+        else changeToOrbital(); //weaponPick();
     }
 
     public void flashRed()

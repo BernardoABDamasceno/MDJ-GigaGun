@@ -45,16 +45,11 @@ public class Shotgun : Gun
             {
                 if (hit.collider.CompareTag("Enemy"))
                 {
-                    print("gets here");
                     EnemyBehaviour enemy = hit.collider.GetComponent<EnemyBehaviour>();
                     if (enemy != null)
                     {
                         enemy.takeDamage(damage);
                     }
-                }
-                else
-                {
-                    print("Hit something else: " + hit.collider.name);
                 }
             }
         }

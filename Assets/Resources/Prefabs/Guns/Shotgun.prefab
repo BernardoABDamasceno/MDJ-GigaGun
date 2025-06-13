@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016858858133103798}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Gun
   m_Icon: {fileID: 0}

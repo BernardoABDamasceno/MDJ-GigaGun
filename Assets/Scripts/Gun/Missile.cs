@@ -42,7 +42,10 @@ public class Missile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // if the collision is with anything it should collide with -> return
-        if (other.CompareTag("PlayerGroup") || other.CompareTag("PlasmaOrb") || other.CompareTag("Missile")) return;
+        if (other.CompareTag("PlayerGroup") ||
+            other.CompareTag("PlasmaOrb") ||
+            other.CompareTag("Missile") ||
+            other.name == "Flamecone") return;
         
         // direct hit on enemy
         if (other.CompareTag("Enemy")) other.SendMessage("takeDamage", hitDamage);
@@ -71,7 +74,7 @@ public class Missile : MonoBehaviour
                 hit.gameObject.GetComponentInParent<Player>().SendMessage("getHit", playerDamage);
                 hit.gameObject.GetComponentInParent<Player>().SendMessage("applyPushback", outputPushVector);
             }
-            else
+            else if(hit.CompareTag("Enemy"))
             {
                 hit.gameObject.SendMessage("takeDamage", explosionDamage);
             }

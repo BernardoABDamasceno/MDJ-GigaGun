@@ -50,12 +50,15 @@ public class ConnectionPoint : MonoBehaviour
 
     public void confirmCollisions()
     {
-        Collider[] collisions = Physics.OverlapSphere(transform.position, 0.055f, LayerMask.GetMask("Gun", "ConnectionPoint"), QueryTriggerInteraction.Collide);
+        Collider[] collisions = Physics.OverlapSphere(transform.position, 0.065f, LayerMask.GetMask("Gun", "Ignore Raycast", "ConnectionPoint"), QueryTriggerInteraction.Collide);
 
-        print("Collisions found: " + collisions.Length);
-        if (collisions.Length >= 2)
+        foreach (Collider col in collisions)
         {
-            gameObject.SetActive(false);
+            if (col.gameObject.transform.parent.gameObject != gameObject)
+            {
+                gameObject.SetActive(false);
+                break;
+            }
         }
     }
 
