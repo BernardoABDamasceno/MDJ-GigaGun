@@ -1127,35 +1127,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1021054948}
     - target: {fileID: 3136087509016330361, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: playerGroup
-      value: 
-      objectReference: {fileID: 964225815}
-    - target: {fileID: 3136087509016330361, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: optionsCanvas
       value: 
       objectReference: {fileID: 465347755}
     - target: {fileID: 4280905323022369588, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: far clip plane
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912309375538569166, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6168728798836526620, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
@@ -1173,10 +1149,6 @@ PrefabInstance:
     - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Name
       value: Player_Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8766215608029370119, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12372,11 +12344,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fabbfcb7d0b1ec547828efe0f7a30cb1, type: 3}
---- !u!1 &964225815 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-  m_PrefabInstance: {fileID: 62258260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &967527080
 PrefabInstance:
   m_ObjectHideFlags: 0

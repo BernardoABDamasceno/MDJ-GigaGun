@@ -114,6 +114,7 @@ public class CameraManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+
         player.SendMessage("paused");
         isAssemblyMode = true;
         weaponchoice = true;
@@ -159,9 +160,15 @@ public class CameraManager : MonoBehaviour
 
     public void levelUp()
     {
+
         isAssemblyMode = !isAssemblyMode;
         if (!isAssemblyMode) changeToFPS();
-        else changeToOrbital(); //weaponPick();
+        else
+        {
+            Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
+            orbitalCam.GetComponentInChildren<Renderer>().material.SetTexture("_MainTexture", texture);
+            changeToOrbital(); //weaponPick();
+        }
     }
 
     public void flashRed()

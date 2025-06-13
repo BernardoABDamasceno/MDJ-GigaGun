@@ -18,6 +18,7 @@ Shader "Custom/PS1_Graphics"
         [Toggle] _AffineTextureMapping("Affine Texture Mapping", float) = 0.0
         [Toggle] _DynamicVertexLighting("Dynamic Vertex Lighting", float) = 0.0
         [Toggle] _Dithering("Dithering", float) = 0.0
+        [Toggle] _FlipTexture("Texture Flipping", float) = 0.0
     }
     SubShader
     {
@@ -71,6 +72,7 @@ Shader "Custom/PS1_Graphics"
             float _DynamicVertexLighting;
             float _Dithering;
             float _AffineTextureMapping;
+            float _FlipTexture;
             
             v2f vertexShader(VertexData v) {
                 v2f i;
@@ -116,6 +118,13 @@ Shader "Custom/PS1_Graphics"
             fixed4 fragmentShader(v2f i) : SV_TARGET {
         
                 float2 uvs = i.uv;
+
+                //unity sometimes do need to be fliping textures
+                if (_FlipTexture != 0.0)
+                {
+                    uvs.y = 1.0 - uvs.y;
+                    uvs.x = 1.0 - uvs.x;
+                }
                 float3 color = i.color;
 
                 if(_AffineTextureMapping){
