@@ -58,7 +58,9 @@ public class Missile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // if the collision is with anything it should collide with -> return
+        // inlcuding player, to prvent midfall shenenigans
         if (other.CompareTag("PlayerGroup") ||
+            other.CompareTag("Player") ||
             other.CompareTag("PlasmaOrb") ||
             other.CompareTag("Missile") ||
             other.name == "Flamecone" ||
