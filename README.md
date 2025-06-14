@@ -12,16 +12,19 @@ MDJ Game Project
  - RPGs need to spawn a bit further a way from the player to not clip into vision.
 
 ## Known Bugs:
- - got a bug with the flame thrower once where it took like half a second to change directions when walking, haven't been able to replicate it
+# (order of importance from up to down)
 
- - flamethrower particles too narrow and short
- - explosion particles too small
-
- - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
  - some objects make the player start stutter walking
 
  - parameterizar tudo como deve de ser
 
- - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means)
+ - flamethrower particles too narrow and short
+ - explosion particles too small
 
  - grenades sometimes pass thru ground(requires checking in new map)
+
+ - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means)
+
+(who cares at this point, unless we figure out if replicable)
+ - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
+ - got a bug with the flame thrower once where it took like half a second to change directions when walking, haven't been able to replicate it
