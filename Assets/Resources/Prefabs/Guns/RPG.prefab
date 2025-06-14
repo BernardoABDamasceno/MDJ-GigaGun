@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kickbackXZ: 5
   kickbackY: 20
-  fireRate: 0.5
+  fireRate: 2.5
   damage: 5
   fireSFX: {fileID: 0}
   missilePrefab: {fileID: 9171390392663240242, guid: e97cc1f7655fe2748a1eb64aff2958a7, type: 3}
