@@ -133,7 +133,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetSFXVolume(float volume)
     {
-        float dB = Mathf.Log10(volume) * 20f;
+        float dB = Mathf.Log10(volume) * 10.0f;
         if (mainAudioMixer != null)
         {
             mainAudioMixer.SetFloat("SFXVolume", dB);
