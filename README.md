@@ -8,9 +8,6 @@ MDJ Game Project
  - assembly mode still feels pretty place holder, mby something like resident evil or backpack hero for assembly
  - look up arcade or bullet hell games also for reference for guns and power ups
 
- - Terminal velocity way too low, and it goes too quick to it losing gun downwards velocity way too fast
- - RPGs need to spawn a bit further a way from the player to not clip into vision.
-
 ## Important for MOJO:
 # (order of importance from up to down)
 
@@ -25,10 +22,6 @@ MDJ Game Project
  - maybe add a limiter (terminal velocity) to pushback so the player can't go to fast to the point it traverses the map boundaries (REVIEW)
 
  - add sky colliders to prevent high flights (IMPLEMENT)
-
- - flamethrower particles too narrow and short (REVIEW)
- 
- - explosion particles too small (REVIEW)
 
  - Hard-reset of assembly camera on first click (BUG)
 
