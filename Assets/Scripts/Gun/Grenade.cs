@@ -1,9 +1,10 @@
 using UnityEditor.Callbacks;
 using UnityEngine;
+using static PauseManager; // To check if the game is paused
 
-public class Granade : MonoBehaviour
+public class Grenade : MonoBehaviour
 {
-    [Header("Granade Stats")]
+    [Header("Grenade Stats")]
     [SerializeField] private float explosionDamage = 30.0f;
     [SerializeField] private float playerDamage = 5.0f;
     [SerializeField] private float explosionRadius = 5.0f;
@@ -32,6 +33,8 @@ public class Granade : MonoBehaviour
 
     void Update()
     {
+        if (CameraManager.isAssemblyMode || isGamePaused) return;
+
         explosionTimer -= Time.deltaTime;
 
         if (explosionTimer <= 0f)

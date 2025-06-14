@@ -11,11 +11,9 @@ MDJ Game Project
 ## Important for MOJO:
 # (order of importance from up to down)
 
- - some objects make the player start stutter walking (BUG)
-
+ - some objects make the player start stutter walking (BUG) (new update makes it less likely but its still there)
+ 
  - parameterizar tudo como deve de ser (REVIEW)
-
- - player velocity while falling seems more linear than accelerating over time due to gravity (REVIEW)
 
  - grenades sometimes pass thru ground (requires checking in new map) (BUG)
 

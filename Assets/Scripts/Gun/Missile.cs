@@ -64,7 +64,6 @@ public class Missile : MonoBehaviour
             other.name == "Flamecone" ||
             other.CompareTag("Gun")) return;
 
-        print(other.tag);
         // direct hit on enemy
         if (other.CompareTag("Enemy")) other.SendMessage("takeDamage", hitDamage);
 

@@ -190,7 +190,6 @@ public class Player : MonoBehaviour
 
         if (pushback.Equals(Vector3.zero) && jumpVector.Equals(Vector3.zero) && !isGrounded && !isOnSlope)
         {
-            print("acelerating gravity");
             gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
         }
 
