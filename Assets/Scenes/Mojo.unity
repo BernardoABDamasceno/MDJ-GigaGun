@@ -1070,6 +1070,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1531210455421117532, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: terminalVelocity
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531210455421117532, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: gravityAcceleration
+      value: 2.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1973256449781118879, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.8
@@ -1130,11 +1138,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.65
       objectReference: {fileID: 0}
+    - target: {fileID: 5369374705177724106, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+      propertyPath: m_TagString
+      value: PlayerGroup
+      objectReference: {fileID: 0}
     - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Name
       value: Player_Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 858537836225534248, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

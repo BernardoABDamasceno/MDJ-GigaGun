@@ -61,8 +61,10 @@ public class Missile : MonoBehaviour
         if (other.CompareTag("PlayerGroup") ||
             other.CompareTag("PlasmaOrb") ||
             other.CompareTag("Missile") ||
-            other.name == "Flamecone") return;
+            other.name == "Flamecone" ||
+            other.CompareTag("Gun")) return;
 
+        print(other.tag);
         // direct hit on enemy
         if (other.CompareTag("Enemy")) other.SendMessage("takeDamage", hitDamage);
 

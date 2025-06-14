@@ -182,11 +182,17 @@ public class Player : MonoBehaviour
                                      0, rb.velocity.z * 0.93f + movementDir.z * 0.07f) + pushback;
             Invoke("airTimeOver", airTimer);
         }
-        gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
+
         float pushY = pushback.y;
         pushback = Vector3.MoveTowards(new Vector3(pushback.x, 0, pushback.z), Vector3.zero, gundragHorizontal);
         pushback += Vector3.MoveTowards(new Vector3(0, pushY, 0), Vector3.zero, gundragVertical);
         jumpVector = Vector3.MoveTowards(jumpVector, Vector3.zero, jumpdrag);
+
+        if (pushback.Equals(Vector3.zero) && jumpVector.Equals(Vector3.zero) && !isGrounded && !isOnSlope)
+        {
+            print("acelerating gravity");
+            gravity = Vector3.MoveTowards(gravity, new Vector3(0, terminalVelocity, 0), gravityAcceleration);
+        }
 
         bool isMovingHorizontally = (horizontalInput != 0 || verticalInput != 0);
         bool isGroundedOrOnSlope = isGrounded || isOnSlope;
@@ -243,6 +249,7 @@ public class Player : MonoBehaviour
         }
         // rb.AddForce(pushback, ForceMode.Impulse);
         this.pushback += pushback;
+        gravity = Vector3.zero;
     }
     void OnCollisionEnter(Collision collision)
     {

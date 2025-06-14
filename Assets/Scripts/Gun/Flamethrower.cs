@@ -4,9 +4,7 @@ public class Flamethrower : Gun
 {
     [Header("Flamethrower Settings")]
     [SerializeField] private GameObject flames;
-    [SerializeField] private ParticleSystem flamesPs1;
-    [SerializeField] private ParticleSystem flamesPs2;
-    [SerializeField] private ParticleSystem flamesPs3;
+    [SerializeField] private ParticleSystem flamesPs;
     [SerializeField] private float firingTimeOutTime = 1.0f;
     private bool isfiring = false;
 
@@ -22,9 +20,7 @@ public class Flamethrower : Gun
         {
             isfiring = true;
             flames.SetActive(true);
-            flamesPs1.Play();
-            flamesPs2.Play();
-            flamesPs3.Play();
+            flamesPs.Play();
             //if after a second this function isn't called again, is not firing anymore
             Invoke("firingTimeOut", firingTimeOutTime);
         }
@@ -61,9 +57,7 @@ public class Flamethrower : Gun
     private void firingTimeOut()
     {
         isfiring = false;
-        flamesPs1.Stop();
-        flamesPs2.Stop();
-        flamesPs3.Stop();
+        flamesPs.Stop();
         flames.SetActive(false);
     }
 }

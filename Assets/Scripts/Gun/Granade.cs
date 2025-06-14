@@ -67,7 +67,7 @@ public class Granade : MonoBehaviour
                     hit.gameObject.GetComponentInParent<Player>().SendMessage("getHit", playerDamage);
                     hit.gameObject.GetComponentInParent<Player>().SendMessage("applyPushback", outputPushVector);
                 }
-                else
+                else if(hit.CompareTag("Enemy"))
                 {
                     hit.gameObject.SendMessage("takeDamage", explosionDamage);
                 }

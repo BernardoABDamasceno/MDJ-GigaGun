@@ -14,18 +14,18 @@ public class JsonFileWriter : MonoBehaviour
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "logs")))
         {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "logs"));
-            Debug.Log("Logs directory created.");
+            //Debug.Log("Logs directory created.");
         }
 
         sampleData = new PlayerData();
         WriteToJson();
-        Debug.Log("Sample data initialized and written to JSON.");
+        //Debug.Log("Sample data initialized and written to JSON.");
     }
 
     void OnDestroy()
     {
         WriteToJson();
-        Debug.Log("Data written to JSON on destroy.");
+        //Debug.Log("Data written to JSON on destroy.");
     }
 
     [ContextMenu("Write to JSON")]
@@ -48,12 +48,12 @@ public class JsonFileWriter : MonoBehaviour
             // Write to file
             File.WriteAllText(filePath, jsonString);
             
-            Debug.Log($"Successfully wrote data to: {filePath}");
-            Debug.Log($"JSON Content:\n{jsonString}");
+            //Debug.Log($"Successfully wrote data to: {filePath}");
+            //Debug.Log($"JSON Content:\n{jsonString}");
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to write JSON file: {e.Message}");
+            //Debug.LogError($"Failed to write JSON file: {e.Message}");
         }
     }
     
@@ -64,7 +64,7 @@ public class JsonFileWriter : MonoBehaviour
         if (loadedData != null)
         {
             sampleData = loadedData;
-            Debug.Log("Data loaded successfully!");
+            //Debug.Log("Data loaded successfully!");
         }
     }
     
@@ -76,19 +76,19 @@ public class JsonFileWriter : MonoBehaviour
             
             if (!File.Exists(filePath))
             {
-                Debug.LogWarning($"File not found: {filePath}");
+                //Debug.LogWarning($"File not found: {filePath}");
                 return null;
             }
             
             string jsonString = File.ReadAllText(filePath);
             T loadedData = JsonUtility.FromJson<T>(jsonString);
             
-            Debug.Log($"Successfully loaded data from: {filePath}");
+            //Debug.Log($"Successfully loaded data from: {filePath}");
             return loadedData;
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to read JSON file: {e.Message}");
+            //Debug.LogError($"Failed to read JSON file: {e.Message}");
             return null;
         }
     }
@@ -97,7 +97,7 @@ public class JsonFileWriter : MonoBehaviour
     public void ShowFileLocation()
     {
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
-        Debug.Log($"File location: {filePath}");
+        //Debug.Log($"File location: {filePath}");
         
         // Open the folder in file explorer (Windows/Mac)
         #if UNITY_EDITOR_WIN
@@ -115,11 +115,11 @@ public class JsonFileWriter : MonoBehaviour
             string json = JsonUtility.ToJson(obj, true);
             string path = Path.Combine(Application.persistentDataPath, filename);
             File.WriteAllText(path, json);
-            Debug.Log($"Saved {typeof(T).Name} to {path}");
+            //Debug.Log($"Saved {typeof(T).Name} to {path}");
         }
         catch (Exception e)
         {
-            Debug.LogError($"Save failed: {e.Message}");
+            //Debug.LogError($"Save failed: {e.Message}");
         }
     }
     
@@ -134,12 +134,12 @@ public class JsonFileWriter : MonoBehaviour
                 string json = File.ReadAllText(path);
                 return JsonUtility.FromJson<T>(json);
             }
-            Debug.LogWarning($"File not found: {path}");
+            //Debug.LogWarning($"File not found: {path}");
             return null;
         }
         catch (Exception e)
         {
-            Debug.LogError($"Load failed: {e.Message}");
+            //Debug.LogError($"Load failed: {e.Message}");
             return null;
         }
     }
