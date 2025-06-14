@@ -1,5 +1,7 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Canvas dmgCanvas;
     [SerializeField] Canvas infoDump;
     [SerializeField] Canvas pauseCanvas;
+    [SerializeField] Canvas background;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
@@ -30,6 +33,7 @@ public class CameraManager : MonoBehaviour
         orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
 
@@ -107,6 +111,7 @@ public class CameraManager : MonoBehaviour
         orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
 
         // Logging player actions for data collection
@@ -122,11 +127,12 @@ public class CameraManager : MonoBehaviour
         isAssemblyMode = true;
         weaponchoice = true;
         infoDump.gameObject.SetActive(true);
+        background.gameObject.SetActive(true);
 
         //default pick
-        SetGun("Prefabs/Guns/Revolver");    
+        SetGun("Prefabs/Guns/Revolver");
 
-        
+
         gigagunFPStransform.position = gigaGun.transform.position;
         gigagunFPStransform.rotation = gigaGun.transform.rotation;
 
@@ -137,7 +143,7 @@ public class CameraManager : MonoBehaviour
         orbitalCam.GetComponent<OrbitalCamera>().rotation = new Vector2(0f, 0f);
 
         gigaGun.transform.position = assemblyLocation;
-        gigaGun.transform.rotation = new Quaternion(0f,0f,0f,0f);
+        gigaGun.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
 
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
         fpsCam.gameObject.SetActive(false);
@@ -171,14 +177,12 @@ public class CameraManager : MonoBehaviour
 
     public void levelUp()
     {
-
+        
         isAssemblyMode = !isAssemblyMode;
         if (!isAssemblyMode) changeToFPS();
         else
         {
-            Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
-            orbitalCam.GetComponentInChildren<Renderer>().material.SetTexture("_MainTexture", texture);
-            changeToOrbital(); //weaponPick();
+            StartCoroutine(captureFrameTimely());
         }
     }
 
@@ -190,6 +194,15 @@ public class CameraManager : MonoBehaviour
     private void flashReset()
     {
         dmgCanvas.gameObject.SetActive(false);
+    }
+    private IEnumerator captureFrameTimely()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
+        background.GetComponentInChildren<RawImage>().texture = texture;
+        background.GetComponentInChildren<RawImage>().SetNativeSize();
+        changeToOrbital();
     }
 }
 
