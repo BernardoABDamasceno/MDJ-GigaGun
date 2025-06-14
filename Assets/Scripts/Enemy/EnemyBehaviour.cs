@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float health = 15.0f;
     [SerializeField] private ParticleSystem bloodSplaterDeath;
     [SerializeField] private ParticleSystem bloodSplatterHit;
-    [SerializeField] GameObject granadePrefab;
+    [SerializeField] GameObject grenadePrefab;
     [SerializeField] float throwAngle = 5.0f;
     [SerializeField] float throwForce = 10.0f;
 
@@ -132,7 +132,7 @@ public class EnemyBehaviour : MonoBehaviour
             agent.updateRotation = false;
         }
 
-        InvokeRepeating("throwGranade", 0, 10);
+        InvokeRepeating("throwGrenade", 0, 10);
     }
 
     void Update()
@@ -394,7 +394,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-        if (isDead) return; // If already dead, ignore damage
+        if (isDead || CameraManager.isAssemblyMode || isGamePaused) return;
         
         //print("HIT");
         health -= damage;
@@ -408,8 +408,10 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    private void throwGranade()
+    private void throwGrenade()
     {
+        if (isDead || CameraManager.isAssemblyMode || isGamePaused) return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // BIGGEST PILE OF SHIT I'VE PROBABLY DONE SO FAR BUT FUCK IT
@@ -421,8 +423,8 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        GameObject granade = Instantiate(granadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
-                        granade.GetComponent<Rigidbody>().AddForce(
+                        GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
+                        grenade.GetComponent<Rigidbody>().AddForce(
                             (player.position - transform.position + Vector3.up * throwAngle + transform.right * 2.0f * (2 - i)) * throwForce,
                             ForceMode.Impulse
                         );
@@ -430,8 +432,8 @@ public class EnemyBehaviour : MonoBehaviour
                 }
                 else
                 {
-                    GameObject granade = Instantiate(granadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
-                    granade.GetComponent<Rigidbody>().AddForce((player.position - transform.position + Vector3.up * throwAngle) * throwForce, ForceMode.Impulse);
+                    GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 2.0f, Quaternion.identity);
+                    grenade.GetComponent<Rigidbody>().AddForce((player.position - transform.position + Vector3.up * throwAngle) * throwForce, ForceMode.Impulse);
                 }
                 currentState = EnemyState.Attacking;
                 currentAttackCooldownTimer = attackCooldown; // Reset cooldown
