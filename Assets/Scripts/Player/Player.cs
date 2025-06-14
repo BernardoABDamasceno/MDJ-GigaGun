@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] float slopeExtraSpeed = 7.0f;
     [SerializeField] CameraManager cameraManager;
 
-    [SerializeField] private AudioClip runningSFX; // Drag your running audio clip here in the Inspector
+    [SerializeField] private AudioClip runningSFX;
     private AudioSource audioSource;
 
     private Rigidbody rb;

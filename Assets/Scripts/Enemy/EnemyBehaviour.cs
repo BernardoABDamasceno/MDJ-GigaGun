@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using static PauseManager; // To check if the game is paused
+using UnityEngine.Audio;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -14,8 +15,22 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private AudioClip approachingSFX;
     [SerializeField] private AudioClip attackingSFX;
     [SerializeField] private AudioClip dyingSFX;
-    private AudioSource loopingAudioSource;   // For approaching
-    private AudioSource oneShotAudioSource;   // For attacks and dying,
+    private AudioSource loopingAudioSource;    // For approaching
+    private AudioSource oneShotAudioSource;    // For attacks and dying,
+
+    // ---  Audio Control Variables ---
+    [Header("Approaching Sound Settings")]
+    [Tooltip("Distance at which the approaching sound starts playing.")]
+    [SerializeField] private float approachingSoundActivationDistance = 10.0f; // Adjust in Inspector
+    [Tooltip("Distance at which the approaching sound stops playing. Should be >= Activation Distance.")]
+    [SerializeField] private float approachingSoundDeactivationDistance = 12.0f; // Adjust in Inspector
+    [Tooltip("Minimum time (seconds) before the approaching sound can start playing again after stopping.")]
+    [SerializeField] private float approachingSoundStartCooldown = 0.5f; // Adjust in Inspector
+    private float _approachingSoundCurrentCooldown = 0f; // Internal timer
+
+    // --- Audio Mixer Group ---
+    [Header("Audio Output")] // New Header for organization
+    [SerializeField] private AudioMixerGroup sfxAudioMixerGroup;
 
     [SerializeField] bool isHulk = false;
     [SerializeField] private float health = 15.0f;
@@ -29,7 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float detectionRadius = 125f; // How far the enemy notices the player
     public float wanderSpeed = 3.5f; // Speed when wandering
-    public float chaseSpeed = 5f;    // Speed when chasing player
+    public float chaseSpeed = 5f;     // Speed when chasing player
 
     // Attack parameters
     public float attackRange = 2.0f; // Distance to trigger attack
@@ -89,6 +104,19 @@ public class EnemyBehaviour : MonoBehaviour
             oneShotAudioSource = audioSources[1];
         }
 
+        // --- Assigning AudioMixerGroup to both AudioSources ---
+        if (sfxAudioMixerGroup != null)
+        {
+            if (loopingAudioSource != null)
+            {
+                loopingAudioSource.outputAudioMixerGroup = sfxAudioMixerGroup;
+            }
+            if (oneShotAudioSource != null)
+            {
+                oneShotAudioSource.outputAudioMixerGroup = sfxAudioMixerGroup;
+            }
+        }
+
         // Configures the looping AudioSource
         if (loopingAudioSource != null)
         {
@@ -97,8 +125,9 @@ public class EnemyBehaviour : MonoBehaviour
             loopingAudioSource.playOnAwake = false;
             loopingAudioSource.spatialBlend = 1f; // Full 3D sound
             loopingAudioSource.rolloffMode = AudioRolloffMode.Logarithmic;
-            loopingAudioSource.minDistance = 1.5f; // Sound starts fading after 1 unit
-            loopingAudioSource.maxDistance = 2.0f; // Sound is inaudible after x units
+            // ---  AudioSource min/maxDistance based on sound trigger distances ---
+            loopingAudioSource.minDistance = 1.0f; // Sound is at full volume up to this distance
+            loopingAudioSource.maxDistance = approachingSoundDeactivationDistance; // Sound is inaudible after this distance
             loopingAudioSource.pitch = 1f; // Ensures normal playback speed
         }
         // Configures the one-shot AudioSource
@@ -119,6 +148,9 @@ public class EnemyBehaviour : MonoBehaviour
         newWanderTargetDelay = Random.Range(minNewWanderTargetDelay, maxNewWanderTargetDelay);
         // Initialize timer with a random offset (so they don't all start choosing new targets at once)
         wanderTimer = Random.Range(0f, newWanderTargetDelay);
+
+        // --- Initialize approaching sound cooldown ---
+        _approachingSoundCurrentCooldown = 0f;
 
         SetNewWanderTarget();
 
@@ -154,6 +186,8 @@ public class EnemyBehaviour : MonoBehaviour
             if (loopingAudioSource != null && loopingAudioSource.isPlaying)
             {
                 loopingAudioSource.Stop();
+                // --- Reset cooldown when sound stops on death ---
+                _approachingSoundCurrentCooldown = approachingSoundStartCooldown;
             }
             return;
         }
@@ -178,6 +212,8 @@ public class EnemyBehaviour : MonoBehaviour
             if (loopingAudioSource != null && loopingAudioSource.isPlaying)
             {
                 loopingAudioSource.Stop();
+                // --- Reset cooldown when sound stops on pause ---
+                _approachingSoundCurrentCooldown = approachingSoundStartCooldown;
             }
             return; // Exit Update early if in assembly mode or paused
         }
@@ -193,6 +229,14 @@ public class EnemyBehaviour : MonoBehaviour
                 agent.speed = ogSpeed; // Restore original speed
             }
         }
+
+        // --- Approaching Sound Cooldown Update ---
+        if (_approachingSoundCurrentCooldown > 0)
+        {
+            _approachingSoundCurrentCooldown -= Time.deltaTime;
+        }
+        // --- End Approaching Sound Cooldown Update ---
+
 
         // State machine logic for movement
         switch (currentState)
@@ -220,22 +264,26 @@ public class EnemyBehaviour : MonoBehaviour
             bool isCurrentlyWalking = agent.velocity.magnitude > 0.1f;
             animator.SetBool("isWalking", isCurrentlyWalking);
 
-            // Approaching SFX Play/Stop Logic on the dedicated looping AudioSource
-            if (loopingAudioSource != null && approachingSFX != null)
+            // ---  Approaching SFX Play/Stop Logic ---
+            if (loopingAudioSource != null && approachingSFX != null && player != null)
             {
-                if (isCurrentlyWalking)
+                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+                // Conditions to START playing the sound: is walking AND within activation distance AND not already playing AND cooldown is over
+                if (isCurrentlyWalking && distanceToPlayer < approachingSoundActivationDistance)
                 {
-                    if (!loopingAudioSource.isPlaying)
+                    if (!loopingAudioSource.isPlaying && _approachingSoundCurrentCooldown <= 0f)
                     {
-                        // The clip and loop property are already set in Start() for this source
                         loopingAudioSource.Play();
                     }
                 }
-                else // Not walking (velocity is low)
+                // Conditions to STOP playing the sound: currently playing AND (not walking OR outside deactivation distance)
+                else
                 {
-                    if (loopingAudioSource.isPlaying)
+                    if (loopingAudioSource.isPlaying && (distanceToPlayer >= approachingSoundDeactivationDistance || !isCurrentlyWalking))
                     {
                         loopingAudioSource.Stop();
+                        _approachingSoundCurrentCooldown = approachingSoundStartCooldown; // Reset cooldown when sound stops
                     }
                 }
             }
@@ -314,6 +362,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (loopingAudioSource != null && loopingAudioSource.isPlaying)
         {
             loopingAudioSource.Stop();
+            // --- Reset cooldown when sound stops on attack ---
+            _approachingSoundCurrentCooldown = approachingSoundStartCooldown;
         }
 
         // Makes sure the enemy is facing the player while attacking
@@ -395,7 +445,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void takeDamage(float damage)
     {
         if (isDead || CameraManager.isAssemblyMode || isGamePaused) return;
-        
+
         //print("HIT");
         health -= damage;
         if (health <= 0)
