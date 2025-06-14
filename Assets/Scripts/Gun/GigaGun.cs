@@ -145,28 +145,28 @@ public class GigaGun : MonoBehaviour
         {
             if (connectionPoint.name.Contains("1"))
             {
-                pointdirection = new Vector3(1, 0, 0);
+                pointdirection = -insertingCP.transform.right;
             }
             else if (connectionPoint.name.Contains("2"))
             {
-                pointdirection = new Vector3(0, 1, 0);
+                pointdirection = insertingCP.transform.up*1.2f;
             }
             else if (connectionPoint.name.Contains("3"))
             {
-                pointdirection = new Vector3(-1, 0, 0);
+                pointdirection = insertingCP.transform.right;
             }
             else if (connectionPoint.name.Contains("4"))
             {
-                pointdirection = new Vector3(0, -1, 0);
+                pointdirection = -insertingCP.transform.up*1.2f;
             }
         
-            newposition = insertingCP.transform.position + pointdirection * 0.1f; // RPG needs a bit of space to avoid clipping
+            newposition = insertingCP.transform.position + pointdirection * 0.08f; // RPG needs a bit of space to avoid clipping
         }
         else if (pickedGun.name.Contains("Flamethrower"))
         {
             if (connectionPoint.name.Contains("2"))
             {
-                pointdirection = new Vector3(0, 1, 0);
+                pointdirection = insertingCP.transform.up;
             }
 
             newposition = insertingCP.transform.position + pointdirection * 0.075f; // Flamethrower needs a bit of downwards space to avoid clipping
