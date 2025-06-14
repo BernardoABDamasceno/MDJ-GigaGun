@@ -24,5 +24,6 @@ MDJ Game Project
  - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means - Bernie) (DON'T KNOW - Gonçalo)
 
 (who cares at this point, unless we figure out if replicable)
- - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
+ - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup) <- isto acontece quando faz load pela primeira vez, logo n se deve repetir
+ 
  - got a bug with the flame thrower once where it took like half a second to change directions when walking, haven't been able to replicate it
