@@ -11,21 +11,28 @@ MDJ Game Project
  - Terminal velocity way too low, and it goes too quick to it losing gun downwards velocity way too fast
  - RPGs need to spawn a bit further a way from the player to not clip into vision.
 
-## Known Bugs:
+## Important for MOJO:
 # (order of importance from up to down)
 
- - some objects make the player start stutter walking
+ - some objects make the player start stutter walking (BUG)
 
- - parameterizar tudo como deve de ser
+ - parameterizar tudo como deve de ser (REVIEW)
 
- - grenades sometimes pass thru ground (requires checking in new map)
+ - player velocity while falling seems more linear than accelerating over time due to gravity (REVIEW)
 
- - flamethrower particles too narrow and short
- - explosion particles too small
+ - grenades sometimes pass thru ground (requires checking in new map) (BUG)
 
- - Hard-reset of assembly camera on first click
+ - maybe add a limiter (terminal velocity) to pushback so the player can't go to fast to the point it traverses the map boundaries (REVIEW)
 
- - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means)
+ - add sky colliders to prevent high flights (IMPLEMENT)
+
+ - flamethrower particles too narrow and short (REVIEW)
+ 
+ - explosion particles too small (REVIEW)
+
+ - Hard-reset of assembly camera on first click (BUG)
+
+ - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means - Bernie) (DON'T KNOW - Gonçalo)
 
 (who cares at this point, unless we figure out if replicable)
  - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
