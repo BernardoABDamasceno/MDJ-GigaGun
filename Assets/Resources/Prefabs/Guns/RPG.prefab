@@ -583,7 +583,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_Name
-      value: ConnectionPoint
+      value: ConnectionPoint (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -769,7 +769,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5350550583274738522, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_Name
-      value: ConnectionPoint (3)
+      value: ConnectionPoint (4)
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
