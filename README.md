@@ -19,8 +19,6 @@ MDJ Game Project
 
  - maybe add a limiter (terminal velocity) to pushback so the player can't go to fast to the point it traverses the map boundaries (REVIEW)
 
- - add sky colliders to prevent high flights (IMPLEMENT)
-
  - Hard-reset of assembly camera on first click (BUG)
 
  - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means - Bernie) (DON'T KNOW - Gonçalo)
