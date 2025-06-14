@@ -18,10 +18,12 @@ MDJ Game Project
 
  - parameterizar tudo como deve de ser
 
+ - grenades sometimes pass thru ground (requires checking in new map)
+
  - flamethrower particles too narrow and short
  - explosion particles too small
 
- - grenades sometimes pass thru ground(requires checking in new map)
+ - Hard-reset of assembly camera on first click
 
  - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means)
 
