@@ -695,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6753212322349949016, guid: 2373459ac82725244bac8e1f71100d94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.619999
+      value: -10.47
       objectReference: {fileID: 0}
     - target: {fileID: 6753212322349949016, guid: 2373459ac82725244bac8e1f71100d94, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2735,17 +2735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44eba378a660e74d809f1059e66d95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: playerdata.json
-  sampleData:
-    playerId: Player_b25c0a01-c8b3-41af-8e44-636de90b3ffa
-    timeSpentFPS: 0
-    timeSpentAssembly: 0
-    airTime: 0
-    revolvers: 0
-    shotguns: 0
-    plasmaRifles: 0
-    flamethrowers: 0
-    rpgs: 0
 --- !u!1001 &573616539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7956,7 +7945,7 @@ PrefabInstance:
     - target: {fileID: 7982284983683389310, guid: ce0d0a908bb55a44f9ccea99c1d70c29, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: c3763b5be62db5145919a48d325468e6, type: 2}
+      objectReference: {fileID: 23800000, guid: ce7809c6f2981cf4e91e835691259c73, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
