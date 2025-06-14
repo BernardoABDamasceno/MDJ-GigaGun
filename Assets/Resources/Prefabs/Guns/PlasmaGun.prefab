@@ -465,8 +465,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616341751035403379}
-  - component: {fileID: 2695714047360796081}
   - component: {fileID: 8120576366840047899}
+  - component: {fileID: 2695714047360796081}
   m_Layer: 7
   m_Name: PlasmaGun
   m_TagString: Gun
@@ -495,6 +495,24 @@ Transform:
   - {fileID: 6316777364729088679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8120576366840047899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227123897541279027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9794a3f1c47fff44c91aa848ec9db90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickbackXZ: 1.5
+  kickbackY: 5
+  fireRate: 0.2
+  damage: 5
+  fireSFX: {fileID: 8300000, guid: 70a7795961278214f945aa5c8be033ae, type: 3}
+  plasmaOrbPrefab: {fileID: 9171390392663240242, guid: 873000bd25581fa40a0b7d58fe1e8ff6, type: 3}
 --- !u!82 &2695714047360796081
 AudioSource:
   m_ObjectHideFlags: 0
@@ -505,7 +523,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6b75822419f82fb4eafff2fb93d0e261, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 70a7795961278214f945aa5c8be033ae, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -591,24 +609,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8120576366840047899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8227123897541279027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9794a3f1c47fff44c91aa848ec9db90d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kickbackXZ: 1.5
-  kickbackY: 5
-  fireRate: 0.2
-  damage: 5
-  fireSFX: {fileID: 0}
-  plasmaOrbPrefab: {fileID: 9171390392663240242, guid: 873000bd25581fa40a0b7d58fe1e8ff6, type: 3}
 --- !u!1 &8402653070622794444
 GameObject:
   m_ObjectHideFlags: 0

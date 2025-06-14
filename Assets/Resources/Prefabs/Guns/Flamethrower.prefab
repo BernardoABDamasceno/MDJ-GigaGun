@@ -513,7 +513,7 @@ MonoBehaviour:
   kickbackY: 2
   fireRate: 0.1
   damage: 0
-  fireSFX: {fileID: 0}
+  fireSFX: {fileID: 8300000, guid: fe0b376d5afbf3c4ca8c4d4b38b8cc96, type: 3}
   flames: {fileID: 2284175724329458571}
   flamesPs: {fileID: 5242246689183441752}
   firingTimeOutTime: 0.1
@@ -527,7 +527,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3ffdbe819195f8d45b2fe89aaa25e64d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fe0b376d5afbf3c4ca8c4d4b38b8cc96, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

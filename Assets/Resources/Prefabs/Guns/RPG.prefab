@@ -253,8 +253,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3327975769673953775}
-  - component: {fileID: 1102201545713281752}
   - component: {fileID: 3677969981470327926}
+  - component: {fileID: 1102201545713281752}
   m_Layer: 0
   m_Name: RPG
   m_TagString: Gun
@@ -283,6 +283,25 @@ Transform:
   - {fileID: 8826495002930322152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3677969981470327926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293294622055359598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652d9da1f0ddfd8488048a1488818bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickbackXZ: 5
+  kickbackY: 20
+  fireRate: 2.5
+  damage: 5
+  fireSFX: {fileID: 8300000, guid: 99d792070e56832499d1e3d55acc0224, type: 3}
+  missilePrefab: {fileID: 9171390392663240242, guid: e97cc1f7655fe2748a1eb64aff2958a7, type: 3}
+  missileLifetime: 10
 --- !u!82 &1102201545713281752
 AudioSource:
   m_ObjectHideFlags: 0
@@ -293,7 +312,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3ffdbe819195f8d45b2fe89aaa25e64d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 99d792070e56832499d1e3d55acc0224, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -379,25 +398,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3677969981470327926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8293294622055359598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652d9da1f0ddfd8488048a1488818bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kickbackXZ: 5
-  kickbackY: 20
-  fireRate: 2.5
-  damage: 5
-  fireSFX: {fileID: 0}
-  missilePrefab: {fileID: 9171390392663240242, guid: e97cc1f7655fe2748a1eb64aff2958a7, type: 3}
-  missileLifetime: 10
 --- !u!1 &8647085898705235644
 GameObject:
   m_ObjectHideFlags: 0

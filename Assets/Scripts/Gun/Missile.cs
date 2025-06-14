@@ -21,6 +21,22 @@ public class Missile : MonoBehaviour
     [SerializeField] private ParticleSystem explosionPs;
     [SerializeField] private ParticleSystem trusterPs;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip explosionSFX;
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
+        }
+    }
+
+
     void Start()
     {
         parentTransform = GameObject.FindGameObjectWithTag("Cameraholder").transform;
@@ -46,7 +62,7 @@ public class Missile : MonoBehaviour
             other.CompareTag("PlasmaOrb") ||
             other.CompareTag("Missile") ||
             other.name == "Flamecone") return;
-        
+
         // direct hit on enemy
         if (other.CompareTag("Enemy")) other.SendMessage("takeDamage", hitDamage);
 
@@ -80,6 +96,11 @@ public class Missile : MonoBehaviour
             }
         }
 
+        if (explosionSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(explosionSFX);
+        }
+        
         //stop moving particles
         trusterPs.Stop();
         //setup explosion and destruction

@@ -147,8 +147,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3327975769673953775}
-  - component: {fileID: 8682690935658635419}
   - component: {fileID: 8289312919482485156}
+  - component: {fileID: 8682690935658635419}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Gun
@@ -177,6 +177,23 @@ Transform:
   - {fileID: 7395962324261086884}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8289312919482485156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293294622055359598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ff86c412edae64b828c300e8d3cf90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickbackXZ: 1.5
+  kickbackY: 5
+  fireRate: 0.8
+  damage: 5
+  fireSFX: {fileID: 8300000, guid: 7858f4e0dc726564ab3139f6324cb627, type: 3}
 --- !u!82 &8682690935658635419
 AudioSource:
   m_ObjectHideFlags: 0
@@ -273,23 +290,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8289312919482485156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8293294622055359598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ff86c412edae64b828c300e8d3cf90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kickbackXZ: 1.5
-  kickbackY: 5
-  fireRate: 0.8
-  damage: 5
-  fireSFX: {fileID: 0}
 --- !u!1 &8647085898705235644
 GameObject:
   m_ObjectHideFlags: 0

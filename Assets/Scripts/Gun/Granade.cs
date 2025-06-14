@@ -13,7 +13,22 @@ public class Granade : MonoBehaviour
     [Header("Particle FX's")]
     [SerializeField] private ParticleSystem explosionPs;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip explosionSFX;
+    private AudioSource audioSource;
+
     private float explosionTimer = 3.0f;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        }
+    }
 
     void Update()
     {
@@ -21,6 +36,13 @@ public class Granade : MonoBehaviour
 
         if (explosionTimer <= 0f)
         {
+            // Play explosion sound BEFORE destroying the object
+            if (explosionSFX != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(explosionSFX);
+
+            }
+
             //explosion logic
             //due to structure the to identify the player we need to check for the "Ignore Raycast" layer, which aint optimal
             Collider[] entitiesInRange = Physics.OverlapSphere(
