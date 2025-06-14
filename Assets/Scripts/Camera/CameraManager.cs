@@ -78,6 +78,7 @@ public class CameraManager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        // keeps up with player position
         if (!isAssemblyMode)
         {
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FPSCamera : MonoBehaviour
@@ -12,7 +10,7 @@ public class FPSCamera : MonoBehaviour
     float yRotation;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         yRotation += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime; // Update rotation based on mouse input
         xRotation -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime; // Update rotation based on mouse input
