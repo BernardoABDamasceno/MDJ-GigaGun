@@ -18,6 +18,8 @@ MDJ Game Project
  - bug where the flamethower flames were blue for a second after firing when first clicking into the game (once on startup)
  - some objects make the player start stutter walking
  - parameterizar tudo como deve de ser
+ - arma no assembly muda conforme o quao alto ou baixo tu olhas
+ - connection points iluminam-se uns aos outros com colisoes(?)
 
  ## Missing:
  - nav mesh hasn't yet been implemented in the new MOJO scene

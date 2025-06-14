@@ -33,6 +33,37 @@ Transform:
   - {fileID: 5399943172305873386}
   m_Father: {fileID: 339202761828184205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2461427700744037768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7325592984663076000}
+  m_Layer: 0
+  m_Name: JankForAssemblyTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7325592984663076000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461427700744037768}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1973256449781118879}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4280905323022369588
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +844,7 @@ Transform:
   m_Children:
   - {fileID: 6168728798836526620}
   - {fileID: 8766215608029370119}
+  - {fileID: 7325592984663076000}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8663129407435074920
@@ -999,3 +1031,4 @@ MonoBehaviour:
   gigaGun: {fileID: 4948430276237621780}
   player: {fileID: 4280905323022369588}
   assemblyLocation: {x: -500, y: -500, z: -500}
+  gigagunFPStransform: {fileID: 7325592984663076000}

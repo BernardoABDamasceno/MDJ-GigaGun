@@ -327,10 +327,11 @@ MonoBehaviour:
   approachingSFX: {fileID: 8300000, guid: 32d6e58c2301ee94fac60a1eb9b5f537, type: 3}
   attackingSFX: {fileID: 8300000, guid: b7da98e8c814183438a7990901c2342f, type: 3}
   dyingSFX: {fileID: 8300000, guid: 7e0cf79d3aed4b44b942de93fae5ae6b, type: 3}
+  isHulk: 0
   health: 15
   bloodSplaterDeath: {fileID: 1260972684799560305}
   bloodSplatterHit: {fileID: 4231216390401649954}
-  granadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
+  grenadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
   throwAngle: 5
   throwForce: 5
   detectionRadius: 250

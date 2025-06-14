@@ -331,7 +331,7 @@ MonoBehaviour:
   health: 50
   bloodSplaterDeath: {fileID: 1260972684799560305}
   bloodSplatterHit: {fileID: 4231216390401649954}
-  granadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
+  grenadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
   throwAngle: 5
   throwForce: 5
   detectionRadius: 250

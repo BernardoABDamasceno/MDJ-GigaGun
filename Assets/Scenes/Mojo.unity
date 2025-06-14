@@ -1134,10 +1134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 8663129407435074920, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6057,7 +6053,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 577746350}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6222,7 +6218,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 577746350}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7633,11 +7629,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5627229792182759890, guid: 6ff9d9fa6c811854b920efc0797285b8, type: 3}
   m_PrefabInstance: {fileID: 576057193}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &577746350 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6804360169471427512, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
-  m_PrefabInstance: {fileID: 62258260}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &578493666 stripped
 Transform:
@@ -11601,7 +11592,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 577746350}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -13166,7 +13157,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 577746350}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -21785,6 +21776,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 851477492105664568, guid: 5843449edc04db84da68c8424ea0eb67, type: 3}
   m_PrefabInstance: {fileID: 1702219984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1705393767 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7325592984663076000, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+  m_PrefabInstance: {fileID: 62258260}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1706912288
 PrefabInstance:

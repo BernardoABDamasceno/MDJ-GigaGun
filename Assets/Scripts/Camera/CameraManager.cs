@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] GameObject player;
 
     [SerializeField] private Vector3 assemblyLocation = new Vector3(-500, -500, -500);
-    private Vector3 gigagunFPSposition = Vector3.zero;
+    [SerializeField] private Transform gigagunFPStransform;
 
     private bool weaponchoice = false;
 
@@ -32,9 +32,8 @@ public class CameraManager : MonoBehaviour
         infoDump.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
-        
-        orbitalCam.transform.position = assemblyLocation;
 
+        orbitalCam.transform.position = assemblyLocation;
     }
 
     void Update()
@@ -97,8 +96,11 @@ public class CameraManager : MonoBehaviour
         if (GigaGun.insertingGun != null)
             gigaGun.SendMessage("cancelInsertGun");
         gigaGun.gameObject.SendMessage("disableConnectionPoints");
+
         gigaGun.transform.parent = fpsCam.transform;
-        gigaGun.transform.position = gigagunFPSposition;
+
+        gigaGun.transform.position = gigagunFPStransform.position;
+        gigaGun.transform.rotation = gigagunFPStransform.rotation;
 
         fpsCam.gameObject.SetActive(true);
         orbitalCam.gameObject.SetActive(false);
@@ -124,9 +126,15 @@ public class CameraManager : MonoBehaviour
         SetGun("Prefabs/Guns/Revolver");    
 
         
-        gigagunFPSposition = gigaGun.transform.position;
-        gigaGun.transform.parent = transform;
+        gigagunFPStransform.position = gigaGun.transform.position;
+        gigagunFPStransform.rotation = gigaGun.transform.rotation;
+
+        gigaGun.transform.parent = GameObject.FindGameObjectWithTag("PlayerGroup").transform;
+
+        orbitalCam.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+
         gigaGun.transform.position = assemblyLocation;
+        gigaGun.transform.rotation = new Quaternion(0f,0f,0f,0f);
 
         gigaGun.gameObject.SendMessage("enableConnectionPoints");
         fpsCam.gameObject.SetActive(false);
@@ -151,7 +159,7 @@ public class CameraManager : MonoBehaviour
     {
         GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
         //print("Setting gun: " + newgun.layer);
-        gigaGun.transform.parent = transform;
+        //gigaGun.transform.parent = transform;
         gigaGun.SendMessage("setPickedGun", newgun);
         //optionsCanvas.gameObject.SetActive(false);
         //this is always on for sandbox
