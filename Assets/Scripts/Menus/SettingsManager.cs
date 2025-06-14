@@ -22,7 +22,7 @@ public class SettingsManager : MonoBehaviour
 
     // Constants for volume ranges
     private const float MAX_VOLUME_LINEAR_VALUE = 2.0f;
-    private const float MIN_VOLUME_LINEAR_VALUE = 0.0001f; // Represents -80dB (to avoid Log10(0))
+    private const float MIN_VOLUME_LINEAR_VALUE = 0.000001f;
 
     [Header("Display Settings")]
     [SerializeField] private Button fullscreenButton;
