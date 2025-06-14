@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class Player : MonoBehaviour
 
     [SerializeField] private AudioClip runningSFX;
     private AudioSource audioSource;
+
+    // Audio Mixer Group 
+    [Header("Audio Output")]
+    [SerializeField] private AudioMixerGroup sfxAudioMixerGroup;
+
 
     private Rigidbody rb;
     private Vector3 pushback = Vector3.zero;
@@ -39,12 +45,28 @@ public class Player : MonoBehaviour
     // find angle between player and ground
     private RaycastHit hit = new RaycastHit();
 
-    // Start is called before the first frame update
+    // Start is called before the first frame illustration
     void Start()
     {
         // Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        // If no AudioSource is found, add one automatically
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false; // Player movement sound shouldn't play immediately
+        audioSource.loop = true; // Running sound should loop
+        audioSource.clip = runningSFX; // Assign the running SFX
+
+        // Assign the AudioMixerGroup
+        if (sfxAudioMixerGroup != null)
+        {
+            audioSource.outputAudioMixerGroup = sfxAudioMixerGroup;
+        }
+
 
         // Ensures game is unpaused and cursor is set correctly at the start of the game scene
         Time.timeScale = 1f;
