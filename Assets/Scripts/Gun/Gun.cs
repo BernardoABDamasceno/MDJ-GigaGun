@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Audio; // Required for AudioMixerGroup
+using UnityEngine.Audio;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public abstract class Gun : MonoBehaviour
     [Header("References")]
     protected GameObject player;
     protected ParticleSystem ps;
-    protected AudioSource audioSource; // NEW: Reference to the AudioSource
+    protected AudioSource audioSource;
 
     // Gun properties
     [Header("Gun Stats")]
@@ -31,7 +31,7 @@ public abstract class Gun : MonoBehaviour
     // Audio Clip
     [Header("Audio")]
     [SerializeField] protected AudioClip fireSFX;
-    // Add this field for the Audio Mixer Group
+    // Audio Mixer Group
     [SerializeField] protected AudioMixerGroup sfxAudioMixerGroup; // This will apply to all guns
 
     protected bool fireRateCooldown = false;
@@ -49,15 +49,14 @@ public abstract class Gun : MonoBehaviour
         ps = GetComponentInChildren<ParticleSystem>();
 
         audioSource = GetComponent<AudioSource>();
-        // Corrected logic: only add AudioSource if it doesn't exist
+        // Ensure the AudioSource is present
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         audioSource.playOnAwake = false;
         audioSource.loop = false;
-
-        // Assign the AudioMixerGroup here, applies to all derived guns
+        // Set the AudioClip to null initially
         if (sfxAudioMixerGroup != null)
         {
             audioSource.outputAudioMixerGroup = sfxAudioMixerGroup;
@@ -95,7 +94,7 @@ public abstract class Gun : MonoBehaviour
                                             forwardNormalized.z * kickbackXZ
                                             );
 
-        if (player != null) // Keep this null check for 'player' as discussed
+        if (player != null)
         {
             player.SendMessage("applyPushback", kickbackOutput);
         }
