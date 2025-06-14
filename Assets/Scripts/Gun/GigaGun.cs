@@ -122,6 +122,11 @@ public class GigaGun : MonoBehaviour
     public void setPickedGun(GameObject newgun)
     {
         pickedGun = newgun;
+        if (insertingGun != null)
+        {
+            cancelInsertGun();
+            insertGun(insertingCP.GetComponent<ConnectionPoint>());
+        }   
     }
 
     public void insertGun(ConnectionPoint connectionPoint)
