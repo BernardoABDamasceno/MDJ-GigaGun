@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 465347755}
     - target: {fileID: 3952064196598921696, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8503799133296989534, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
       propertyPath: m_Name
@@ -28285,6 +28285,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 618784622671166910, guid: 4cc70b9c276600448bc6c3186ab3a288, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618784622671166910, guid: 4cc70b9c276600448bc6c3186ab3a288, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127163360632173810, guid: 4cc70b9c276600448bc6c3186ab3a288, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1777128830207794561, guid: 4cc70b9c276600448bc6c3186ab3a288, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3665486428071438727, guid: 4cc70b9c276600448bc6c3186ab3a288, type: 3}
       propertyPath: m_Name
       value: Terrain

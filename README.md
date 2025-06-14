@@ -14,9 +14,9 @@ MDJ Game Project
  - some objects make  the player start stutter walking (BUG) (new update makes it less likely but its still there)
  
  - parameterizar tudo como deve de ser (REVIEW)
-
- - grenades sometimes pass thru ground (requires checking in new map) (BUG)
-
+ 
+ - Hard-reset of assembly camera on first click (BUG)
+ 
  - maybe add a limiter (terminal velocity) to pushback so the player can't go to fast to the point it traverses the map boundaries (REVIEW)
 
  - connection points iluminam-se uns aos outros com colisoes(? i dont know what this means - Bernie) (DON'T KNOW - Gonçalo)

@@ -14,6 +14,7 @@ TagManager:
   - PlayerGroup
   - Missile
   - Flamethrower
+  - Grenade
   layers:
   - Default
   - TransparentFX

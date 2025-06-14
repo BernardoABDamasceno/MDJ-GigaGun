@@ -84,13 +84,24 @@ public class Grenade : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Missile")
+        print("Grenade collided with: " + collision.gameObject.name);
+        if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Grenade"))
+        {
             GetComponent<Rigidbody>().isKinematic = true;
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        print("Grenade triggered with: " + other.gameObject.name);
+        if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Grenade"))
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Missile")
+        if (other.CompareTag("Grenade"))
         {
             GetComponent<SphereCollider>().isTrigger = false;
         }
