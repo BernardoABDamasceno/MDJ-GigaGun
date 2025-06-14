@@ -12,12 +12,12 @@ public class MainMenuManager : MonoBehaviour
         Cursor.visible = true;
 
     }
-    /// Called when the "START GAME" button is pressed.
+
     /// Loads the main game scene.
-    public void StartGame() // Renamed from PlayGame
+    public void StartGame()
     {
         Debug.Log("Starting game...");
-        SceneManager.LoadScene("Game"); // Replace "GameScene" with your actual game scene name
+        SceneManager.LoadScene("Mojo");
     }
     /// Called when the "SETTINGS" button is pressed.
     public void OpenSettings()
