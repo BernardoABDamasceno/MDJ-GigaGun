@@ -125,10 +125,13 @@ MonoBehaviour:
   approachingSFX: {fileID: 0}
   attackingSFX: {fileID: 0}
   dyingSFX: {fileID: 0}
+  isHulk: 0
   health: 15
   bloodSplaterDeath: {fileID: 0}
   bloodSplatterHit: {fileID: 0}
-  granadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
+  grenadePrefab: {fileID: 9171390392663240242, guid: 2e85c23e7c52c754cb34ae4bbf85553e, type: 3}
+  throwAngle: 5
+  throwForce: 10
   detectionRadius: 5000
   wanderSpeed: 5
   chaseSpeed: 10
