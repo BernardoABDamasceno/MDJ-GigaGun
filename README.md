@@ -15,7 +15,7 @@ MDJ Game Project
  
  - parameterizar tudo como deve de ser (REVIEW)
  
- - Hard-reset of assembly camera on first click (BUG)
+ - Hard-reset of assembly camera on first click (BUG) (now it seems just like the gun's rotation in assembly is inverse to where the fps camera points)
  
  - maybe add a limiter (terminal velocity) to pushback so the player can't go to fast to the point it traverses the map boundaries (REVIEW)
 
