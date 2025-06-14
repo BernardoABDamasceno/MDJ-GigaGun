@@ -6328,9 +6328,9 @@ Canvas:
   m_GameObject: {fileID: 472439705}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1229170222}
-  m_PlaneDistance: 0.31
+  m_PlaneDistance: 0.32
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -11838,8 +11838,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 0.31
+  m_Camera: {fileID: 1502464870}
+  m_PlaneDistance: 0.32
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -13414,7 +13414,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1021054949
 RectTransform:
@@ -19765,6 +19765,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 307656678343130303, guid: 09a8a919d0c09b8488180489ee6b26ef, type: 3}
   m_PrefabInstance: {fileID: 1497660816}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1502464870 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6804360169471427512, guid: e3af2d350888fd744bdeaf5ca40a0705, type: 3}
+  m_PrefabInstance: {fileID: 62258260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1503565646
 GameObject:
   m_ObjectHideFlags: 0
@@ -23609,7 +23614,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '"Prefabs/Guns/Revolver"'
+          m_StringArgument: Prefabs/Guns/Revolver
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!222 &1795100499
@@ -28798,11 +28803,11 @@ SceneRoots:
   - {fileID: 2105633204}
   - {fileID: 2140921881}
   - {fileID: 162635158217377160}
+  - {fileID: 1021054949}
   - {fileID: 175601906}
   - {fileID: 472439709}
   - {fileID: 889786543}
   - {fileID: 465347756}
-  - {fileID: 1021054949}
   - {fileID: 1731604003}
   - {fileID: 469026458}
   - {fileID: 1007728925}
