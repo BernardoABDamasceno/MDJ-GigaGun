@@ -300,6 +300,7 @@ MonoBehaviour:
   fireRate: 2.5
   damage: 5
   fireSFX: {fileID: 8300000, guid: 99d792070e56832499d1e3d55acc0224, type: 3}
+  sfxAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
   missilePrefab: {fileID: 9171390392663240242, guid: e97cc1f7655fe2748a1eb64aff2958a7, type: 3}
   missileLifetime: 10
 --- !u!82 &1102201545713281752

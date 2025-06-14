@@ -194,6 +194,7 @@ MonoBehaviour:
   fireRate: 0.8
   damage: 5
   fireSFX: {fileID: 8300000, guid: 7858f4e0dc726564ab3139f6324cb627, type: 3}
+  sfxAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
 --- !u!82 &8682690935658635419
 AudioSource:
   m_ObjectHideFlags: 0

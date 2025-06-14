@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio; // Required for AudioMixerGroup
 
 public abstract class Gun : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public abstract class Gun : MonoBehaviour
     // Audio Clip
     [Header("Audio")]
     [SerializeField] protected AudioClip fireSFX;
+    // Add this field for the Audio Mixer Group
+    [SerializeField] protected AudioMixerGroup sfxAudioMixerGroup; // This will apply to all guns
 
     protected bool fireRateCooldown = false;
 
@@ -44,12 +47,20 @@ public abstract class Gun : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         ps = GetComponentInChildren<ParticleSystem>();
+
         audioSource = GetComponent<AudioSource>();
-        if (audioSource != null)
+        // Corrected logic: only add AudioSource if it doesn't exist
+        if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false;
-            audioSource.loop = false;
+        }
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+
+        // Assign the AudioMixerGroup here, applies to all derived guns
+        if (sfxAudioMixerGroup != null)
+        {
+            audioSource.outputAudioMixerGroup = sfxAudioMixerGroup;
         }
     }
 
@@ -79,12 +90,19 @@ public abstract class Gun : MonoBehaviour
         }
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
-                                 forwardNormalized.x * kickbackXZ,
-                                 forwardNormalized.y * kickbackY,
-                                 forwardNormalized.z * kickbackXZ
-                                 );
+                                            forwardNormalized.x * kickbackXZ,
+                                            forwardNormalized.y * kickbackY,
+                                            forwardNormalized.z * kickbackXZ
+                                            );
 
-        player.SendMessage("applyPushback", kickbackOutput);
+        if (player != null) // Keep this null check for 'player' as discussed
+        {
+            player.SendMessage("applyPushback", kickbackOutput);
+        }
+        else
+        {
+            Debug.LogError("Player GameObject is null in Gun. Make sure your Player has the 'Player' tag and is active in the scene.");
+        }
 
         ps.Play();
 
@@ -95,6 +113,6 @@ public abstract class Gun : MonoBehaviour
 
     protected void finishFireRateCooldown() { fireRateCooldown = false; }
 
-    public abstract GunType getGunType(); 
+    public abstract GunType getGunType();
 
 }

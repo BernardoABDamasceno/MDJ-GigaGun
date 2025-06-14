@@ -512,6 +512,7 @@ MonoBehaviour:
   fireRate: 0.2
   damage: 5
   fireSFX: {fileID: 8300000, guid: 70a7795961278214f945aa5c8be033ae, type: 3}
+  sfxAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
   plasmaOrbPrefab: {fileID: 9171390392663240242, guid: 873000bd25581fa40a0b7d58fe1e8ff6, type: 3}
 --- !u!82 &2695714047360796081
 AudioSource:
