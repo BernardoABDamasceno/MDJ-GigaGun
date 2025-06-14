@@ -132,7 +132,9 @@ public class CameraManager : MonoBehaviour
 
         gigaGun.transform.parent = GameObject.FindGameObjectWithTag("PlayerGroup").transform;
 
-        orbitalCam.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        //dumbest shit ever
+        orbitalCam.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        orbitalCam.GetComponent<OrbitalCamera>().rotation = new Vector2(0f, 0f);
 
         gigaGun.transform.position = assemblyLocation;
         gigaGun.transform.rotation = new Quaternion(0f,0f,0f,0f);

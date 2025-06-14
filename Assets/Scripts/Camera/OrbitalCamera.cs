@@ -13,7 +13,7 @@ public class OrbitalCamera : MonoBehaviour
     [SerializeField] float lerpDuration = 1.0f; // Duration of the transition
     [SerializeField] float sensitivity = 5.0f;
     
-    private Vector2 rotation; // Rotation of the camera
+    public Vector2 rotation; // Rotation of the camera
     private Transform target = null;
     private bool switchingTarget = false;
     private float elapsedTime = 0f;
@@ -76,6 +76,7 @@ public class OrbitalCamera : MonoBehaviour
                 rotation.x = Mathf.Clamp(rotation.x, -90, 90); // Clamp the x rotation to prevent flipping
 
                 transform.eulerAngles = new Vector3(rotation.x, rotation.y, 0); // Apply rotation to the camera
+                
                 if (Cursor.visible)
                 {
                     storedMousePos = Mouse.current.position.ReadValue();
@@ -83,6 +84,7 @@ public class OrbitalCamera : MonoBehaviour
                 }
 
             }
+            //what does this do????????
             else if (Input.GetMouseButtonUp(0))
             {
                 Mouse.current.WarpCursorPosition(storedMousePos);
