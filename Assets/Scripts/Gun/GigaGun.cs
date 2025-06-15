@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
+
 
 public class GigaGun : MonoBehaviour
 {
@@ -125,8 +126,8 @@ public class GigaGun : MonoBehaviour
         if (insertingGun != null)
         {
             cancelInsertGun();
-            insertGun(insertingCP.GetComponent<ConnectionPoint>());
-        }   
+            StartCoroutine(continueNewGun());
+        }
     }
 
     public void insertGun(ConnectionPoint connectionPoint)
@@ -154,7 +155,7 @@ public class GigaGun : MonoBehaviour
             }
             else if (connectionPoint.name.Contains("2"))
             {
-                pointdirection = insertingCP.transform.up*1.2f;
+                pointdirection = insertingCP.transform.up * 1.2f;
             }
             else if (connectionPoint.name.Contains("3"))
             {
@@ -162,9 +163,9 @@ public class GigaGun : MonoBehaviour
             }
             else if (connectionPoint.name.Contains("4"))
             {
-                pointdirection = -insertingCP.transform.up*1.2f;
+                pointdirection = -insertingCP.transform.up * 1.2f;
             }
-        
+
             newposition = insertingCP.transform.position + pointdirection * 0.08f; // RPG needs a bit of space to avoid clipping
         }
         else if (pickedGun.name.Contains("Flamethrower"))
@@ -231,7 +232,7 @@ public class GigaGun : MonoBehaviour
         insertingGun = null;
         insertingCP.SetActive(true);
         insertingGunCP.Clear();
-        
+
     }
 
     public void confirmInsertGun()
@@ -303,5 +304,11 @@ public class GigaGun : MonoBehaviour
     private void finishCooldown()
     {
         cooldownRot = false;
+    }
+    private IEnumerator continueNewGun()
+    {
+        yield return new WaitForEndOfFrame();
+
+        insertGun(insertingCP.GetComponent<ConnectionPoint>());
     }
 }
