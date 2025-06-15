@@ -273,7 +273,6 @@ public class Player : MonoBehaviour
         // rb.AddForce(pushback, ForceMode.Impulse);
         this.pushback += pushback;
         gravity = Vector3.zero;
-        print("PEPE FLY WING SOMETHING");
     }
     void OnCollisionEnter(Collision collision)
     {
