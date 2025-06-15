@@ -6401,7 +6401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &472439706
 Canvas:
   m_ObjectHideFlags: 0
@@ -12574,11 +12574,11 @@ MonoBehaviour:
       - m_Target: {fileID: 183858581}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetGun
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Prefabs/Guns/PlasmaGun
           m_BoolArgument: 0
@@ -15288,11 +15288,11 @@ MonoBehaviour:
       - m_Target: {fileID: 183858581}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetGun
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: Prefabs/Guns/Shotgun
           m_BoolArgument: 0
@@ -17545,11 +17545,11 @@ MonoBehaviour:
       - m_Target: {fileID: 183858581}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetGun
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: Prefabs/Guns/RPG
           m_BoolArgument: 0
@@ -20271,11 +20271,11 @@ MonoBehaviour:
       - m_Target: {fileID: 183858581}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetGun
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: Prefabs/Guns/Flamethrower
           m_BoolArgument: 0
@@ -24099,7 +24099,7 @@ MonoBehaviour:
       - m_Target: {fileID: 183858581}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: SetGun
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

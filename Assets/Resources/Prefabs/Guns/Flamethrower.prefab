@@ -5342,8 +5342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce72b30c9acf45438b94301f338b18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickbackXZ: 0.5
-  kickbackY: 2
+  kickbackXZ: 0
+  kickbackY: 0
   fireRate: 0.1
   damage: 0
   fireSFX: {fileID: 8300000, guid: d4c007eb616026a4590a064467b79ffe, type: 3}
