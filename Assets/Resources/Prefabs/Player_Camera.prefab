@@ -1007,6 +1007,7 @@ MonoBehaviour:
   dmgCanvas: {fileID: 0}
   infoDump: {fileID: 0}
   pauseCanvas: {fileID: 0}
+  background: {fileID: 0}
   gigaGun: {fileID: 4948430276237621780}
   player: {fileID: 4280905323022369588}
   assemblyLocation: {x: -500, y: -500, z: -500}

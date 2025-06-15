@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Canvas optionsCanvas;
     [SerializeField] Canvas dmgCanvas;
     [SerializeField] Canvas infoDump;
+    [SerializeField] Canvas infoDumpFilter;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas background;
     [SerializeField] GameObject gigaGun;
@@ -21,6 +22,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform gigagunFPStransform;
 
     private bool weaponchoice = false;
+    private int turnedOn = 0; // 0 = Revolver, 1 = PlasmaGun, 2 = Shotgun, 3 = RPG, 4 = Flamethrower
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class CameraManager : MonoBehaviour
         orbitalCam.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
+        filterShutdown();
         background.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
         pauseCanvas.worldCamera = fpsCam;
@@ -50,26 +53,23 @@ public class CameraManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                //print("1");
-                SetGun("Prefabs/Guns/Revolver");
+                SetGun(0);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                //print("2");
-                SetGun("Prefabs/Guns/PlasmaGun");
+                SetGun(1);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                //print("3");
-                SetGun("Prefabs/Guns/Shotgun");
+                SetGun(2);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                SetGun("Prefabs/Guns/RPG");
+                SetGun(3);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                SetGun("Prefabs/Guns/Flamethrower");
+                SetGun(4);
             }
         }
 
@@ -130,7 +130,7 @@ public class CameraManager : MonoBehaviour
         background.gameObject.SetActive(true);
 
         //default pick
-        SetGun("Prefabs/Guns/Revolver");
+        SetGun(0);
 
 
         gigagunFPStransform.position = gigaGun.transform.position;
@@ -164,20 +164,38 @@ public class CameraManager : MonoBehaviour
         changeToOrbital();
         weaponchoice = true;
     }
-    public void SetGun(string gunPrefabPath)
+    public void SetGun(int num)
     {
-        GameObject newgun = Resources.Load<GameObject>(gunPrefabPath);
-        //print("Setting gun: " + newgun.layer);
-        //gigaGun.transform.parent = transform;
+        infoDumpFilter.transform.GetChild(turnedOn).gameObject.SetActive(false);
+        infoDumpFilter.transform.GetChild(num).gameObject.SetActive(true);
+        turnedOn = num;
+        GameObject newgun = null;
+        if (num == 0)
+        {
+            newgun = Resources.Load<GameObject>("Prefabs/Guns/Revolver");
+        }
+        else if (num == 1)
+        {
+            newgun = Resources.Load<GameObject>("Prefabs/Guns/PlasmaGun");
+        }
+        else if (num == 2)
+        {
+            newgun = Resources.Load<GameObject>("Prefabs/Guns/Shotgun");
+        }
+        else if (num == 3)
+        {
+            newgun = Resources.Load<GameObject>("Prefabs/Guns/RPG");
+        }
+        else if (num == 4)
+        {
+            newgun = Resources.Load<GameObject>("Prefabs/Guns/Flamethrower");
+        }
         gigaGun.SendMessage("setPickedGun", newgun);
-        //optionsCanvas.gameObject.SetActive(false);
-        //this is always on for sandbox
-        //weaponchoice = false;
     }
 
     public void levelUp()
     {
-        
+
         isAssemblyMode = !isAssemblyMode;
         if (!isAssemblyMode) changeToFPS();
         else
@@ -203,6 +221,15 @@ public class CameraManager : MonoBehaviour
         background.GetComponentInChildren<RawImage>().texture = texture;
         background.GetComponentInChildren<RawImage>().SetNativeSize();
         changeToOrbital();
+    }
+
+    private void filterShutdown()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject child = infoDumpFilter.transform.GetChild(i).gameObject;
+            child.SetActive(false);
+        }
     }
 }
 

@@ -231,6 +231,7 @@ public class GigaGun : MonoBehaviour
         insertingGun = null;
         insertingCP.SetActive(true);
         insertingGunCP.Clear();
+        
     }
 
     public void confirmInsertGun()

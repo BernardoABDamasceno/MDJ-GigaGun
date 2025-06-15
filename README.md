@@ -14,6 +14,8 @@ MDJ Game Project
  - some objects make  the player start stutter walking (BUG) (new update makes it less likely but its still there)
  
  - parameterizar tudo como deve de ser (REVIEW)
+
+ - when doing swapperino of a placed gun connection turn on and off
  
  - Hard-reset of assembly camera on first click (BUG) (now it seems just like the gun's rotation in assembly is inverse to where the fps camera points)
  
