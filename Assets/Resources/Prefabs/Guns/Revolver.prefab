@@ -189,13 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ff86c412edae64b828c300e8d3cf90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickbackXZ: 1.5
-  kickbackY: 5
+  kickbackXZ: 2.5
+  kickbackY: 7.5
   fireRate: 0.8
-  damage: 5
+  damage: 7.5
   fireSFX: {fileID: 8300000, guid: a1c2f8db36328b74fbece22b6f5a8806, type: 3}
   sfxAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}
-  revolverVolume: 0.3
 --- !u!82 &8682690935658635419
 AudioSource:
   m_ObjectHideFlags: 0

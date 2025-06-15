@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using UnityEditor.Callbacks;
 
 public class Flamecone : MonoBehaviour
 {

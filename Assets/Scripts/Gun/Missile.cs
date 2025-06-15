@@ -8,7 +8,7 @@ public class Missile : MonoBehaviour
     [Header("Rocket Stats")]
     [SerializeField] private float missileSpeed = 0.2f;
     [SerializeField] private float hitDamage = 5.0f;
-    [SerializeField] private float explosionDamage = 30.0f;
+    [SerializeField] private float explosionDamage = 10.0f;
     [SerializeField] private float playerDamage = 5.0f;
     [SerializeField] private float extraDistance = 1.0f;
     [SerializeField] private float explosionRadius = 5.0f;
@@ -77,7 +77,6 @@ public class Missile : MonoBehaviour
             LayerMask.GetMask("Enemy", "Ignore Raycast"),
             QueryTriggerInteraction.Collide
         );
-
         foreach (Collider hit in entitiesInRange)
         {
             //player specific logic
@@ -93,7 +92,7 @@ public class Missile : MonoBehaviour
                 hit.gameObject.GetComponentInParent<Player>().SendMessage("getHit", playerDamage);
                 hit.gameObject.GetComponentInParent<Player>().SendMessage("applyPushback", outputPushVector);
             }
-            else if(hit.CompareTag("Enemy"))
+            else if (hit.CompareTag("Enemy"))
             {
                 hit.gameObject.SendMessage("takeDamage", explosionDamage);
             }

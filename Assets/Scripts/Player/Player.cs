@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpColdownTime = 0.475f;
     [SerializeField] float slopeExtraSpeed = 7.0f;
     [SerializeField] CameraManager cameraManager;
+    [SerializeField] Canvas playerUI;
 
     [SerializeField] private AudioClip runningSFX;
     private AudioSource audioSource;
@@ -271,6 +273,7 @@ public class Player : MonoBehaviour
         // rb.AddForce(pushback, ForceMode.Impulse);
         this.pushback += pushback;
         gravity = Vector3.zero;
+        print("PEPE FLY WING SOMETHING");
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -344,6 +347,7 @@ public class Player : MonoBehaviour
     {
         //print("Player got hit for " + damage + " damage");
         HP -= damage;
+        playerUI.GetComponentInChildren<TextMeshProUGUI>().text = HP + "/200 HP";
         cameraManager.SendMessage("flashRed");
         if (HP <= 0)
         {

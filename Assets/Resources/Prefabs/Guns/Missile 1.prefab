@@ -150,13 +150,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileSpeed: 0.5
-  hitDamage: 5
-  explosionDamage: 30
-  playerDamage: 5
+  hitDamage: 1.5
+  explosionDamage: 4.5
+  playerDamage: 2
   extraDistance: 2
   explosionRadius: 10
-  explosionPushbackXZ: 30
-  explosionPushbackY: 150
+  explosionPushbackXZ: 7
+  explosionPushbackY: 40
   explosionPs: {fileID: 1452608060370652551}
   trusterPs: {fileID: 3410423358468416045}
   explosionSFX: {fileID: 8300000, guid: dda257b619bd83842bf36f0731a6a96f, type: 3}

@@ -60,22 +60,6 @@ public class Flamethrower : Gun
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (isfiring)
-        {
-            // Apply pushback force
-            Vector3 forwardNormalized = -transform.forward.normalized;
-            Vector3 kickbackOutput = new Vector3(
-                forwardNormalized.x * kickbackXZ,
-                forwardNormalized.y * kickbackY,
-                forwardNormalized.z * kickbackXZ
-            );
-
-            player.SendMessage("applyPushback", kickbackOutput);
-        }
-    }
-
     public override GunType getGunType()
     {
         return GunType.Flamethrower;

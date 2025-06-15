@@ -177,6 +177,18 @@ public class GigaGun : MonoBehaviour
 
             newposition = insertingCP.transform.position + pointdirection * 0.075f; // Flamethrower needs a bit of downwards space to avoid clipping
         }
+        else if (pickedGun.name.Contains("Shotgun"))
+        {
+            if (connectionPoint.name.Contains("1"))
+            {
+                pointdirection = -insertingCP.transform.right;
+            }
+            else if (connectionPoint.name.Contains("3"))
+            {
+                pointdirection = insertingCP.transform.right;
+            }
+            newposition = insertingCP.transform.position + pointdirection * 0.085f;
+        }
         else
         {
             newposition = insertingCP.transform.position;

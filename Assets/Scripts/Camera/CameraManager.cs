@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Canvas infoDumpFilter;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas background;
+    [SerializeField] Canvas playerUI;
     [SerializeField] GameObject gigaGun;
     [SerializeField] GameObject player;
 
@@ -38,6 +39,7 @@ public class CameraManager : MonoBehaviour
         filterShutdown();
         background.gameObject.SetActive(false);
         dmgCanvas.gameObject.SetActive(false);
+        playerUI.gameObject.SetActive(true);
         pauseCanvas.worldCamera = fpsCam;
 
         orbitalCam.transform.position = assemblyLocation;
@@ -112,6 +114,7 @@ public class CameraManager : MonoBehaviour
         optionsCanvas.gameObject.SetActive(false);
         infoDump.gameObject.SetActive(false);
         background.gameObject.SetActive(false);
+        playerUI.gameObject.SetActive(true);
         pauseCanvas.worldCamera = fpsCam;
 
         // Logging player actions for data collection
@@ -215,6 +218,7 @@ public class CameraManager : MonoBehaviour
     }
     private IEnumerator captureFrameTimely()
     {
+        playerUI.gameObject.SetActive(false);
         yield return new WaitForEndOfFrame();
 
         Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();

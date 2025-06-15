@@ -507,8 +507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea74eb792b2e574ca0f66424552306b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickbackXZ: 6
-  kickbackY: 10
+  kickbackXZ: 12.5
+  kickbackY: 25
   fireRate: 1.5
   damage: 5
   fireSFX: {fileID: 8300000, guid: 3ffdbe819195f8d45b2fe89aaa25e64d, type: 3}
@@ -798,7 +798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -922,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6980720629326618391, guid: 652270bb2aacc87499f0787684d431c8, type: 3}
       propertyPath: m_LocalPosition.y

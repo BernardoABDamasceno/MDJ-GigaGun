@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0608ec7e63c8b044d8d766011c59b417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDamage: 30
-  playerDamage: 5
+  explosionDamage: 10
+  playerDamage: 2
   explosionRadius: 5
-  explosionPushbackXZ: 10
-  explosionPushbackY: 30
+  explosionPushbackXZ: 7
+  explosionPushbackY: 10
   explosionPs: {fileID: 1452608060370652551}
   explosionSFX: {fileID: 8300000, guid: cc86fc7716117a043888905f7cededdd, type: 3}
 --- !u!82 &4814130775325778268

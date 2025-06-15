@@ -296,8 +296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kickbackXZ: 5
-  kickbackY: 20
-  fireRate: 2.5
+  kickbackY: 10
+  fireRate: 2
   damage: 5
   fireSFX: {fileID: 8300000, guid: 99d792070e56832499d1e3d55acc0224, type: 3}
   sfxAudioMixerGroup: {fileID: 8573419896679782362, guid: f427e51144a280e439daa66e4b4f1903, type: 2}

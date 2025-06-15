@@ -446,7 +446,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (isDead || CameraManager.isAssemblyMode || isGamePaused) return;
 
-        //print("HIT");
         health -= damage;
         if (health <= 0)
         {
@@ -467,7 +466,7 @@ public class EnemyBehaviour : MonoBehaviour
         // BIGGEST PILE OF SHIT I'VE PROBABLY DONE SO FAR BUT FUCK IT
         if (distanceToPlayer <= 50.0f && currentAttackCooldownTimer <= 0f)
         {
-            if (Random.Range(0, 100) <= 50)
+            if (Random.Range(0, 100) <= 33)
             {
                 if (isHulk)
                 {
@@ -504,6 +503,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void Death()
     {
         //Debug.Log("Enemy Death() method called! Time: " + Time.time); 
+        EnemySpawner.currentEnemies--;
 
         // Stop any looping audio when dying
         if (loopingAudioSource != null && loopingAudioSource.isPlaying)
@@ -557,8 +557,6 @@ public class EnemyBehaviour : MonoBehaviour
         float destructionDelay = dyingSFX != null ? dyingSFX.length : 1f; // Default to 1 second if no sound is set
 
         Destroy(gameObject, destructionDelay);
-
-        EnemySpawner.currentEnemies--;
     }
 
     void OnCollisionEnter(Collision collision)
