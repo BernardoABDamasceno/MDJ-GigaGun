@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlasmaBall : MonoBehaviour
 {
-    private Transform parentTransform;
+    public Transform parentTransform;
     private Rigidbody rb;
     [SerializeField] private float plasmaOrbSpeed = 0.5f;
     [SerializeField] private float damage = 5.0f;
@@ -12,7 +12,6 @@ public class PlasmaBall : MonoBehaviour
     private Vector3 playerForward;
     void Start()
     {
-        parentTransform = GameObject.FindGameObjectWithTag("Cameraholder").transform;
         playerForward = parentTransform.forward;
         transform.position += playerForward * extraDistance;
         rb = GetComponent<Rigidbody>();

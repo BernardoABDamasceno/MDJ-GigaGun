@@ -16,6 +16,7 @@ public class RPG : Gun
         }
         
         GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
+        missile.GetComponent<Missile>().parentTransform = transform;
         StartCoroutine(destroyMissile(missile, missileLifetime));
 
         Vector3 forwardNormalized = -transform.forward.normalized;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    private Transform parentTransform;
+    public Transform parentTransform;
     private Rigidbody rb;
 
     [Header("Rocket Stats")]
@@ -39,7 +39,6 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
-        parentTransform = GameObject.FindGameObjectWithTag("Cameraholder").transform;
         playerForward = parentTransform.forward;
         transform.position += playerForward * extraDistance;
         transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);

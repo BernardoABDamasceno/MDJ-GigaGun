@@ -15,7 +15,8 @@ public class PlasmaGun : Gun
         }
 
         //needs refactoring
-        Instantiate(plasmaOrbPrefab, transform.position, transform.rotation);
+        GameObject orb = Instantiate(plasmaOrbPrefab, transform.position, transform.rotation);
+        orb.GetComponent<PlasmaBall>().parentTransform = transform;
 
         Vector3 forwardNormalized = -transform.forward.normalized;
         Vector3 kickbackOutput = new Vector3(
