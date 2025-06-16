@@ -292,7 +292,7 @@ public class Player : MonoBehaviour
             jumpVector = Vector3.zero;
 
             // Logging player actions for data collection
-            FindObjectOfType<JsonFileWriter>().WriteToJson();
+            // FindObjectOfType<JsonFileWriter>().WriteToJson();
         }
     }
     void OnCollisionExit(Collision collision)

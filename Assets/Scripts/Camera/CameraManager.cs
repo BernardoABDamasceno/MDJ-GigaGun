@@ -118,7 +118,7 @@ public class CameraManager : MonoBehaviour
         pauseCanvas.worldCamera = fpsCam;
 
         // Logging player actions for data collection
-        FindObjectOfType<JsonFileWriter>().WriteToJson();
+        // FindObjectOfType<JsonFileWriter>().WriteToJson();
     }
 
     private void changeToOrbital()
@@ -154,7 +154,7 @@ public class CameraManager : MonoBehaviour
         pauseCanvas.worldCamera = orbitalCam;
 
         // Logging player actions for data collection
-        FindObjectOfType<JsonFileWriter>().WriteToJson();
+        // FindObjectOfType<JsonFileWriter>().WriteToJson();
     }
 
     private void weaponPick()
