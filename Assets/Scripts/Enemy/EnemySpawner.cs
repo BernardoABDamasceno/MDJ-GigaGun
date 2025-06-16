@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        currentEnemies = 0;
         InvokeRepeating("spawnEnemy",startDelay, rateOfSpawns);
     }
 
