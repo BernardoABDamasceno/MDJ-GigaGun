@@ -89,10 +89,10 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) checkJump = true;
 
         // Logging player actions for data collection
-        if (!PauseManager.isGamePaused || !CameraManager.isAssemblyMode)
-        {
-            if (!isGrounded && !isOnSlope) JsonFileWriter.sampleData.airTime += Time.deltaTime;
-        }
+        // if (!PauseManager.isGamePaused || !CameraManager.isAssemblyMode)
+        // {
+        //     if (!isGrounded && !isOnSlope) JsonFileWriter.sampleData.airTime += Time.deltaTime;
+        // }
     }
 
     //  TODO: Refactor

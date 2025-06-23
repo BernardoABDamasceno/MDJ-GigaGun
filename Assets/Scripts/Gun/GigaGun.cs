@@ -272,29 +272,29 @@ public class GigaGun : MonoBehaviour
 
         guns.Add(insertingGun);
         // Logging player actions for data collection
-/*         switch (insertingGun.name.Split('(')[0]) // Get the gun type from the name
-        // This assumes the gun name is formatted like "Revolver(Clone)" or "Shotgun(Clone)"
-        {
-            case "Revolver":
-                JsonFileWriter.sampleData.revolvers++;
-                break;
-            case "Shotgun":
-                JsonFileWriter.sampleData.shotguns++;
-                break;
-            case "PlasmaGun":
-                JsonFileWriter.sampleData.plasmaRifles++;
-                break;
-            case "Flamethrower":
-                JsonFileWriter.sampleData.flamethrowers++;
-                break;
-            case "RPG":
-                JsonFileWriter.sampleData.rpgs++;
-                break;
-            default:
-                Debug.LogWarning("Unknown gun type: " + insertingGun.name);
-                break;
-        }
-        FindObjectOfType<JsonFileWriter>().WriteToJson(); */
+/*         // switch (insertingGun.name.Split('(')[0]) // Get the gun type from the name
+        // // This assumes the gun name is formatted like "Revolver(Clone)" or "Shotgun(Clone)"
+        // {
+        //     case "Revolver":
+        //         JsonFileWriter.sampleData.revolvers++;
+        //         break;
+        //     case "Shotgun":
+        //         JsonFileWriter.sampleData.shotguns++;
+        //         break;
+        //     case "PlasmaGun":
+        //         JsonFileWriter.sampleData.plasmaRifles++;
+        //         break;
+        //     case "Flamethrower":
+        //         JsonFileWriter.sampleData.flamethrowers++;
+        //         break;
+        //     case "RPG":
+        //         JsonFileWriter.sampleData.rpgs++;
+        //         break;
+        //     default:
+        //         Debug.LogWarning("Unknown gun type: " + insertingGun.name);
+        //         break;
+        // }
+        // FindObjectOfType<JsonFileWriter>().WriteToJson(); */
         // End of logging
         insertingGun = null;
 

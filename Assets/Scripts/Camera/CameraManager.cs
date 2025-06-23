@@ -76,11 +76,11 @@ public class CameraManager : MonoBehaviour
         }
 
         // Logging player actions for data collection
-        if (!PauseManager.isGamePaused)
-        {
-            if (isAssemblyMode) JsonFileWriter.sampleData.timeSpentAssembly += Time.deltaTime;
-            else JsonFileWriter.sampleData.timeSpentFPS += Time.deltaTime;
-        }
+        // if (!PauseManager.isGamePaused)
+        // {
+        //     if (isAssemblyMode) JsonFileWriter.sampleData.timeSpentAssembly += Time.deltaTime;
+        //     else JsonFileWriter.sampleData.timeSpentFPS += Time.deltaTime;
+        // }
     }
     void FixedUpdate()
     {

@@ -9,8 +9,12 @@ public class JsonFileWriter : MonoBehaviour
     [HideInInspector]
     public static PlayerData sampleData;
 
+    [SerializeField] private static bool collectInfo = false;
+
     void Start()
     {
+        if (!collectInfo) return;
+        
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "logs")))
         {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "logs"));
@@ -24,6 +28,7 @@ public class JsonFileWriter : MonoBehaviour
 
     void OnDestroy()
     {
+        if (!collectInfo) return;
         WriteToJson();
         //Debug.Log("Data written to JSON on destroy.");
     }
@@ -31,23 +36,25 @@ public class JsonFileWriter : MonoBehaviour
     [ContextMenu("Write to JSON")]
     public void WriteToJson()
     {
+        if (!collectInfo) return;
         fileName = "logs\\" + sampleData.playerId + ".json";
         WriteClassToJson(sampleData, fileName);
     }
     
     public void WriteClassToJson<T>(T dataClass, string filename)
     {
+        if (!collectInfo) return;
         try
         {
             // Convert the class to JSON
             string jsonString = JsonUtility.ToJson(dataClass, true);
-            
+
             // Get the path for persistent data
             string filePath = Path.Combine(Application.persistentDataPath, filename);
-            
+
             // Write to file
             File.WriteAllText(filePath, jsonString);
-            
+
             //Debug.Log($"Successfully wrote data to: {filePath}");
             //Debug.Log($"JSON Content:\n{jsonString}");
         }
@@ -60,6 +67,7 @@ public class JsonFileWriter : MonoBehaviour
     [ContextMenu("Read from JSON")]
     public void ReadFromJson()
     {
+        if (!collectInfo) return;
         PlayerData loadedData = ReadClassFromJson<PlayerData>(fileName);
         if (loadedData != null)
         {
@@ -70,19 +78,20 @@ public class JsonFileWriter : MonoBehaviour
     
     public T ReadClassFromJson<T>(string filename) where T : class
     {
+        if (!collectInfo) return null;
         try
         {
             string filePath = Path.Combine(Application.persistentDataPath, filename);
-            
+
             if (!File.Exists(filePath))
             {
                 //Debug.LogWarning($"File not found: {filePath}");
                 return null;
             }
-            
+
             string jsonString = File.ReadAllText(filePath);
             T loadedData = JsonUtility.FromJson<T>(jsonString);
-            
+
             //Debug.Log($"Successfully loaded data from: {filePath}");
             return loadedData;
         }
@@ -96,6 +105,7 @@ public class JsonFileWriter : MonoBehaviour
     [ContextMenu("Show File Location")]
     public void ShowFileLocation()
     {
+        if (!collectInfo) return;
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
         //Debug.Log($"File location: {filePath}");
         
@@ -110,6 +120,7 @@ public class JsonFileWriter : MonoBehaviour
     // Method to write any serializable class to JSON
     public static void SaveToJson<T>(T obj, string filename)
     {
+        if (!collectInfo) return;
         try
         {
             string json = JsonUtility.ToJson(obj, true);
@@ -126,6 +137,7 @@ public class JsonFileWriter : MonoBehaviour
     // Method to load any serializable class from JSON
     public static T LoadFromJson<T>(string filename) where T : class
     {
+        if (!collectInfo) return null;
         try
         {
             string path = Path.Combine(Application.persistentDataPath, filename);
